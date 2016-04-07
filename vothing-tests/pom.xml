@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+        http://maven.apache.org/POM/4.0.0
+        http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.prodyna.pac.vothing</groupId>
+		<artifactId>vothing</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>vothing-tests</artifactId>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.prodyna.pac.vothing</groupId>
+			<artifactId>vothing-core</artifactId>
+			<version>${project.version}</version>
+			<type>ejb</type>
+			<scope>test</scope>
+		</dependency>
+		<!-- <dependency> <groupId>com.prodyna.pac.vothing</groupId> <artifactId>vothing-core</artifactId> 
+			<version>${project.version}</version> <type>test-jar</type> <scope>test</scope> 
+			</dependency> -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.arquillian.junit</groupId>
+			<artifactId>arquillian-junit-container</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.wildfly</groupId>
+			<artifactId>wildfly-arquillian-container-managed</artifactId>
+			<version>8.0.0.Final</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-jaxrs</artifactId>
+			<version>3.0.8.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-client</artifactId>
+			<version>3.0.16.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-surefire-plugin</artifactId>
+			<version>2.19.1</version>
+		</dependency>
+
+		<!-- <dependency> <groupId>org.jboss.resteasy</groupId> <artifactId>resteasy-jackson-provider</artifactId> 
+			<version>3.0.10.Final</version> </dependency> -->
+
+		<!-- <dependency> <groupId>org.jboss.arquillian.extension</groupId> <artifactId>arquillian-rest-client-api</artifactId> 
+			<version>1.0.4.Alpha4</version> <scope>test</scope> </dependency> <dependency> 
+			<groupId>org.jboss.arquillian.extension</groupId> <artifactId>arquillian-rest-client-impl-base</artifactId> 
+			<version>1.0.0.Alpha4</version> <scope>test</scope> </dependency> -->
+
+	</dependencies>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.jboss.arquillian</groupId>
+				<artifactId>arquillian-bom</artifactId>
+				<version>1.1.11.Final</version>
+				<scope>import</scope>
+				<type>pom</type>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.19.1</version>
+				<configuration>
+					<forkCount>0</forkCount>
+					<!-- <argLine>${argLine} -Dmaven.surefire.debug</argLine> -->
+					<redirectTestOutputToFile>true</redirectTestOutputToFile>
+					<!-- TODO extract as property -->
+					<!-- <systemPropertyVariables>
+						<jboss.client.address>http://macci:8080</jboss.client.address>
+						<maven.surefire.debug></maven.surefire.debug>
+						<arquillian.launch>jbossas-managed</arquillian.launch>
+					</systemPropertyVariables> -->
+					<!-- <systemProperties> <systemProperty> <name>jboss.client.address</name> 
+						<value>http://macci:8080</value> </systemProperty> </systemProperties> -->
+				</configuration>
+			</plugin>
+			<!-- <plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<configuration>
+					<skip>true</skip>
+					<skipDeploy>true</skipDeploy>
+				</configuration>
+			</plugin> -->
+		</plugins>
+	</build>
+
+</project>
