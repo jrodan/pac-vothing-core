@@ -1,7 +1,9 @@
-package com.prodyna.pac.vothing;
+package com.prodyna.pac.vothing.constants;
 
 public interface VothingConstants {
 
+	String SELECT_ALL = "select_all_";
+	
 	String SELECT_ALL_VOTE_TYPES = "select_all_vote_types";
 	
 	String SELECT_ALL_VOTES = "select_all_votes";

@@ -1,6 +1,5 @@
 package com.prodyna.pac.vothing.persistence;
 
-import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 
@@ -8,35 +7,25 @@ import javax.json.Json;
 import javax.json.JsonObjectBuilder;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.google.gson.Gson;
-import com.prodyna.pac.vothing.VothingConstants;
+import com.prodyna.pac.vothing.constants.VothingConstants;
 
 @Entity
 @XmlRootElement
 @Table(name = "vothing_user")
 @NamedQueries({ @NamedQuery(name = VothingConstants.SELECT_ALL_USERS, query = "SELECT a FROM User a") })
-public class User implements Serializable {
+public class User extends BaseModelImpl<User> {
 	
 	/** Generated serial version UID. */
 	private static final long serialVersionUID = 3424622331216625L;
 	
-	@Id
-	@GeneratedValue
-	private long userId;
-	
 	@Column
 	private String foreName;
-	
-	@Column
-	private String lastName;
 	
 	@Column
 	private String email;
@@ -56,28 +45,12 @@ public class User implements Serializable {
 	@OneToMany(mappedBy="user")
 	private Collection<Vote> votes;
 	
-	public long getUserId() {
-		return userId;
-	}
-
-	public void setUserId(long userId) {
-		this.userId = userId;
-	}
-
 	public String getForeName() {
 		return foreName;
 	}
 
 	public void setForeName(String foreName) {
 		this.foreName = foreName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
 	}
 
 	public String getEmail() {
@@ -134,40 +107,12 @@ public class User implements Serializable {
 	public User() {
 	}
 
-	@Override
-	public final boolean equals(final Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (obj == null) {
-			return false;
-		}
-		if (!(obj instanceof User)) {
-			return false;
-		}
-		final User other = (User) obj;
-		if (this.userId == 0) {
-			if (other.userId != 0) {
-				return false;
-			}
-		} else if (this.userId == other.userId) {
-			return false;
-		}
-		return true;
-	}
-
-	@Override
-	public String toString() {
-		Gson gson = new Gson();
-		return gson.toJson(this);
-	}
-	
 	public String toFrontendUserJSONObjectString() {
 		JsonObjectBuilder userAttributes = Json.createObjectBuilder();
 		userAttributes.add("email", this.getEmail());
 		userAttributes.add("forename", this.getForeName());
-		userAttributes.add("lastname", this.getLastName());
-		userAttributes.add("userid", this.getUserId());
+		userAttributes.add("lastname", this.getName());
+		userAttributes.add("userid", this.getId());
 		JsonObjectBuilder user = Json.createObjectBuilder();
 		user.add("user", userAttributes);
 		return user.build().toString();

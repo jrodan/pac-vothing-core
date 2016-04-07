@@ -1,5 +1,8 @@
 package com.prodyna.pac.vothing;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import javax.inject.Inject;
 import javax.persistence.EntityNotFoundException;
 import javax.servlet.ServletContextEvent;
@@ -7,7 +10,13 @@ import javax.servlet.ServletContextListener;
 
 import org.slf4j.Logger;
 
+import com.prodyna.pac.vothing.constants.RoleConstants;
+import com.prodyna.pac.vothing.persistence.Permission;
+import com.prodyna.pac.vothing.persistence.Role;
 import com.prodyna.pac.vothing.persistence.User;
+import com.prodyna.pac.vothing.security.PermissionEnum;
+import com.prodyna.pac.vothing.service.PermissionService;
+import com.prodyna.pac.vothing.service.RoleService;
 import com.prodyna.pac.vothing.service.UserService;
 
 public class VothingServletContextListener implements ServletContextListener{
@@ -22,6 +31,12 @@ public class VothingServletContextListener implements ServletContextListener{
 	
 	@Inject
 	private Logger logger;
+	
+	@Inject
+	private PermissionService permissionService;
+	
+	@Inject
+	private RoleService roleService;
 
 	@Override
 	public void contextInitialized(ServletContextEvent event) {
@@ -30,6 +45,20 @@ public class VothingServletContextListener implements ServletContextListener{
 	
 	public void initDatabase() {
 		// check if default data exist otherwise create
+		
+		// TODO init permissions
+		Collection<Permission> permissions = new ArrayList<Permission>();
+		permissionService.createPermission(PermissionEnum.NONE);
+		permissionService.createPermission(PermissionEnum.SURVEY_ADD);
+		permissionService.createPermission(PermissionEnum.SURVEY_DELETE);
+		permissions.add(permissionService.createPermission(PermissionEnum.SURVEY_LIST));
+		
+		// TODO init roles
+		Role adminRole = roleService.createRole(RoleConstants.ROLE_ADMIN, null);
+		Role userRole = roleService.createRole(RoleConstants.ROLE_USER, permissions);
+		
+		Collection<Role> roles = new ArrayList<Role>();
+		
 		User user = null;
 		try {
 			user = userService.getUser("default@vothing.com", "123");
@@ -37,37 +66,38 @@ public class VothingServletContextListener implements ServletContextListener{
 			logger.error("no default users are existing - continue creating these",e);
 		}
 		
+		
 		if(user == null) {
 			
 			// TODO create default users
 			user = new User();
 			user.setEmail("default@vothing.com");
 			user.setForeName("dummy");
-			user.setLastName("user");
+			user.setName("user");
 			user.setPassword("123");
 			userService.createUser(user);
 			
 			user = new User();
 			user.setEmail("user@vothing.com");
 			user.setForeName("user");
-			user.setLastName("user");
+			user.setName("user");
 			user.setPassword("123");
+			roles.add(userRole);
+			user.setRoles(roles);
+			roles.clear();
 			userService.createUser(user);
 			
 			user = new User();
 			user.setEmail("admin@vothing.com");
 			user.setForeName("admin");
-			user.setLastName("admin");
+			user.setName("admin");
 			user.setPassword("123");
+			roles.add(adminRole);
+			user.setRoles(roles);
 			userService.createUser(user);
-			
-			// TODO assign default roles to default users
-			// TODO create default roles
-			// TODO assign permissions to roles
 			
 		}
 		
-		// TODO init server private key
 		
 	}
 

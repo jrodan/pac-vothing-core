@@ -9,7 +9,7 @@ import javax.persistence.EntityNotFoundException;
 import org.slf4j.Logger;
 
 import com.prodyna.pac.vothing.Vothing;
-import com.prodyna.pac.vothing.VothingConstants;
+import com.prodyna.pac.vothing.constants.VothingConstants;
 import com.prodyna.pac.vothing.monitoring.VothingMonitoring;
 import com.prodyna.pac.vothing.persistence.User;
 import com.prodyna.pac.vothing.service.UserService;

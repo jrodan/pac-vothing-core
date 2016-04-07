@@ -1,4 +1,4 @@
-package com.prodyna.pac.vothing;
+package com.prodyna.pac.vothing.security;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -12,12 +12,17 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.ext.Provider;
 
 import com.nimbusds.jose.JOSEException;
+import com.prodyna.pac.vothing.Vothing;
+import com.prodyna.pac.vothing.constants.VothingConstants;
 import com.prodyna.pac.vothing.monitoring.VothingMonitoring;
 import com.prodyna.pac.vothing.persistence.User;
 import com.prodyna.pac.vothing.service.SecurityService;
 
+@Provider
+//@PreMatching
 @VothingMonitoring
 public class VothingServletSecurityFilter implements Filter, VothingConstants {
 
@@ -33,7 +38,7 @@ public class VothingServletSecurityFilter implements Filter, VothingConstants {
 	public void destroy() {
 		// unused
 	}
-
+	
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain chain) throws IOException, ServletException {
@@ -66,15 +71,16 @@ public class VothingServletSecurityFilter implements Filter, VothingConstants {
 			if (user != null) {
 				vothing.setUser(user);
 				isLoginValid = true;
+				request.setAttribute("user", user);
 			}
 		}
 
 		// continue with filter chain
 		if (isLoginValid) {
-			// TODO what to do here?
 			chain.doFilter(request, response);
 		} else {
 			vothing.setUser(null);
+			request.setAttribute("user", null);
 			httpResponse.sendError(HttpServletResponse.SC_FORBIDDEN);
 		}
 

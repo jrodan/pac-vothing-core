@@ -1,13 +1,18 @@
 <web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
-    
+   	
+   	<context-param>
+    	<param-name>resteasy.providers</param-name>
+	    <param-value>com.prodyna.pac.vothing.security.VothingServletInterceptor</param-value>
+	</context-param>
+   
     <listener>
 		<listener-class>
              com.prodyna.pac.vothing.VothingServletContextListener 
         </listener-class>
    </listener>
-    
+       
     <servlet-mapping>
         <servlet-name>javax.ws.rs.core.Application</servlet-name>
         <url-pattern>/*</url-pattern>
@@ -15,7 +20,7 @@
     
     <filter> 
 	    <filter-name>VothingServletSecurityFilter</filter-name>
-	    <filter-class>com.prodyna.pac.vothing.VothingServletSecurityFilter</filter-class> 
+	    <filter-class>com.prodyna.pac.vothing.security.VothingServletSecurityFilter</filter-class> 
 	</filter> 
 	<filter-mapping> 
 	    <filter-name>VothingServletSecurityFilter</filter-name>

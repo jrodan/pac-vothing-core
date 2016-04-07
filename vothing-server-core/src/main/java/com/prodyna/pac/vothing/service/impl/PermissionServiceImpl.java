@@ -1,21 +1,19 @@
 package com.prodyna.pac.vothing.service.impl;
 
-import java.util.List;
-
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
 
 import com.prodyna.pac.vothing.Vothing;
-import com.prodyna.pac.vothing.VothingConstants;
 import com.prodyna.pac.vothing.monitoring.VothingMonitoring;
 import com.prodyna.pac.vothing.persistence.Permission;
+import com.prodyna.pac.vothing.security.PermissionEnum;
 import com.prodyna.pac.vothing.service.PermissionService;
 
 @Stateless
 @VothingMonitoring
-public class PermissionServiceImpl implements PermissionService {
+public class PermissionServiceImpl extends BaseServiceImpl<Permission> implements PermissionService {
 
 	// TODO check permissions before action
 
@@ -26,17 +24,20 @@ public class PermissionServiceImpl implements PermissionService {
 	private Vothing vothing;
 
 	@Override
-	public List<Permission> getPermissions() {
-		logger.trace("Retrieving all permissions from DB.");
+	public Permission createPermission(String name) {
+		
+		Permission permission = new Permission();
+		permission.setName(name);
+		this.vothing.getEntityManager().persist(permission);
 
-		List<Permission> permissions = this.vothing
-				.getEntityManager()
-				.createNamedQuery(VothingConstants.SELECT_ALL_PERMISSIONS, Permission.class)
-				.getResultList();
-
-		return permissions;
+		return permission;
 	}
 
-	
+	@Override
+	public Permission createPermission(PermissionEnum permission) {
+		return this.createPermission(permission.getName());
+	}
+
+
 
 }

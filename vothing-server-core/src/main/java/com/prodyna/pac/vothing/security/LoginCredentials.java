@@ -1,4 +1,4 @@
-package com.prodyna.pac.vothing;
+package com.prodyna.pac.vothing.security;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;

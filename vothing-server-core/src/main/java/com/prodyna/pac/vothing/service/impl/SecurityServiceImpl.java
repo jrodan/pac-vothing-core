@@ -1,7 +1,6 @@
 package com.prodyna.pac.vothing.service.impl;
 
 import java.io.IOException;
-import java.nio.charset.Charset;
 import java.text.ParseException;
 import java.util.Collection;
 
@@ -16,10 +15,8 @@ import javax.ws.rs.core.Context;
 
 import net.minidev.json.JSONObject;
 
-import org.apache.commons.codec.digest.Md5Crypt;
 import org.slf4j.Logger;
 
-import com.google.gson.Gson;
 import com.nimbusds.jose.JOSEException;
 import com.nimbusds.jose.JWSAlgorithm;
 import com.nimbusds.jose.JWSHeader;
@@ -31,13 +28,15 @@ import com.nimbusds.jose.Payload;
 import com.nimbusds.jose.crypto.MACSigner;
 import com.nimbusds.jose.crypto.MACVerifier;
 import com.nimbusds.jose.util.JSONObjectUtils;
-import com.prodyna.pac.vothing.LoginCredentials;
 import com.prodyna.pac.vothing.Vothing;
-import com.prodyna.pac.vothing.VothingConstants;
+import com.prodyna.pac.vothing.constants.RoleConstants;
+import com.prodyna.pac.vothing.constants.VothingConstants;
 import com.prodyna.pac.vothing.monitoring.VothingMonitoring;
 import com.prodyna.pac.vothing.persistence.Permission;
 import com.prodyna.pac.vothing.persistence.Role;
 import com.prodyna.pac.vothing.persistence.User;
+import com.prodyna.pac.vothing.security.LoginCredentials;
+import com.prodyna.pac.vothing.security.PermissionEnum;
 import com.prodyna.pac.vothing.service.SecurityService;
 
 @Stateless
@@ -145,15 +144,24 @@ public class SecurityServiceImpl implements SecurityService, VothingConstants {
 	}
 
 	@Override
-	public boolean hasUserPermission(Permission permissionToCheck) {
-		User user = vothing.getUser();
+	public boolean hasUserPermission(User user, PermissionEnum permissionEnum) {
+		return hasUserPermission(user, permissionEnum.getName());
+	}
+
+	@Override
+	public boolean hasUserPermission(User user, Permission permissionToCheck) {
 		Collection<Role> roles = user.getRoles();
 
 		for (Role role : roles) {
+			
+			if(role.getName().equalsIgnoreCase(RoleConstants.ROLE_ADMIN)) {
+				return true;
+			}
+			
 			Collection<Permission> permissions = role.getPermissions();
 			for (Permission permission : permissions) {
-				if (permission.getPermissionId() == permissionToCheck
-						.getPermissionId()) {
+				if (permission.getId() == permissionToCheck
+						.getId()) {
 					return true;
 				}
 			}
@@ -163,22 +171,13 @@ public class SecurityServiceImpl implements SecurityService, VothingConstants {
 	}
 
 	@Override
-	public boolean hasUserPermission(String permissionKey) {
-		for (Permission permission : vothing.getPermissionService().getPermissions()) {
+	public boolean hasUserPermission(User user, String permissionKey) {
+		for (Permission permission : vothing.getPermissionService().getElements()) {
 			if (permission.getName().equalsIgnoreCase(permissionKey)) {
-				return hasUserPermission(permission);
+				return hasUserPermission(user, permission);
 			}
 		}
 		return false;
 	}
-
-//	@Override
-//	public String encodePassword(String password) {
-//
-//		String encodedPassword = Md5Crypt.md5Crypt(
-//				password.getBytes(Charset.forName("UTF-8")), PASSWORD_SALT);
-//
-//		return encodedPassword;
-//	}
 
 }

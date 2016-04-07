@@ -1,23 +1,16 @@
 package com.prodyna.pac.vothing;
 
 import java.io.Serializable;
-import java.util.Collection;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
-import org.jboss.annotation.ejb.cache.simple.CacheConfig;
-
 import com.prodyna.pac.vothing.monitoring.VothingMonitoring;
-import com.prodyna.pac.vothing.persistence.Permission;
-import com.prodyna.pac.vothing.persistence.Role;
 import com.prodyna.pac.vothing.persistence.User;
 import com.prodyna.pac.vothing.service.PermissionService;
 import com.prodyna.pac.vothing.service.SecurityService;
 import com.prodyna.pac.vothing.service.UserService;
 
-//@SessionScoped
-@CacheConfig(maxSize = 100000, idleTimeoutSeconds = 60, removalTimeoutSeconds = 60)
 @VothingMonitoring
 // TODO check if timeout is working
 public class VothingBean implements Vothing, Serializable {
