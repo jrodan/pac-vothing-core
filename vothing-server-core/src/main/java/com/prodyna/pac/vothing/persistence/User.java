@@ -7,6 +7,9 @@ import javax.json.Json;
 import javax.json.JsonObjectBuilder;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -20,31 +23,32 @@ import com.prodyna.pac.vothing.constants.VothingConstants;
 @Table(name = "vothing_user")
 @NamedQueries({ @NamedQuery(name = VothingConstants.SELECT_ALL_USERS, query = "SELECT a FROM User a") })
 public class User extends BaseModelImpl<User> {
-	
+
 	/** Generated serial version UID. */
 	private static final long serialVersionUID = 3424622331216625L;
-	
+
 	@Column
 	private String foreName;
-	
+
 	@Column
 	private String email;
-	
+
 	@Column
 	private String password;
-	
+
 	@Column
 	private Date lastLogin;
-	
-	@OneToMany(mappedBy="user")
+
+	@OneToMany(mappedBy = "user")
 	private Collection<Survey> surveys;
-	
-	@OneToMany(mappedBy="user")
+
+	@ManyToMany
+	@JoinTable(name = "userrole", joinColumns = @JoinColumn(name = "userId", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "roleId", referencedColumnName = "id"))
 	private Collection<Role> roles;
-	
-	@OneToMany(mappedBy="user")
+
+	@OneToMany(mappedBy = "user")
 	private Collection<Vote> votes;
-	
+
 	public String getForeName() {
 		return foreName;
 	}

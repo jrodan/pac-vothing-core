@@ -16,7 +16,7 @@ import com.prodyna.pac.vothing.service.UserService;
 
 @Stateless
 @VothingMonitoring
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl extends BaseServiceImpl<User> implements UserService {
 
 	@Inject
 	private Logger logger;
@@ -66,7 +66,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void createUser(User user) {
-		vothing.getEntityManager().persist(user);
+		super.addElement(user);
 	}
 
 }

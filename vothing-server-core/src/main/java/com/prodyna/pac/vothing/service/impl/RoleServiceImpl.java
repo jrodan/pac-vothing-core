@@ -33,7 +33,7 @@ public class RoleServiceImpl extends BaseServiceImpl<Role> implements RoleServic
 		Role role = new Role();
 		role.setName(name);
 		role.setPermissions(permissions);
-		this.vothing.getEntityManager().persist(role);
+		super.addElement(role);
 
 		return role;
 	}

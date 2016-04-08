@@ -15,6 +15,7 @@ import com.prodyna.pac.vothing.Vothing;
 import com.prodyna.pac.vothing.persistence.User;
 
 @Provider
+//@Priority(Priorities.USER)
 public class VothingServletInterceptor implements ContainerRequestFilter {
 
 	@Context
@@ -29,35 +30,41 @@ public class VothingServletInterceptor implements ContainerRequestFilter {
 		
 		User user = (User) requestContext.getProperty("user");
 		
-		if(user == null) {
-			requestContext.abortWith(Response.status(Response.Status.UNAUTHORIZED)
-					.build());
-			return;
-		}
- 		
-		Method method = resourceInfo.getResourceMethod();
-		boolean hasPermission = true;
-
-		final PermissionAnn annotation = method
-				.getAnnotation(PermissionAnn.class);
-		PermissionEnum permission = PermissionEnum.NONE;
-
-		if (annotation != null && annotation.permission() != PermissionEnum.NONE) {
-			permission = annotation.permission();
-			hasPermission = false;
-		} 
+//		if(user == null) {
+//			requestContext.abortWith(Response.status(Response.Status.UNAUTHORIZED)
+//					.build());
+//			return;
+//		}
 		
-		if (!hasPermission && user != null) {
-
-			if (vothing.getSecurityService().hasUserPermission(user, permission)) {
-				hasPermission = true;
+		if(user != null) {
+ 		
+			Method method = resourceInfo.getResourceMethod();
+			boolean hasPermission = true;
+	
+			final PermissionAnn annotation = method
+					.getAnnotation(PermissionAnn.class);
+			PermissionEnum permission = PermissionEnum.NONE;
+	
+			if (annotation != null && annotation.permission() != PermissionEnum.NONE) {
+				permission = annotation.permission();
+				hasPermission = false;
+			} 
+			
+			if (!hasPermission && user != null) {
+	
+				if (vothing.getSecurityService().hasUserPermission(user, permission)) {
+					hasPermission = true;
+				}
+	
 			}
-
-		}
-
-		if (!hasPermission) {
-			requestContext.abortWith(Response.status(Response.Status.FORBIDDEN)
-					.build());
+	
+			if (!hasPermission) {
+				requestContext.abortWith(Response.status(Response.Status.FORBIDDEN)
+						.build());
+			}
+			
+		} else {
+			// do nothing in this case because login was not executed till now
 		}
 	}
 }

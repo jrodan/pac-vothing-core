@@ -28,9 +28,7 @@ public class PermissionServiceImpl extends BaseServiceImpl<Permission> implement
 		
 		Permission permission = new Permission();
 		permission.setName(name);
-		this.vothing.getEntityManager().persist(permission);
-
-		return permission;
+		return super.addElement(permission);
 	}
 
 	@Override

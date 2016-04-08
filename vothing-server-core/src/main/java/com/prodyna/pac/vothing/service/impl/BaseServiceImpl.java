@@ -74,6 +74,8 @@ public class BaseServiceImpl<T extends BaseModel> implements BaseService<T> {
 				this.vothing.getEntityManager().persist(element);
 			}
 			
+		} else {
+			this.vothing.getEntityManager().persist(element);
 		}
 		
 		return element;

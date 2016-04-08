@@ -23,6 +23,7 @@ import com.prodyna.pac.vothing.service.SecurityService;
 
 @Provider
 //@PreMatching
+//@Priority(Priorities.AUTHENTICATION)
 @VothingMonitoring
 public class VothingServletSecurityFilter implements Filter, VothingConstants {
 

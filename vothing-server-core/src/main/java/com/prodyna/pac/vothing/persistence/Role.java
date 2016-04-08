@@ -3,8 +3,6 @@ package com.prodyna.pac.vothing.persistence;
 import java.util.Collection;
 
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -28,17 +26,17 @@ public class Role extends BaseModelImpl<Role> {
 	private Collection<Permission> permissions;
 
 	//@JoinColumn(name = "userId")
-	@JoinColumn(name = "userId", referencedColumnName = "id")
-	@ManyToOne
-	User user;
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
+//	@JoinColumn(name = "userId", referencedColumnName = "id")
+//	@ManyToOne
+//	User user;
+//
+//	public User getUser() {
+//		return user;
+//	}
+//
+//	public void setUser(User user) {
+//		this.user = user;
+//	}
 
 	public Collection<Permission> getPermissions() {
 		return permissions;
