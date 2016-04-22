@@ -15,6 +15,7 @@ import com.prodyna.pac.vothing.Vothing;
 import com.prodyna.pac.vothing.persistence.User;
 
 @Provider
+//@WebFilter(filterName="VothingServletInterceptor", value="/*") // TODO
 //@Priority(Priorities.USER)
 public class VothingServletInterceptor implements ContainerRequestFilter {
 

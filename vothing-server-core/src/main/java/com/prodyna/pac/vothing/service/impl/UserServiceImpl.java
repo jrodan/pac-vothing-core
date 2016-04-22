@@ -41,7 +41,7 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
 				}
 			}
 		}
-
+		
 		// if (user == null) {
 		// throw new EntityNotFoundException(
 		// "User could not be found for given email and password ["
@@ -60,7 +60,6 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
 		// "User could not be found for given userId [" + userId + "]");
 		// }
 		// TODO
-
 		return user;
 	}
 

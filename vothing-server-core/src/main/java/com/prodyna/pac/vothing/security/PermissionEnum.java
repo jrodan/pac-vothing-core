@@ -10,6 +10,8 @@ public enum PermissionEnum {
 	
 	SURVEY_ADD("SURVEY_ADD"), 
 	
+	SURVEY_UPDATE("SURVEY_UPDATE"), 
+	
 	SURVEY_DELETE("SURVEY_DELETE");
 	
 	private String name = "";

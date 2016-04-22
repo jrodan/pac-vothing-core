@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -22,19 +23,32 @@ public interface SurveyService extends BaseService<Survey>{
 	
 	@GET
 	@Path("/add/{name}")
+	@PermissionAnn(permission = PermissionEnum.SURVEY_ADD)
 	Survey createSurvey(@PathParam("name") String name);
+	
+	@POST
+	@Path("/add")
+	@PermissionAnn(permission = PermissionEnum.SURVEY_ADD)
+	String createSurvey(Survey survey);
 	
 	@GET
 	@Path("/list")
-	@PermissionAnn(permission = PermissionEnum.SURVEY_ADD)
+	@PermissionAnn(permission = PermissionEnum.SURVEY_LIST)
 	List<Survey> getSurveys();
+	
+	@POST
+	@Path("/update")
+	@PermissionAnn(permission = PermissionEnum.SURVEY_UPDATE)
+	String updateSurvey(Survey survey);
 	
 //	@GET
 //	@Path("/list/{surveyId}")
+	@PermissionAnn(permission = PermissionEnum.SURVEY_LIST)
 	Survey getSurvey(@PathParam("surveyId") long surveyId);
 	
 	@GET
 	@Path("/delete/{surveyId}")
+	@PermissionAnn(permission = PermissionEnum.SURVEY_DELETE)
 	void deleteVote(@PathParam("surveyId") long surveyId);
 
 }

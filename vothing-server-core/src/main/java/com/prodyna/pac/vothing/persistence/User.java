@@ -14,6 +14,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.prodyna.pac.vothing.constants.VothingConstants;
@@ -28,12 +29,15 @@ public class User extends BaseModelImpl<User> {
 	private static final long serialVersionUID = 3424622331216625L;
 
 	@Column
+	@NotNull
 	private String foreName;
 
 	@Column
+	@NotNull
 	private String email;
 
 	@Column
+	@NotNull
 	private String password;
 
 	@Column

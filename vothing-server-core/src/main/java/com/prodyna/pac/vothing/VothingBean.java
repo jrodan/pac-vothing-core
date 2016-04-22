@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.ws.rs.ApplicationPath;
+import javax.ws.rs.core.Application;
 
 import com.prodyna.pac.vothing.monitoring.VothingMonitoring;
 import com.prodyna.pac.vothing.persistence.User;
@@ -12,8 +14,8 @@ import com.prodyna.pac.vothing.service.SecurityService;
 import com.prodyna.pac.vothing.service.UserService;
 
 @VothingMonitoring
-// TODO check if timeout is working
-public class VothingBean implements Vothing, Serializable {
+@ApplicationPath("/")
+public class VothingBean extends Application implements Vothing, Serializable {
 
 	private static final long serialVersionUID = 168371436432931798L;
 

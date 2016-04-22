@@ -16,8 +16,6 @@ import com.prodyna.pac.vothing.service.SurveyService;
 @VothingMonitoring
 public class SurveyServiceImpl extends BaseServiceImpl<Survey> implements SurveyService {
 
-	// TODO check permissions before action
-
 	@Inject
 	private Logger logger;
 
@@ -30,9 +28,7 @@ public class SurveyServiceImpl extends BaseServiceImpl<Survey> implements Survey
 		Survey survey = new Survey();
 		survey.setName(name);
 		survey.setUser(this.vothing.getUser());
-		this.vothing.getEntityManager().persist(survey);
-
-		return survey;
+		return super.addElement(survey);
 	}
 
 	@Override
@@ -48,6 +44,19 @@ public class SurveyServiceImpl extends BaseServiceImpl<Survey> implements Survey
 	@Override
 	public void deleteVote(long surveyId) {
 		super.deleteElement(surveyId);
+	}
+
+	@Override
+	public String updateSurvey(Survey survey) {
+		// TODO Auto-generated method stub
+		// TODO check what comes from the frontend 
+		return null;
+	}
+
+	@Override
+	public String createSurvey(Survey survey) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

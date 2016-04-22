@@ -26,7 +26,7 @@ public interface SecurityService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	String login(LoginCredentials loginCredentials);
-
+	
 	User getUserByToken(String token) throws ParseException, JOSEException;
 
 	public boolean hasUserPermission(User user, PermissionEnum permissionEnum);

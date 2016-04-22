@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import javax.persistence.EntityNotFoundException;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
+import javax.servlet.annotation.WebListener;
 
 import org.slf4j.Logger;
 
@@ -19,6 +20,7 @@ import com.prodyna.pac.vothing.service.PermissionService;
 import com.prodyna.pac.vothing.service.RoleService;
 import com.prodyna.pac.vothing.service.UserService;
 
+@WebListener
 public class VothingServletContextListener implements ServletContextListener{
 
 	@Override
@@ -49,8 +51,9 @@ public class VothingServletContextListener implements ServletContextListener{
 		// TODO init permissions
 		Collection<Permission> permissions = new ArrayList<Permission>();
 		permissionService.createPermission(PermissionEnum.NONE);
-		permissionService.createPermission(PermissionEnum.SURVEY_ADD);
 		permissionService.createPermission(PermissionEnum.SURVEY_DELETE);
+		permissions.add(permissionService.createPermission(PermissionEnum.SURVEY_ADD));
+		permissions.add(permissionService.createPermission(PermissionEnum.SURVEY_UPDATE));
 		permissions.add(permissionService.createPermission(PermissionEnum.SURVEY_LIST));
 		
 		// TODO init roles
@@ -84,8 +87,8 @@ public class VothingServletContextListener implements ServletContextListener{
 			user.setPassword("123");
 			roles.add(userRole);
 			user.setRoles(roles);
-			roles.clear();
 			userService.createUser(user);
+			roles.clear();
 			
 			user = new User();
 			user.setEmail("admin@vothing.com");
