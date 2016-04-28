@@ -13,6 +13,7 @@
 	<packaging>war</packaging>
 
 	<dependencies>
+		
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
@@ -25,26 +26,23 @@
 			<artifactId>nimbus-jose-jwt</artifactId>
 			<version>4.12</version>
 		</dependency>
-		<!-- <dependency> <groupId>org.jboss.resteasy</groupId> <artifactId>resteasy-jaxrs</artifactId> 
-			<version>3.0.8.Final</version> </dependency> -->
 		<!-- <dependency>
 			<groupId>org.jboss.resteasy</groupId>
-			<artifactId>jaxrs-api</artifactId>
-			<version>3.0.12.Final</version>
+			<artifactId>resteasy-jaxrs</artifactId>
+			<version>3.0.16.Final</version>
 		</dependency> -->
-<!-- 		<dependency>
-	<groupId>javax.ws.rs</groupId>
-	<artifactId>javax.ws.rs-api</artifactId>
-	<version>2.0.1</version>
-</dependency> -->
-		
+		<!-- <dependency> <groupId>org.jboss.resteasy</groupId> <artifactId>jaxrs-api</artifactId> 
+			<version>3.0.12.Final</version> </dependency> -->
+		<!-- <dependency> <groupId>javax.ws.rs</groupId> <artifactId>javax.ws.rs-api</artifactId> 
+			<version>2.0.1</version> </dependency> -->
+
 	</dependencies>
 
 
 	<build>
 
 		<plugins>
-			
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
@@ -52,7 +50,7 @@
 					<failOnMissingWebXml>false</failOnMissingWebXml>
 				</configuration>
 			</plugin>
-		
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-ejb-plugin</artifactId>

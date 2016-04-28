@@ -3,7 +3,9 @@ package com.prodyna.pac.vothing.security;
 import java.io.IOException;
 import java.lang.reflect.Method;
 
+import javax.annotation.Priority;
 import javax.inject.Inject;
+import javax.ws.rs.Path;
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerRequestFilter;
 import javax.ws.rs.container.ResourceInfo;
@@ -17,7 +19,9 @@ import com.prodyna.pac.vothing.persistence.User;
 @Provider
 //@WebFilter(filterName="VothingServletInterceptor", value="/*") // TODO
 //@Priority(Priorities.USER)
-public class VothingServletInterceptor implements ContainerRequestFilter {
+@Path("/restricted/*")
+@Priority(3)
+public class VothingPermissionFilter implements ContainerRequestFilter {
 
 	@Context
 	private ResourceInfo resourceInfo;

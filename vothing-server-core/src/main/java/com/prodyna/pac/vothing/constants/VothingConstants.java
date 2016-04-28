@@ -22,7 +22,7 @@ public interface VothingConstants {
 	
 	String SELECT_SESSION_BY_TOKEN = "select_session_by_token";
 	
-	String VOTHING_ACCESS_TOKEN = "votToken";
+	String VOTHING_ACCESS_TOKEN = "Vothing-Token";
 	
 	String VOTHING_USER = "votUser";
 	

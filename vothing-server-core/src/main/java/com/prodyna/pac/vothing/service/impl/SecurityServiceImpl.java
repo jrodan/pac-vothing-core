@@ -83,7 +83,7 @@ public class SecurityServiceImpl implements SecurityService, VothingConstants {
 				logger.error("could not send error message 403", e);
 			}
 		}
-
+		
 		return token;
 	}
 
