@@ -21,15 +21,15 @@ import com.prodyna.pac.vothing.security.PermissionEnum;
 @VothingMonitoring
 public interface SurveyService extends BaseService<Survey>{
 	
-	@GET
-	@Path("/add/{name}")
-	@PermissionAnn(permission = PermissionEnum.SURVEY_ADD)
-	Survey createSurvey(@PathParam("name") String name);
+//	@GET
+//	@Path("/add/{name}")
+//	@PermissionAnn(permission = PermissionEnum.SURVEY_ADD)
+//	Survey createSurvey();
 	
 	@POST
 	@Path("/add")
 	@PermissionAnn(permission = PermissionEnum.SURVEY_ADD)
-	String createSurvey(Survey survey);
+	Survey createSurvey(Survey survey);
 	
 	@GET
 	@Path("/list")
@@ -39,7 +39,7 @@ public interface SurveyService extends BaseService<Survey>{
 	@POST
 	@Path("/update")
 	@PermissionAnn(permission = PermissionEnum.SURVEY_UPDATE)
-	String updateSurvey(Survey survey);
+	Survey updateSurvey(Survey survey);
 	
 //	@GET
 //	@Path("/list/{surveyId}")

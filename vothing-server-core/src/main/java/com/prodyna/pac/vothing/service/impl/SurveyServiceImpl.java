@@ -23,15 +23,6 @@ public class SurveyServiceImpl extends BaseServiceImpl<Survey> implements Survey
 	private Vothing vothing;
 
 	@Override
-	public Survey createSurvey(String name) {
-
-		Survey survey = new Survey();
-		survey.setName(name);
-		survey.setUser(this.vothing.getUser());
-		return super.addElement(survey);
-	}
-
-	@Override
 	public List<Survey> getSurveys() {
 		return super.getElements();
 	}
@@ -47,16 +38,13 @@ public class SurveyServiceImpl extends BaseServiceImpl<Survey> implements Survey
 	}
 
 	@Override
-	public String updateSurvey(Survey survey) {
-		// TODO Auto-generated method stub
-		// TODO check what comes from the frontend 
-		return null;
+	public Survey updateSurvey(Survey survey) {
+		return super.addElement(survey);
 	}
 
-	@Override
-	public String createSurvey(Survey survey) {
-		// TODO Auto-generated method stub
-		return null;
+	public Survey createSurvey(Survey survey) {
+		return super.addElement(survey);
 	}
+
 
 }

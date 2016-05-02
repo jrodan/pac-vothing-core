@@ -2,7 +2,9 @@ package com.prodyna.pac.vothing.persistence;
 
 import java.util.Collection;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -23,18 +25,19 @@ public class Survey extends BaseModelImpl<Survey> {
 	 */
 	private static final long serialVersionUID = 7912134879739982095L;
 
-	@OneToMany(mappedBy = "survey")
-	private Collection<Vote> votes;
+	@OneToMany(mappedBy = "survey", cascade = {CascadeType.PERSIST})
+	private Collection<SurveyOption> surveyOptions;
 	
+	@JoinColumn(name = "userId", referencedColumnName = "id")
 	@ManyToOne
 	User user;
 
-	public Collection<Vote> getVotes() {
-		return votes;
+	public Collection<SurveyOption> getSurveyOptions() {
+		return surveyOptions;
 	}
 
-	public void setVotes(Collection<Vote> votes) {
-		this.votes = votes;
+	public void setSurveyOptions(Collection<SurveyOption> surveyOptions) {
+		this.surveyOptions = surveyOptions;
 	}
 
 	public User getUser() {

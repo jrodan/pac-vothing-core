@@ -1,10 +1,12 @@
 package com.prodyna.pac.vothing.service.impl;
 
 import java.lang.reflect.ParameterizedType;
+import java.util.Collection;
 import java.util.List;
 
 import javax.inject.Inject;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.Query;
 
 import org.slf4j.Logger;
 
@@ -28,14 +30,17 @@ public class BaseServiceImpl<T extends BaseModel> implements BaseService<T> {
 				   ((ParameterizedType)getClass().getGenericSuperclass())
 				      .getActualTypeArguments()[0];
 		
-		String classString = VothingConstants.SELECT_ALL + persistentClass.getSimpleName().toLowerCase() + "s";
+		Query query = this.vothing.getEntityManager().createQuery("SELECT e FROM "+persistentClass.getSimpleName()+" e");
+		List<T> entities = (List<T>) query.getResultList();
 		
-		List<T> permissions = this.vothing
-				.getEntityManager()
-				.createNamedQuery(classString,
-						persistentClass).getResultList();
+//		String classString = VothingConstants.SELECT_ALL + persistentClass.getSimpleName().toLowerCase() + "s";
+//		
+//		List<T> entities = this.vothing
+//				.getEntityManager()
+//				.createNamedQuery(classString,
+//						persistentClass).getResultList();
 
-		return permissions;
+		return entities;
 	}
 
 	@Override

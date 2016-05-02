@@ -2,7 +2,9 @@ package com.prodyna.pac.vothing;
 
 import java.io.Serializable;
 
+import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
@@ -13,6 +15,8 @@ import com.prodyna.pac.vothing.service.PermissionService;
 import com.prodyna.pac.vothing.service.SecurityService;
 import com.prodyna.pac.vothing.service.UserService;
 
+@Named
+@Stateless 
 @VothingMonitoring
 @ApplicationPath("/")
 public class VothingBean extends Application implements Vothing, Serializable {

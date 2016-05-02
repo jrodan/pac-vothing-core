@@ -9,7 +9,7 @@ import com.prodyna.pac.vothing.service.SecurityService;
 
 public abstract class BaseTest {
 
-	@Deployment
+	@Deployment(testable = false)
 	public static Archive<?> createArchive() {
 		// WebArchive war = ShrinkWrap.create(WebArchive.class, "test.war");
 		// war.addAsWebInfResource(new

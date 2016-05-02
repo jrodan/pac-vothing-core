@@ -47,11 +47,11 @@ public class User extends BaseModelImpl<User> {
 	private Collection<Survey> surveys;
 
 	@ManyToMany
-	@JoinTable(name = "userrole", joinColumns = @JoinColumn(name = "userId", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "roleId", referencedColumnName = "id"))
+	@JoinTable(name = "vothing_userrole", joinColumns = @JoinColumn(name = "userId", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "roleId", referencedColumnName = "id"))
 	private Collection<Role> roles;
 
 	@OneToMany(mappedBy = "user")
-	private Collection<Vote> votes;
+	private Collection<SurveyOptionRating> votes;
 
 	public String getForeName() {
 		return foreName;
@@ -101,11 +101,11 @@ public class User extends BaseModelImpl<User> {
 		this.roles = roles;
 	}
 
-	public Collection<Vote> getVotes() {
+	public Collection<SurveyOptionRating> getVotes() {
 		return votes;
 	}
 
-	public void setVotes(Collection<Vote> votes) {
+	public void setVotes(Collection<SurveyOptionRating> votes) {
 		this.votes = votes;
 	}
 

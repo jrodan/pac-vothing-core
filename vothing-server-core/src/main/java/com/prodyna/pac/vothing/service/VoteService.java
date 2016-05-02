@@ -11,7 +11,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import com.prodyna.pac.vothing.monitoring.VothingMonitoring;
-import com.prodyna.pac.vothing.persistence.Vote;
+import com.prodyna.pac.vothing.persistence.SurveyOptionRating;
 
 @Path("/restricted/vote")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -19,23 +19,23 @@ import com.prodyna.pac.vothing.persistence.Vote;
 @VothingMonitoring
 public interface VoteService {
 
-	@GET
-	@Path("/add/{rating}")
-	Vote createVote(@PathParam("rating") double rating);
+//	@GET
+//	@Path("/add/{rating}")
+//	SurveyOptionRating createVote(@PathParam("rating") double rating);
 
-	Vote createVote(Vote vote);
-
-	@GET
-	@Path("/list/{voteId}")
-	Vote readVote(@PathParam("voteId") long voteId)
-			throws EntityNotFoundException;
-
-	@GET
-	@Path("/list")
-	List<Vote> readVotes();
-
-	void deleteVote(String name);
-
-	Vote updateVote(Vote vote);
+//	SurveyOptionRating createVote(SurveyOptionRating vote);
+//
+//	@GET
+//	@Path("/list/{voteId}")
+//	SurveyOptionRating readVote(@PathParam("voteId") long voteId)
+//			throws EntityNotFoundException;
+//
+//	@GET
+//	@Path("/list")
+//	List<SurveyOptionRating> readVotes();
+//
+//	void deleteVote(String name);
+//
+//	SurveyOptionRating updateVote(SurveyOptionRating vote);
 
 }

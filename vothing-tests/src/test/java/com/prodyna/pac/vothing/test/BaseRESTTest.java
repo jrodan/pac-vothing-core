@@ -26,7 +26,7 @@ public abstract class BaseRESTTest extends BaseTest {
 		client.register(JacksonFeature.class);
 		return client;
 	}
-
+	
 	protected WebTarget createWebTarget() {
 		String fullPath = url.toString() ;//+ "rest";
 		log.info("URL = " + fullPath);

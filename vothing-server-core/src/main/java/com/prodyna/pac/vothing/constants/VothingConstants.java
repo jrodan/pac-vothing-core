@@ -6,13 +6,11 @@ public interface VothingConstants {
 	
 	String SELECT_ALL_VOTE_TYPES = "select_all_vote_types";
 	
-	String SELECT_ALL_VOTES = "select_all_votes";
+	String SELECT_ALL_SURVEYOPTIONRATING = "select_all_surveyoptionrating";
 	
 	String SELECT_ALL_USERS = "select_all_users";
 	
 	String SELECT_ALL_ROLES = "select_all_roles";
-	
-	String SELECT_ALL_SERVER = "select_all_servers";
 	
 	String SELECT_ALL_PERMISSIONS = "select_all_permissions";
 	
@@ -21,6 +19,8 @@ public interface VothingConstants {
 	String SELECT_ALL_SESSIONS = "select_all_sessions";
 	
 	String SELECT_SESSION_BY_TOKEN = "select_session_by_token";
+	
+	String SELECT_SURVEYOPTION = "select_all_surveyoption";
 	
 	String VOTHING_ACCESS_TOKEN = "Vothing-Token";
 	
