@@ -18,8 +18,8 @@ public class Role extends BaseModelImpl<Role> {
 	 */
 	private static final long serialVersionUID = -4959572841738825267L;
 
-//	@ManyToMany
-//	@JoinTable(name = "vothing_rolepermission", joinColumns = @JoinColumn(name = "roleId", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "permissionId", referencedColumnName = "id"))
+	@ManyToMany
+	@JoinTable(name = "vothing_rolepermission", joinColumns = @JoinColumn(name = "roleId", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "permissionId", referencedColumnName = "id"))
 	private Collection<Permission> permissions;
 
 	//@JoinColumn(name = "userId")

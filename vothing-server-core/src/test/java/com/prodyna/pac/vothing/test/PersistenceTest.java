@@ -32,8 +32,9 @@ public class PersistenceTest {
         return ShrinkWrap.create(WebArchive.class, "test.war")
                 .addPackages(true, "com.prodyna.pac.vothing")
                 .addPackages(true, "com.nimbusds.jose")
-                .addAsResource("persistence.xml", "META-INF/persistence.xml")
-                .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
+                .addPackages(true,"com.google.gson")
+                .addAsResource("test-persistence.xml", "META-INF/persistence.xml")
+                .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
     }
 
     @Inject
@@ -77,15 +78,15 @@ public class PersistenceTest {
         permissions.add(permissionService.createPermission(PermissionEnum.SURVEY_ADD));
         permissions.add(permissionService.createPermission(PermissionEnum.SURVEY_UPDATE));
         permissions.add(permissionService.createPermission(PermissionEnum.SURVEY_LIST));
-        Assert.assertEquals(permissionService.getElements(), 5);
+        Assert.assertEquals(permissionService.getElements().size(), 5);
 
         // test roles
-        Role adminRole = roleService.createRole(RoleConstants.ROLE_ADMIN, null);
+        Role adminRole = roleService.createRole(RoleConstants.ROLE_ADMIN, new ArrayList<Permission>());
         Assert.assertNotNull(adminRole);
-        Assert.assertEquals(adminRole.getPermissions(), 0);
+        Assert.assertEquals(adminRole.getPermissions().size(), 0);
         Role userRole = roleService.createRole(RoleConstants.ROLE_USER, permissions);
         Assert.assertNotNull(userRole);
-        Assert.assertEquals(userRole.getPermissions(), 5);
+        Assert.assertEquals(userRole.getPermissions().size(), 5);
 
         // test survey
         Survey survey = new Survey();

@@ -19,13 +19,13 @@ public class SurveyOptionRating extends BaseModelImpl<SurveyOptionRating> {
 	/** Generated serial version UID. */
 	private static final long serialVersionUID = 22192424331216625L;
 	
-//	@JoinColumn(name = "userId", referencedColumnName = "id")
-//	@ManyToOne
+	@JoinColumn(name = "userId", referencedColumnName = "id")
+	@ManyToOne
     User user;
 
 	
-//	@JoinColumn(name = "surveyOptionId", referencedColumnName = "id")
-//	@ManyToOne
+	@JoinColumn(name = "surveyOptionId", referencedColumnName = "id")
+	@ManyToOne
     SurveyOption surveyOption;
 	
 	public SurveyOption getSurveyOption() {
