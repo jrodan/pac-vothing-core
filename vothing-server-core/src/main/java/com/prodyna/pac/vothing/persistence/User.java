@@ -43,14 +43,14 @@ public class User extends BaseModelImpl<User> {
 	@Column
 	private Date lastLogin;
 
-	@OneToMany(mappedBy = "user")
+//	@OneToMany(mappedBy = "user")
 	private Collection<Survey> surveys;
 
-	@ManyToMany
-	@JoinTable(name = "vothing_userrole", joinColumns = @JoinColumn(name = "userId", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "roleId", referencedColumnName = "id"))
+//	@ManyToMany
+//	@JoinTable(name = "vothing_userrole", joinColumns = @JoinColumn(name = "userId", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "roleId", referencedColumnName = "id"))
 	private Collection<Role> roles;
 
-	@OneToMany(mappedBy = "user")
+//	@OneToMany(mappedBy = "user")
 	private Collection<SurveyOptionRating> votes;
 
 	public String getForeName() {

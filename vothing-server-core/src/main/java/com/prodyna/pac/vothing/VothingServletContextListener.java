@@ -1,30 +1,18 @@
 package com.prodyna.pac.vothing;
 
-import java.util.ArrayList;
-import java.util.Collection;
+import com.prodyna.pac.vothing.constants.RoleConstants;
+import com.prodyna.pac.vothing.persistence.*;
+import com.prodyna.pac.vothing.security.PermissionEnum;
+import com.prodyna.pac.vothing.service.*;
+import org.slf4j.Logger;
 
 import javax.inject.Inject;
 import javax.persistence.EntityNotFoundException;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
-
-import org.slf4j.Logger;
-
-import com.prodyna.pac.vothing.constants.RoleConstants;
-import com.prodyna.pac.vothing.persistence.Permission;
-import com.prodyna.pac.vothing.persistence.Role;
-import com.prodyna.pac.vothing.persistence.Survey;
-import com.prodyna.pac.vothing.persistence.SurveyOption;
-import com.prodyna.pac.vothing.persistence.SurveyOptionRating;
-import com.prodyna.pac.vothing.persistence.User;
-import com.prodyna.pac.vothing.security.PermissionEnum;
-import com.prodyna.pac.vothing.service.PermissionService;
-import com.prodyna.pac.vothing.service.RoleService;
-import com.prodyna.pac.vothing.service.SurveyOptionRatingService;
-import com.prodyna.pac.vothing.service.SurveyOptionService;
-import com.prodyna.pac.vothing.service.SurveyService;
-import com.prodyna.pac.vothing.service.UserService;
+import java.util.ArrayList;
+import java.util.Collection;
 
 @WebListener
 public class VothingServletContextListener implements ServletContextListener{
@@ -63,7 +51,7 @@ public class VothingServletContextListener implements ServletContextListener{
 	public void initDatabase() {
 		// check if default data exist otherwise create
 		
-		// TODO init permissions
+		// init permissions
 		Collection<Permission> permissions = new ArrayList<Permission>();
 		permissionService.createPermission(PermissionEnum.NONE);
 		permissionService.createPermission(PermissionEnum.SURVEY_DELETE);
@@ -124,19 +112,19 @@ public class VothingServletContextListener implements ServletContextListener{
 			SurveyOption surveyOption2 = new SurveyOption();
 			surveyOption2.setName("Option 2");
 			surveyOption2.setSurvey(survey);
-			SurveyOptionRating surveyOptionRating1 = new SurveyOptionRating();
-			surveyOptionRating1.setSurveyOption(surveyOption1);
-			surveyOptionRating1.setUser(user);
-			SurveyOptionRating surveyOptionRating2 = new SurveyOptionRating();
-			surveyOptionRating2.setSurveyOption(surveyOption2);
-			surveyOptionRating2.setUser(admin);
+//			SurveyOptionRating surveyOptionRating1 = new SurveyOptionRating();
+//			surveyOptionRating1.setSurveyOption(surveyOption1);
+//			surveyOptionRating1.setUser(user);
+//			SurveyOptionRating surveyOptionRating2 = new SurveyOptionRating();
+//			surveyOptionRating2.setSurveyOption(surveyOption2);
+//			surveyOptionRating2.setUser(admin);
 			
 			// persist
 			surveyService.addElement(survey);
 			surveyOptionService.addElement(surveyOption1);
 			surveyOptionService.addElement(surveyOption2);	
-			surveyOptionRatingService.addElement(surveyOptionRating1);
-			surveyOptionRatingService.addElement(surveyOptionRating2);
+//			surveyOptionRatingService.addElement(surveyOptionRating1);
+//			surveyOptionRatingService.addElement(surveyOptionRating2);
 			
 			
 		}

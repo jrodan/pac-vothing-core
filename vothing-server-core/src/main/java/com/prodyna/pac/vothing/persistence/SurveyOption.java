@@ -23,10 +23,11 @@ public class SurveyOption extends BaseModelImpl<SurveyOption> {
 	/** Generated serial version UID. */
 	private static final long serialVersionUID = 1219546602331216625L;
 	
-	@JoinColumn(name = "surveyId", referencedColumnName = "id")
-	@ManyToOne Survey survey;
+//	@JoinColumn(name = "surveyId", referencedColumnName = "id")
+//	@ManyToOne
+	private  Survey survey;
 	
-	@OneToMany(mappedBy = "surveyOption", cascade = {CascadeType.PERSIST})
+//	@OneToMany(mappedBy = "surveyOption", cascade = {CascadeType.PERSIST})
 	private Collection<SurveyOptionRating> surveyOptionRatings;
 	
 	public Collection<SurveyOptionRating> getSurveyOptionRatings() {

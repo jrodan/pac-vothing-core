@@ -16,82 +16,82 @@ import com.prodyna.pac.vothing.service.SecurityService;
 import com.prodyna.pac.vothing.service.UserService;
 
 @Named
-@Stateless 
+@Stateless
 @VothingMonitoring
 @ApplicationPath("/")
 public class VothingBean extends Application implements Vothing, Serializable {
 
-	private static final long serialVersionUID = 168371436432931798L;
+    private static final long serialVersionUID = 168371436432931798L;
 
-	// @Context
-	// private HttpServletRequest request;
-	//
-	// @Context
-	// private HttpServletResponse response;
+    // @Context
+    // private HttpServletRequest request;
+    //
+    // @Context
+    // private HttpServletResponse response;
 
-	@Inject
-	private EntityManager entityManager;
+    @Inject
+    private EntityManager entityManager;
 
-	@Inject
-	private UserService userService;
+    @Inject
+    private UserService userService;
 
-	@Inject
-	private SecurityService securityService;
+    @Inject
+    private SecurityService securityService;
 
-	@Inject
-	private PermissionService permissionService;
+    @Inject
+    private PermissionService permissionService;
 
-	private User user;
+    private User user;
 
-	@Override
-	public User getUser() {
-		return user;
-	}
+    @Override
+    public User getUser() {
+        return user;
+    }
 
-	@Override
-	public void setUser(User user) {
-		this.user = user;
+    @Override
+    public void setUser(User user) {
+        this.user = user;
 
-	}
+    }
 
-	@Override
-	public EntityManager getEntityManager() {
-		return entityManager;
-	}
+    @Override
+    public EntityManager getEntityManager() {
+        return entityManager;
+    }
 
-	@Override
-	public void setEntityManager(EntityManager entityManager) {
-		this.entityManager = entityManager;
-	}
+    @Override
+    public void setEntityManager(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
 
-	@Override
-	public UserService getUserService() {
-		return userService;
-	}
+    @Override
+    public UserService getUserService() {
+        return userService;
+    }
 
-	@Override
-	public void setUserService(UserService userService) {
-		this.userService = userService;
-	}
+    @Override
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
 
-	@Override
-	public SecurityService getSecurityService() {
-		return securityService;
-	}
+    @Override
+    public SecurityService getSecurityService() {
+        return securityService;
+    }
 
-	@Override
-	public void setSecurityService(SecurityService securityService) {
-		this.securityService = securityService;
-	}
-	
-	@Override
-	public PermissionService getPermissionService() {
-		return permissionService;
-	}
-	
-	@Override
-	public void setPermissionService(PermissionService permissionService) {
-		this.permissionService = permissionService;
-	}
+    @Override
+    public void setSecurityService(SecurityService securityService) {
+        this.securityService = securityService;
+    }
+
+    @Override
+    public PermissionService getPermissionService() {
+        return permissionService;
+    }
+
+    @Override
+    public void setPermissionService(PermissionService permissionService) {
+        this.permissionService = permissionService;
+    }
 
 }
