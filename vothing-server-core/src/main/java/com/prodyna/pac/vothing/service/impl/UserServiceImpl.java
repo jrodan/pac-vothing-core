@@ -1,18 +1,16 @@
 package com.prodyna.pac.vothing.service.impl;
 
-import java.util.List;
-
-import javax.ejb.Stateless;
-import javax.inject.Inject;
-import javax.persistence.EntityNotFoundException;
-
-import org.slf4j.Logger;
-
 import com.prodyna.pac.vothing.Vothing;
 import com.prodyna.pac.vothing.constants.VothingConstants;
 import com.prodyna.pac.vothing.monitoring.VothingMonitoring;
 import com.prodyna.pac.vothing.persistence.User;
 import com.prodyna.pac.vothing.service.UserService;
+import org.slf4j.Logger;
+
+import javax.ejb.Stateless;
+import javax.inject.Inject;
+import javax.persistence.EntityNotFoundException;
+import java.util.List;
 
 @Stateless
 @VothingMonitoring
@@ -64,8 +62,8 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
 	}
 
 	@Override
-	public void createUser(User user) {
-		super.addElement(user);
+	public User createUser(User user) {
+		return super.addElement(user);
 	}
 
 }

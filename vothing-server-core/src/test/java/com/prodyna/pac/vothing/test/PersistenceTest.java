@@ -20,6 +20,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by jrodan on 04/05/16.
@@ -32,7 +33,7 @@ public class PersistenceTest {
         return ShrinkWrap.create(WebArchive.class, "test.war")
                 .addPackages(true, "com.prodyna.pac.vothing")
                 .addPackages(true, "com.nimbusds.jose")
-                .addPackages(true,"com.google.gson")
+                .addPackages(true, "com.google.gson")
                 .addAsResource("test-persistence.xml", "META-INF/persistence.xml")
                 .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
     }
@@ -65,6 +66,16 @@ public class PersistenceTest {
     @InSequence(1)
     public void testPersistence() {
 
+        // test default user persistence
+        User user1 = new User();
+        user1.setEmail("default@vothing.com");
+        user1.setForeName("dummy");
+        user1.setName("user");
+        user1.setPassword("123");
+        User user1DB = userService.createUser(user1);
+        Assert.assertNotNull(user1DB);
+        Assert.assertTrue(user1DB.getEmail().equals(user1.getEmail()));
+
         // test permissions
         Collection<Permission> permissions = new ArrayList<Permission>();
         Permission permissionNone = permissionService.createPermission(PermissionEnum.NONE);
@@ -90,11 +101,18 @@ public class PersistenceTest {
 
         // test survey
         Survey survey = new Survey();
-        survey.setUser(null); // TODO
+        survey.setUser(user1DB); // TODO
         survey.setName("testSurvey1");
         Survey surveyDB = surveyService.createSurvey(survey);
         Assert.assertNotNull(surveyDB);
         Assert.assertTrue(surveyDB.getId() > 0);
+        Assert.assertTrue(user1DB.getId() == user1.getId());
+
+        // test update of user in db in survey table
+        user1DB.setForeName("duck");
+        User user1DB2 = userService.createUser(user1DB);
+        Survey surveyDB2 = surveyService.getSurvey(surveyDB.getId());
+        Assert.assertTrue(user1DB2.getForeName().equals(surveyDB2.getUser().getForeName()));
 
         // test survey options
         // TODO does a survey need to know its survey options in the model?
@@ -129,6 +147,63 @@ public class PersistenceTest {
         // test user
         // TODO does a user need to know its surveys in the model?
 
+        // test user with role
+        User user2 = new User();
+        user2.setEmail("user@vothing.com");
+        user2.setForeName("user");
+        user2.setName("user");
+        user2.setPassword("123");
+        List<Role> roles2 = new ArrayList<Role>();
+        roles2.add(userRole);
+        user2.setRoles(roles2);
+        User user2DB = userService.createUser(user2);
+        Assert.assertNotNull(user2DB);
+        Assert.assertEquals(user2DB.getRoles().size(), 1);
+
+        // test user with vote and survey
+        User admin = new User();
+        admin.setEmail("admin@vothing.com");
+        admin.setForeName("admin");
+        admin.setName("admin");
+        admin.setPassword("123");
+        User adminDB = userService.createUser(admin);
+        Assert.assertNotNull(adminDB);
+        // add roles
+        List<Role> roles3 = new ArrayList<Role>();
+        roles3.add(adminRole);
+        adminDB.setRoles(roles3);
+        // add surveys
+        List<Survey> surveys3 = new ArrayList<Survey>();
+        surveys3.add(surveyDB); // add already created survey
+        adminDB.setSurveys(surveys3);
+        // add survey option
+        List<SurveyOption> surveyOptions3 = new ArrayList<SurveyOption>();
+        surveyOptions3.add(surveyOption1DB);
+        surveyOptions3.add(surveyOption2DB);
+        surveyDB.setSurveyOptions(surveyOptions3);
+        // update user
+        adminDB = userService.createUser(adminDB);
+        Assert.assertTrue(adminDB.getRoles().size() == 1);
+        Assert.assertTrue(adminDB.getSurveys().size() == 1);
+        Assert.assertTrue(adminDB.getSurveyOptionRatings().size() == 2);
+        // test deletion of entries
+        surveyOptionService.deleteElement(surveyOption1DB.getId());
+        User adminDB2 = userService.getUser(adminDB.getId());
+        Assert.assertTrue(adminDB.getId() == adminDB2.getId());
+        Assert.assertTrue(adminDB2.getSurveys().size() == 1);
+        Assert.assertTrue(adminDB2.getSurveys().contains(surveyDB));
+        for(Survey surveyTemp : adminDB2.getSurveys()) {
+            Assert.assertTrue(surveyTemp.getSurveyOptions().size() == 1);
+        }
+        // update user
+        surveyOptionRating1DB.setUser(adminDB2);
+        surveyOptionRating2DB.setUser(adminDB2);
+        List<SurveyOptionRating> surveyOptionRatings3 = new ArrayList<SurveyOptionRating>();
+        surveyOptionRatings3.add(surveyOptionRating1DB);
+        surveyOptionRatings3.add(surveyOptionRating2DB);
+        adminDB2.setSurveyOptionRatings(surveyOptionRatings3);
+        User adminDB3 = userService.createUser(admin);
+        Assert.assertTrue(adminDB3.getSurveyOptionRatings().size() == 2);
 
     }
 

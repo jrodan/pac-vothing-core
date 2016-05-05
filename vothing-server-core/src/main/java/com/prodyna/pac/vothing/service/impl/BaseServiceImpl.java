@@ -1,38 +1,34 @@
 package com.prodyna.pac.vothing.service.impl;
 
-import java.lang.reflect.ParameterizedType;
-import java.util.Collection;
-import java.util.List;
+import com.prodyna.pac.vothing.Vothing;
+import com.prodyna.pac.vothing.persistence.BaseModel;
+import com.prodyna.pac.vothing.service.BaseService;
+import org.slf4j.Logger;
 
 import javax.inject.Inject;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.Query;
-
-import org.slf4j.Logger;
-
-import com.prodyna.pac.vothing.Vothing;
-import com.prodyna.pac.vothing.constants.VothingConstants;
-import com.prodyna.pac.vothing.persistence.BaseModel;
-import com.prodyna.pac.vothing.service.BaseService;
+import java.lang.reflect.ParameterizedType;
+import java.util.List;
 
 public class BaseServiceImpl<T extends BaseModel> implements BaseService<T> {
-	
-	@Inject
-	private Logger logger;
 
-	@Inject
-	private Vothing vothing;
+    @Inject
+    private Logger logger;
 
-	@Override
-	public List<T> getElements() {
-		
-		Class<T> persistentClass = (Class<T>)
-				   ((ParameterizedType)getClass().getGenericSuperclass())
-				      .getActualTypeArguments()[0];
-		
-		Query query = this.vothing.getEntityManager().createQuery("SELECT e FROM "+persistentClass.getSimpleName()+" e");
-		List<T> entities = (List<T>) query.getResultList();
-		
+    @Inject
+    private Vothing vothing;
+
+    @Override
+    public List<T> getElements() {
+
+        Class<T> persistentClass = (Class<T>)
+                ((ParameterizedType) getClass().getGenericSuperclass())
+                        .getActualTypeArguments()[0];
+
+        Query query = this.vothing.getEntityManager().createQuery("SELECT e FROM " + persistentClass.getSimpleName() + " e");
+        List<T> entities = (List<T>) query.getResultList();
+
 //		String classString = VothingConstants.SELECT_ALL + persistentClass.getSimpleName().toLowerCase() + "s";
 //		
 //		List<T> entities = this.vothing
@@ -40,51 +36,52 @@ public class BaseServiceImpl<T extends BaseModel> implements BaseService<T> {
 //				.createNamedQuery(classString,
 //						persistentClass).getResultList();
 
-		return entities;
-	}
+        return entities;
+    }
 
-	@Override
-	public <T> T getElement(long id) {
-		
-		Class<T> persistentClass = (Class<T>)
-				   ((ParameterizedType)getClass().getGenericSuperclass())
-				      .getActualTypeArguments()[0];
-		
-		T element = this.vothing.getEntityManager().find(
-				persistentClass, id);
-		if (element == null) {
-			throw new EntityNotFoundException(
-					persistentClass.getSimpleName() + " could not be found for given id [" + id
-							+ "]");
-		}
+    @Override
+    public <T> T getElement(long id) {
 
-		return element;
-	}
+        Class<T> persistentClass = (Class<T>)
+                ((ParameterizedType) getClass().getGenericSuperclass())
+                        .getActualTypeArguments()[0];
 
-	@Override
-	public <T> void deleteElement(long id) {
-		T element = this.getElement(id);
-		this.vothing.getEntityManager().remove(element);
-		
-	}
+        T element = this.vothing.getEntityManager().find(
+                persistentClass, id);
+        if (element == null) {
+            throw new EntityNotFoundException(
+                    persistentClass.getSimpleName() + " could not be found for given id [" + id
+                            + "]");
+        }
 
-	@Override
-	public <T extends BaseModel> T addElement(T element) {
-		
-		if(element.getId() > 0) {
-			T dbElement = getElement(element.getId());
-			if(dbElement != null) {
-				this.vothing.getEntityManager().refresh(element);
-			} else {
-				this.vothing.getEntityManager().persist(element);
-			}
-			
-		} else {
-			this.vothing.getEntityManager().persist(element);
-		}
-		
-		return element;
-		
-	}
+        return element;
+    }
+
+    @Override
+    public <T> void deleteElement(long id) {
+        T element = this.getElement(id);
+        this.vothing.getEntityManager().remove(element);
+
+    }
+
+    @Override
+    public <T extends BaseModel> T addElement(T element) {
+
+        if (element.getId() > 0) {
+            T dbElement = getElement(element.getId());
+            if (dbElement != null) {
+                element = this.vothing.getEntityManager().merge(element);
+                this.vothing.getEntityManager().refresh(element);
+            } else {
+                this.vothing.getEntityManager().persist(element);
+            }
+
+        } else {
+            this.vothing.getEntityManager().persist(element);
+        }
+
+        return element;
+
+    }
 
 }

@@ -101,11 +101,11 @@ public class User extends BaseModelImpl<User> {
 		this.roles = roles;
 	}
 
-	public Collection<SurveyOptionRating> getVotes() {
+	public Collection<SurveyOptionRating> getSurveyOptionRatings() {
 		return votes;
 	}
 
-	public void setVotes(Collection<SurveyOptionRating> votes) {
+	public void setSurveyOptionRatings(Collection<SurveyOptionRating> votes) {
 		this.votes = votes;
 	}
 

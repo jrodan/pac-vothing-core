@@ -1,9 +1,9 @@
 package com.prodyna.pac.vothing.service;
 
-import javax.persistence.EntityNotFoundException;
-
 import com.prodyna.pac.vothing.monitoring.VothingMonitoring;
 import com.prodyna.pac.vothing.persistence.User;
+
+import javax.persistence.EntityNotFoundException;
 
 @VothingMonitoring
 public interface UserService {
@@ -12,6 +12,6 @@ public interface UserService {
 
 	User getUser(long userId) throws EntityNotFoundException;
 
-	void createUser(User user);
+	User createUser(User user);
 
 }
