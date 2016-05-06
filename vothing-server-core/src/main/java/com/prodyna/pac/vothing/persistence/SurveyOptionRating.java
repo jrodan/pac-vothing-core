@@ -8,6 +8,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.prodyna.pac.vothing.constants.VothingConstants;
 
 @Entity
@@ -18,12 +20,13 @@ public class SurveyOptionRating extends BaseModelImpl<SurveyOptionRating> {
 	
 	/** Generated serial version UID. */
 	private static final long serialVersionUID = 22192424331216625L;
-	
+
+    @JsonBackReference
 	@JoinColumn(name = "userId", referencedColumnName = "id")
 	@ManyToOne
     User user;
 
-	
+    @JsonBackReference
 	@JoinColumn(name = "surveyOptionId", referencedColumnName = "id")
 	@ManyToOne
     SurveyOption surveyOption;

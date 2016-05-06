@@ -1,7 +1,5 @@
 package com.prodyna.pac.vothing.persistence;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.google.gson.Gson;
 
 import javax.persistence.*;
@@ -11,7 +9,6 @@ import java.io.Serializable;
 @XmlRootElement
 @Inheritance
 @MappedSuperclass
-@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 public abstract class BaseModelImpl<T> implements BaseModel<T>, Serializable {
 	
 	@Id

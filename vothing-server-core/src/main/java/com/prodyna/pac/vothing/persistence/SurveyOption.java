@@ -1,5 +1,7 @@
 package com.prodyna.pac.vothing.persistence;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.prodyna.pac.vothing.constants.VothingConstants;
 
 import javax.persistence.*;
@@ -18,10 +20,12 @@ public class SurveyOption extends BaseModelImpl<SurveyOption> {
      */
     private static final long serialVersionUID = 1219546602331216625L;
 
+    @JsonBackReference
     @JoinColumn(name = "surveyId", referencedColumnName = "id")
     @ManyToOne
     private Survey survey;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "surveyOption", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private Collection<SurveyOptionRating> surveyOptionRatings = new ArrayList<SurveyOptionRating>();
 

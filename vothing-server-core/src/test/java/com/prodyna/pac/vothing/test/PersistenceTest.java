@@ -211,4 +211,14 @@ public class PersistenceTest {
 
     }
 
+
+//    @Test
+//    @InSequence(2)
+//    public void testCollectionSerialization() {
+//        User admin = userService.getUser("admin@vothing.com","123");
+//
+//        admin.getSurveys()
+//
+//    }
+
 }

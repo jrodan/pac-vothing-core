@@ -1,5 +1,7 @@
 package com.prodyna.pac.vothing.persistence;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.prodyna.pac.vothing.constants.VothingConstants;
 
 import javax.json.Json;
@@ -35,6 +37,7 @@ public class User extends BaseModelImpl<User> {
 	@Column
 	private Date lastLogin;
 
+	@JsonManagedReference
 	@OneToMany(mappedBy = "user", cascade = {CascadeType.PERSIST})
 	private Collection<Survey> surveys= new ArrayList<Survey>();
 
@@ -42,6 +45,7 @@ public class User extends BaseModelImpl<User> {
 	@JoinTable(name = "vothing_userrole", joinColumns = @JoinColumn(name = "userId", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "roleId", referencedColumnName = "id"))
 	private Collection<Role> roles = new ArrayList<Role>();
 
+	@JsonManagedReference
 	@OneToMany(mappedBy = "user", cascade = {CascadeType.ALL})
 	private Collection<SurveyOptionRating> votes = new ArrayList<SurveyOptionRating>();
 

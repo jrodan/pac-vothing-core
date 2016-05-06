@@ -1,5 +1,6 @@
 package com.prodyna.pac.vothing.persistence;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.prodyna.pac.vothing.constants.VothingConstants;
 
 import javax.persistence.*;
