@@ -1,30 +1,6 @@
 package com.prodyna.pac.vothing.service.impl;
 
-import java.io.IOException;
-import java.text.ParseException;
-import java.util.Collection;
-
-import javax.ejb.Stateless;
-import javax.inject.Inject;
-import javax.json.Json;
-import javax.json.JsonObjectBuilder;
-import javax.persistence.EntityNotFoundException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.ws.rs.core.Context;
-
-import net.minidev.json.JSONObject;
-
-import org.slf4j.Logger;
-
-import com.nimbusds.jose.JOSEException;
-import com.nimbusds.jose.JWSAlgorithm;
-import com.nimbusds.jose.JWSHeader;
-import com.nimbusds.jose.JWSObject;
-import com.nimbusds.jose.JWSSigner;
-import com.nimbusds.jose.JWSVerifier;
-import com.nimbusds.jose.KeyLengthException;
-import com.nimbusds.jose.Payload;
+import com.nimbusds.jose.*;
 import com.nimbusds.jose.crypto.MACSigner;
 import com.nimbusds.jose.crypto.MACVerifier;
 import com.nimbusds.jose.util.JSONObjectUtils;
@@ -38,6 +14,20 @@ import com.prodyna.pac.vothing.persistence.User;
 import com.prodyna.pac.vothing.security.LoginCredentials;
 import com.prodyna.pac.vothing.security.PermissionEnum;
 import com.prodyna.pac.vothing.service.SecurityService;
+import net.minidev.json.JSONObject;
+import org.slf4j.Logger;
+
+import javax.ejb.Stateless;
+import javax.inject.Inject;
+import javax.json.Json;
+import javax.json.JsonObjectBuilder;
+import javax.persistence.EntityNotFoundException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.core.Context;
+import java.io.IOException;
+import java.text.ParseException;
+import java.util.Collection;
 
 @Stateless
 @VothingMonitoring
@@ -133,7 +123,7 @@ public class SecurityServiceImpl implements SecurityService, VothingConstants {
 		
 		if(userIdLong > 0) {
 			try {
-				user = vothing.getUserService().getUser(userIdLong);
+				user = vothing.getUserService().getElement(userIdLong);
 			} catch (EntityNotFoundException e) {
 				logger.debug("no user is existing for userId " + userId, e);
 			}

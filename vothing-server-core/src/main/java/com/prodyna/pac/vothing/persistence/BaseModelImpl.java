@@ -46,26 +46,31 @@ public abstract class BaseModelImpl<T> implements BaseModel<T>, Serializable {
 		Gson gson = new Gson();
 		return gson.toJson(this);
 	}
-	
+
+	@Override
+	public int hashCode() {
+		int hash = 17;
+		hash = hash * 31 + Long.valueOf(this.getId()).intValue();
+		hash = hash * 31 + this.getName().hashCode();
+		hash = hash * 31 + this.getClass().getName().hashCode();
+		return hash;
+	}
+
 	@Override
 	public boolean equals(final Object obj) {
-		if (this == obj) {
-			return true;
-		}
 		if (obj == null) {
 			return false;
+		}
+		if (this == obj) {
+			return true;
 		}
 		if (!(obj instanceof BaseModel)) {
 			return false;
 		}
 		final BaseModel other = (BaseModel) obj;
-		if (this.getId() == 0) {
-			if (other.getId() != 0) {
-				return false;
-			}
-		} else if (this.getId() == other.getId()) {
-			return false;
+		if(this.getId() == other.getId()) {
+			return true;
 		}
-		return true;
+		return false;
 	}
 }

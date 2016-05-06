@@ -1,23 +1,15 @@
 package com.prodyna.pac.vothing.persistence;
 
-import java.util.Collection;
-import java.util.Date;
+import com.prodyna.pac.vothing.constants.VothingConstants;
 
 import javax.json.Json;
 import javax.json.JsonObjectBuilder;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
-
-import com.prodyna.pac.vothing.constants.VothingConstants;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
 
 @Entity
 @XmlRootElement
@@ -43,15 +35,15 @@ public class User extends BaseModelImpl<User> {
 	@Column
 	private Date lastLogin;
 
-	@OneToMany(mappedBy = "user")
-	private Collection<Survey> surveys;
+	@OneToMany(mappedBy = "user", cascade = {CascadeType.PERSIST})
+	private Collection<Survey> surveys= new ArrayList<Survey>();
 
 	@ManyToMany
 	@JoinTable(name = "vothing_userrole", joinColumns = @JoinColumn(name = "userId", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "roleId", referencedColumnName = "id"))
-	private Collection<Role> roles;
+	private Collection<Role> roles = new ArrayList<Role>();
 
-	@OneToMany(mappedBy = "user")
-	private Collection<SurveyOptionRating> votes;
+	@OneToMany(mappedBy = "user", cascade = {CascadeType.ALL})
+	private Collection<SurveyOptionRating> votes = new ArrayList<SurveyOptionRating>();
 
 	public String getForeName() {
 		return foreName;

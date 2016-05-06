@@ -1,11 +1,11 @@
 package com.prodyna.pac.vothing.persistence;
 
-import java.util.Collection;
+import com.prodyna.pac.vothing.constants.VothingConstants;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
-
-import com.prodyna.pac.vothing.constants.VothingConstants;
+import java.util.ArrayList;
+import java.util.Collection;
 
 @Entity
 @XmlRootElement
@@ -20,7 +20,7 @@ public class Role extends BaseModelImpl<Role> {
 
 	@ManyToMany
 	@JoinTable(name = "vothing_rolepermission", joinColumns = @JoinColumn(name = "roleId", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "permissionId", referencedColumnName = "id"))
-	private Collection<Permission> permissions;
+	private Collection<Permission> permissions = new ArrayList<Permission>();
 
 	//@JoinColumn(name = "userId")
 //	@JoinColumn(name = "userId", referencedColumnName = "id")

@@ -50,20 +50,4 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
 		return user;
 	}
 
-	@Override
-	public User getUser(long userId) throws EntityNotFoundException {
-		final User user = vothing.getEntityManager().find(User.class, userId);
-		// if (user == null) {
-		// throw new EntityNotFoundException(
-		// "User could not be found for given userId [" + userId + "]");
-		// }
-		// TODO
-		return user;
-	}
-
-	@Override
-	public User createUser(User user) {
-		return super.addElement(user);
-	}
-
 }

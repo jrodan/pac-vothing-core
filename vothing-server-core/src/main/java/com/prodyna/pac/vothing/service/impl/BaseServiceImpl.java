@@ -70,14 +70,27 @@ public class BaseServiceImpl<T extends BaseModel> implements BaseService<T> {
         if (element.getId() > 0) {
             T dbElement = getElement(element.getId());
             if (dbElement != null) {
-                element = this.vothing.getEntityManager().merge(element);
-                this.vothing.getEntityManager().refresh(element);
+                this.updateElement(element);
             } else {
-                this.vothing.getEntityManager().persist(element);
+                // TODO throw error in this case?
+                // this.vothing.getEntityManager().persist(element);
             }
 
         } else {
             this.vothing.getEntityManager().persist(element);
+        }
+
+        return element;
+    }
+
+    @Override
+    public <T extends BaseModel> T updateElement(T element) {
+
+        T dbElement = getElement(element.getId());
+        if (dbElement != null) {
+            element = this.vothing.getEntityManager().merge(element);
+        } else {
+            // TODO throw error
         }
 
         return element;

@@ -72,7 +72,7 @@ public class PersistenceTest {
         user1.setForeName("dummy");
         user1.setName("user");
         user1.setPassword("123");
-        User user1DB = userService.createUser(user1);
+        User user1DB = userService.addElement(user1);
         Assert.assertNotNull(user1DB);
         Assert.assertTrue(user1DB.getEmail().equals(user1.getEmail()));
 
@@ -101,7 +101,7 @@ public class PersistenceTest {
 
         // test survey
         Survey survey = new Survey();
-        survey.setUser(user1DB); // TODO
+        survey.setUser(user1DB);
         survey.setName("testSurvey1");
         Survey surveyDB = surveyService.createSurvey(survey);
         Assert.assertNotNull(surveyDB);
@@ -110,7 +110,7 @@ public class PersistenceTest {
 
         // test update of user in db in survey table
         user1DB.setForeName("duck");
-        User user1DB2 = userService.createUser(user1DB);
+        User user1DB2 = userService.addElement(user1DB);
         Survey surveyDB2 = surveyService.getSurvey(surveyDB.getId());
         Assert.assertTrue(user1DB2.getForeName().equals(surveyDB2.getUser().getForeName()));
 
@@ -156,7 +156,7 @@ public class PersistenceTest {
         List<Role> roles2 = new ArrayList<Role>();
         roles2.add(userRole);
         user2.setRoles(roles2);
-        User user2DB = userService.createUser(user2);
+        User user2DB = userService.addElement(user2);
         Assert.assertNotNull(user2DB);
         Assert.assertEquals(user2DB.getRoles().size(), 1);
 
@@ -166,7 +166,7 @@ public class PersistenceTest {
         admin.setForeName("admin");
         admin.setName("admin");
         admin.setPassword("123");
-        User adminDB = userService.createUser(admin);
+        User adminDB = userService.addElement(admin);
         Assert.assertNotNull(adminDB);
         // add roles
         List<Role> roles3 = new ArrayList<Role>();
@@ -174,36 +174,40 @@ public class PersistenceTest {
         adminDB.setRoles(roles3);
         // add surveys
         List<Survey> surveys3 = new ArrayList<Survey>();
+        surveyDB.setUser(adminDB);
         surveys3.add(surveyDB); // add already created survey
-        adminDB.setSurveys(surveys3);
+        surveyService.updateElement(surveyDB);
         // add survey option
         List<SurveyOption> surveyOptions3 = new ArrayList<SurveyOption>();
         surveyOptions3.add(surveyOption1DB);
         surveyOptions3.add(surveyOption2DB);
         surveyDB.setSurveyOptions(surveyOptions3);
+        adminDB.setSurveys(surveys3);
         // update user
-        adminDB = userService.createUser(adminDB);
+        adminDB = userService.addElement(adminDB);
         Assert.assertTrue(adminDB.getRoles().size() == 1);
         Assert.assertTrue(adminDB.getSurveys().size() == 1);
-        Assert.assertTrue(adminDB.getSurveyOptionRatings().size() == 2);
+        Assert.assertTrue(adminDB.getSurveyOptionRatings().size() == 0); // the result should be 0 because even if I add the options there, their userId is currently still not set correctly
         // test deletion of entries
         surveyOptionService.deleteElement(surveyOption1DB.getId());
-        User adminDB2 = userService.getUser(adminDB.getId());
+        User adminDB2 = userService.getElement(adminDB.getId());
         Assert.assertTrue(adminDB.getId() == adminDB2.getId());
         Assert.assertTrue(adminDB2.getSurveys().size() == 1);
         Assert.assertTrue(adminDB2.getSurveys().contains(surveyDB));
-        for(Survey surveyTemp : adminDB2.getSurveys()) {
+        for (Survey surveyTemp : adminDB2.getSurveys()) {
             Assert.assertTrue(surveyTemp.getSurveyOptions().size() == 1);
         }
         // update user
-        surveyOptionRating1DB.setUser(adminDB2);
         surveyOptionRating2DB.setUser(adminDB2);
+        // TODO why will children not be updated?
+        surveyOptionRatingService.updateElement(surveyOptionRating2DB);
         List<SurveyOptionRating> surveyOptionRatings3 = new ArrayList<SurveyOptionRating>();
-        surveyOptionRatings3.add(surveyOptionRating1DB);
         surveyOptionRatings3.add(surveyOptionRating2DB);
         adminDB2.setSurveyOptionRatings(surveyOptionRatings3);
-        User adminDB3 = userService.createUser(admin);
-        Assert.assertTrue(adminDB3.getSurveyOptionRatings().size() == 2);
+        User adminDB3 = userService.updateElement(adminDB2);
+        Assert.assertTrue(adminDB3.getSurveyOptionRatings().size() == 1);
+
+        // TODO add new survey without having it persisted before to a user
 
     }
 

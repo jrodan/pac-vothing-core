@@ -4,6 +4,7 @@ import com.prodyna.pac.vothing.constants.VothingConstants;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.util.ArrayList;
 import java.util.Collection;
 
 @Entity
@@ -17,8 +18,8 @@ public class Survey extends BaseModelImpl<Survey> {
 	 */
 	private static final long serialVersionUID = 7912134879739982095L;
 
-	@OneToMany(mappedBy = "survey", cascade = {CascadeType.PERSIST})
-	private Collection<SurveyOption> surveyOptions;
+	@OneToMany(mappedBy = "survey", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+	private Collection<SurveyOption> surveyOptions = new ArrayList<SurveyOption>();
 	
 	@JoinColumn(name = "userId", referencedColumnName = "id")
 	@ManyToOne
