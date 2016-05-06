@@ -1,16 +1,14 @@
 package com.prodyna.pac.vothing.service.impl;
 
-import java.util.List;
-
-import javax.ejb.Stateless;
-import javax.inject.Inject;
-
-import org.slf4j.Logger;
-
 import com.prodyna.pac.vothing.Vothing;
 import com.prodyna.pac.vothing.monitoring.VothingMonitoring;
 import com.prodyna.pac.vothing.persistence.Survey;
 import com.prodyna.pac.vothing.service.SurveyService;
+import org.slf4j.Logger;
+
+import javax.ejb.Stateless;
+import javax.inject.Inject;
+import java.util.List;
 
 @Stateless
 @VothingMonitoring
@@ -42,6 +40,7 @@ public class SurveyServiceImpl extends BaseServiceImpl<Survey> implements Survey
 		return super.addElement(survey);
 	}
 
+	@Override
 	public Survey createSurvey(Survey survey) {
 		return super.addElement(survey);
 	}

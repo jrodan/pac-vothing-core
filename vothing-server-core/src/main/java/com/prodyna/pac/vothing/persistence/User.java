@@ -37,7 +37,7 @@ public class User extends BaseModelImpl<User> {
 	@Column
 	private Date lastLogin;
 
-	@JsonManagedReference
+	@JsonBackReference
 	@OneToMany(mappedBy = "user", cascade = {CascadeType.PERSIST})
 	private Collection<Survey> surveys= new ArrayList<Survey>();
 

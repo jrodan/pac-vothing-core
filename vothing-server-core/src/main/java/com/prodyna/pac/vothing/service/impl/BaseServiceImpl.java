@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.Query;
 import java.lang.reflect.ParameterizedType;
+import java.util.Date;
 import java.util.List;
 
 public class BaseServiceImpl<T extends BaseModel> implements BaseService<T> {
@@ -28,13 +29,6 @@ public class BaseServiceImpl<T extends BaseModel> implements BaseService<T> {
 
         Query query = this.vothing.getEntityManager().createQuery("SELECT e FROM " + persistentClass.getSimpleName() + " e");
         List<T> entities = (List<T>) query.getResultList();
-
-//		String classString = VothingConstants.SELECT_ALL + persistentClass.getSimpleName().toLowerCase() + "s";
-//		
-//		List<T> entities = this.vothing
-//				.getEntityManager()
-//				.createNamedQuery(classString,
-//						persistentClass).getResultList();
 
         return entities;
     }
@@ -77,6 +71,8 @@ public class BaseServiceImpl<T extends BaseModel> implements BaseService<T> {
             }
 
         } else {
+            element.setCreateDate(new Date());
+            element.setModifiedDate(new Date());
             this.vothing.getEntityManager().persist(element);
         }
 
@@ -88,6 +84,7 @@ public class BaseServiceImpl<T extends BaseModel> implements BaseService<T> {
 
         T dbElement = getElement(element.getId());
         if (dbElement != null) {
+            element.setModifiedDate(new Date());
             element = this.vothing.getEntityManager().merge(element);
         } else {
             // TODO throw error

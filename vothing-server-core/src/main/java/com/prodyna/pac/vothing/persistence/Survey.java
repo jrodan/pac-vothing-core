@@ -1,6 +1,5 @@
 package com.prodyna.pac.vothing.persistence;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.prodyna.pac.vothing.constants.VothingConstants;
 
@@ -24,7 +23,8 @@ public class Survey extends BaseModelImpl<Survey> {
 	@OneToMany(mappedBy = "survey", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
 	private Collection<SurveyOption> surveyOptions = new ArrayList<SurveyOption>();
 
-    @JsonBackReference
+	// TODO get a permission map for each entity
+    @JsonManagedReference
 	@JoinColumn(name = "userId", referencedColumnName = "id")
 	@ManyToOne
 	User user;

@@ -209,6 +209,20 @@ public class PersistenceTest {
 
         // TODO add new survey without having it persisted before to a user
 
+        // add further dummy data
+        surveyDB2.setId(0);
+        surveyOption1DB.setId(0);
+        surveyOption2DB.setId(0);
+        surveyDB2.setName("survey 2");
+        surveyService.createSurvey(surveyDB2);
+        Survey surveyDB3 = new Survey();
+        surveyDB3.setUser(adminDB3);
+        surveyDB3.setName("survey 3");
+        surveyOption1DB.setId(0);
+        surveyOption2DB.setId(0);
+        surveyDB3.setSurveyOptions(surveyOptions3);
+        surveyService.createSurvey(surveyDB3);
+
     }
 
 
