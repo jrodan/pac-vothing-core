@@ -1,6 +1,10 @@
 package com.prodyna.pac.vothing;
 
-import java.io.Serializable;
+import com.prodyna.pac.vothing.monitoring.VothingMonitoring;
+import com.prodyna.pac.vothing.persistence.User;
+import com.prodyna.pac.vothing.service.PermissionService;
+import com.prodyna.pac.vothing.service.SecurityService;
+import com.prodyna.pac.vothing.service.UserService;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -8,12 +12,7 @@ import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
-
-import com.prodyna.pac.vothing.monitoring.VothingMonitoring;
-import com.prodyna.pac.vothing.persistence.User;
-import com.prodyna.pac.vothing.service.PermissionService;
-import com.prodyna.pac.vothing.service.SecurityService;
-import com.prodyna.pac.vothing.service.UserService;
+import java.io.Serializable;
 
 @Named
 @Stateless
@@ -22,12 +21,6 @@ import com.prodyna.pac.vothing.service.UserService;
 public class VothingBean extends Application implements Vothing, Serializable {
 
     private static final long serialVersionUID = 168371436432931798L;
-
-    // @Context
-    // private HttpServletRequest request;
-    //
-    // @Context
-    // private HttpServletResponse response;
 
     @Inject
     private EntityManager entityManager;
@@ -51,7 +44,6 @@ public class VothingBean extends Application implements Vothing, Serializable {
     @Override
     public void setUser(User user) {
         this.user = user;
-
     }
 
     @Override

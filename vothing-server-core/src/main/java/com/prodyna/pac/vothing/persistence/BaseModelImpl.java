@@ -46,15 +46,6 @@ public abstract class BaseModelImpl<T> implements BaseModel<T>, Serializable {
         this.usersPermissions = usersPermissions;
     }
 
-    @PostLoad
-    private void initBaseModelImpl() {
-        // TODO init user in this class context
-        // System.out.println(vothing.getUser().getName());
-        this.usersPermissions.add("permission1");
-        this.usersPermissions.add("permission2");
-        this.usersPermissions.add("permission3");
-    }
-
 	@Override
 	public long getId() {
 		return id;

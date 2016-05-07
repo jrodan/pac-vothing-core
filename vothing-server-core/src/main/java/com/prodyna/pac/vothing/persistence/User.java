@@ -1,6 +1,7 @@
 package com.prodyna.pac.vothing.persistence;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.prodyna.pac.vothing.constants.VothingConstants;
 
@@ -30,6 +31,7 @@ public class User extends BaseModelImpl<User> {
 	@NotNull
 	private String email;
 
+	@JsonIgnoreProperties
 	@Column
 	@NotNull
 	private String password;

@@ -89,6 +89,7 @@ public class PersistenceTest {
         permissions.add(permissionService.createPermission(PermissionEnum.SURVEY_ADD));
         permissions.add(permissionService.createPermission(PermissionEnum.SURVEY_UPDATE));
         permissions.add(permissionService.createPermission(PermissionEnum.SURVEY_LIST));
+        permissions.add(permissionService.createPermission(PermissionEnum.ADMIN));
         Assert.assertEquals(permissionService.getElements().size(), 5);
 
         // test roles
