@@ -23,10 +23,6 @@ import javax.inject.Inject;
 import javax.json.Json;
 import javax.json.JsonObjectBuilder;
 import javax.persistence.EntityNotFoundException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.ws.rs.core.Context;
-import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -41,12 +37,6 @@ public class SecurityServiceImpl implements SecurityService, VothingConstants {
 
     @Inject
     private Vothing vothing;
-
-    @Context
-    private HttpServletRequest httpRequest;
-
-    @Context
-    private HttpServletResponse httpResponse;
 
     @Override
     public String login(LoginCredentials loginCredentials) {
@@ -69,12 +59,6 @@ public class SecurityServiceImpl implements SecurityService, VothingConstants {
             objectBuilder.add("jwt", jwtToken);
             token = objectBuilder.build().toString();
 
-        } else {
-            try {
-                httpResponse.sendError(HTTP_CLIENT_STATUS_LOGIN_INVALID);
-            } catch (IOException e) {
-                logger.error("could not send error message 403", e);
-            }
         }
 
         return token;
@@ -119,7 +103,6 @@ public class SecurityServiceImpl implements SecurityService, VothingConstants {
         JWSVerifier verifier = new MACVerifier(SERVER_PRIVATE_AUTH_KEY);
         jwsObject.verify(verifier);
 
-        // TODO get user from here
         JSONObject claims = jwsObject.getPayload().toJSONObject();
         String userId = JSONObjectUtils.getJSONObject(claims, "user").get("userid").toString();
         Long userIdLong = Long.parseLong(userId);

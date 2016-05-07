@@ -90,7 +90,7 @@ public class PersistenceTest {
         permissions.add(permissionService.createPermission(PermissionEnum.SURVEY_UPDATE));
         permissions.add(permissionService.createPermission(PermissionEnum.SURVEY_LIST));
         permissions.add(permissionService.createPermission(PermissionEnum.ADMIN));
-        Assert.assertEquals(permissionService.getElements().size(), 5);
+        Assert.assertEquals(permissionService.getElements().size(), 6);
 
         // test roles
         Role adminRole = roleService.createRole(RoleConstants.ROLE_ADMIN, new ArrayList<Permission>());
@@ -98,13 +98,13 @@ public class PersistenceTest {
         Assert.assertEquals(adminRole.getPermissions().size(), 0);
         Role userRole = roleService.createRole(RoleConstants.ROLE_USER, permissions);
         Assert.assertNotNull(userRole);
-        Assert.assertEquals(userRole.getPermissions().size(), 5);
+        Assert.assertEquals(userRole.getPermissions().size(), 6);
 
         // test survey
         Survey survey = new Survey();
         survey.setUser(user1DB);
         survey.setName("testSurvey1");
-        Survey surveyDB = surveyService.createSurvey(survey);
+        Survey surveyDB = surveyService.addElement(survey);
         Assert.assertNotNull(surveyDB);
         Assert.assertTrue(surveyDB.getId() > 0);
         Assert.assertTrue(user1DB.getId() == user1.getId());
@@ -112,7 +112,7 @@ public class PersistenceTest {
         // test update of user in db in survey table
         user1DB.setForeName("duck");
         User user1DB2 = userService.addElement(user1DB);
-        Survey surveyDB2 = surveyService.getSurvey(surveyDB.getId());
+        Survey surveyDB2 = surveyService.getElement(surveyDB.getId());
         Assert.assertTrue(user1DB2.getForeName().equals(surveyDB2.getUser().getForeName()));
 
         // test survey options
@@ -215,14 +215,17 @@ public class PersistenceTest {
         surveyOption1DB.setId(0);
         surveyOption2DB.setId(0);
         surveyDB2.setName("survey 2");
-        surveyService.createSurvey(surveyDB2);
+        surveyService.addElement(surveyDB2);
         Survey surveyDB3 = new Survey();
         surveyDB3.setUser(adminDB3);
         surveyDB3.setName("survey 3");
         surveyOption1DB.setId(0);
         surveyOption2DB.setId(0);
-        surveyDB3.setSurveyOptions(surveyOptions3);
-        surveyService.createSurvey(surveyDB3);
+        List<SurveyOption> surveyOptionList2 = new ArrayList<SurveyOption>();
+        surveyOptionList2.add(surveyOption1DB);
+        surveyOptionList2.add(surveyOption2DB);
+        surveyDB3.setSurveyOptions(surveyOptionList2);
+        surveyService.addElement(surveyDB3);
 
     }
 

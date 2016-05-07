@@ -1,11 +1,11 @@
 package com.prodyna.pac.vothing.service.impl;
 
-import com.prodyna.pac.vothing.Vothing;
 import com.prodyna.pac.vothing.persistence.BaseModel;
 import com.prodyna.pac.vothing.service.BaseService;
 import org.slf4j.Logger;
 
 import javax.inject.Inject;
+import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.Query;
 import java.lang.reflect.ParameterizedType;
@@ -18,7 +18,7 @@ public class BaseServiceImpl<T extends BaseModel> implements BaseService<T> {
     private Logger logger;
 
     @Inject
-    private Vothing vothing;
+    private EntityManager entityManager;
 
     @Override
     public List<T> getElements() {
@@ -27,7 +27,7 @@ public class BaseServiceImpl<T extends BaseModel> implements BaseService<T> {
                 ((ParameterizedType) getClass().getGenericSuperclass())
                         .getActualTypeArguments()[0];
 
-        Query query = this.vothing.getEntityManager().createQuery("SELECT e FROM " + persistentClass.getSimpleName() + " e");
+        Query query = entityManager.createQuery("SELECT e FROM " + persistentClass.getSimpleName() + " e");
         List<T> entities = (List<T>) query.getResultList();
 
         return entities;
@@ -40,7 +40,7 @@ public class BaseServiceImpl<T extends BaseModel> implements BaseService<T> {
                 ((ParameterizedType) getClass().getGenericSuperclass())
                         .getActualTypeArguments()[0];
 
-        T element = this.vothing.getEntityManager().find(
+        T element = entityManager.find(
                 persistentClass, id);
         if (element == null) {
             throw new EntityNotFoundException(
@@ -54,7 +54,7 @@ public class BaseServiceImpl<T extends BaseModel> implements BaseService<T> {
     @Override
     public <T> void deleteElement(long id) {
         T element = this.getElement(id);
-        this.vothing.getEntityManager().remove(element);
+        entityManager.remove(element);
 
     }
 
@@ -73,7 +73,7 @@ public class BaseServiceImpl<T extends BaseModel> implements BaseService<T> {
         } else {
             element.setCreateDate(new Date());
             element.setModifiedDate(new Date());
-            this.vothing.getEntityManager().persist(element);
+            entityManager.persist(element);
         }
 
         return element;
@@ -85,7 +85,7 @@ public class BaseServiceImpl<T extends BaseModel> implements BaseService<T> {
         T dbElement = getElement(element.getId());
         if (dbElement != null) {
             element.setModifiedDate(new Date());
-            element = this.vothing.getEntityManager().merge(element);
+            element = entityManager.merge(element);
         } else {
             // TODO throw error
         }

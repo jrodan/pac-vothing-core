@@ -1,7 +1,5 @@
 package com.prodyna.pac.vothing.service.impl;
 
-import com.prodyna.pac.vothing.Vothing;
-import com.prodyna.pac.vothing.constants.VothingConstants;
 import com.prodyna.pac.vothing.monitoring.VothingMonitoring;
 import com.prodyna.pac.vothing.persistence.User;
 import com.prodyna.pac.vothing.service.UserService;
@@ -16,38 +14,34 @@ import java.util.List;
 @VothingMonitoring
 public class UserServiceImpl extends BaseServiceImpl<User> implements UserService {
 
-	@Inject
-	private Logger logger;
+    @Inject
+    private Logger logger;
 
-	@Inject
-	private Vothing vothing;
+    @Override
+    public User getUser(String email, String password)
+            throws EntityNotFoundException {
+        User user = null;
+        List<User> users = this.getElements();
 
-	@Override
-	public User getUser(String email, String password)
-			throws EntityNotFoundException {
-		User user = null;
-		List<User> users = vothing.getEntityManager().createNamedQuery(
-				VothingConstants.SELECT_ALL_USERS, User.class).getResultList();
+        if (users != null) {
+            for (User userTemp : users) {
+                if (userTemp.getEmail().equalsIgnoreCase(email)
+                        && userTemp.getPassword().equals(password)) {
+                    // TODO encrypt/decrypt password
+                    user = userTemp;
+                    break;
+                }
+            }
+        }
 
-		if (users != null) {
-			for (User userTemp : users) {
-				if (userTemp.getEmail().equalsIgnoreCase(email)
-						&& userTemp.getPassword().equals(password)) {
-					// TODO encrypt/decrypt password
-					user = userTemp;
-					break;
-				}
-			}
-		}
-		
-		// if (user == null) {
-		// throw new EntityNotFoundException(
-		// "User could not be found for given email and password ["
-		// + email + "]");
-		// TODO
-		// }
+        // if (user == null) {
+        // throw new EntityNotFoundException(
+        // "User could not be found for given email and password ["
+        // + email + "]");
+        // TODO
+        // }
 
-		return user;
-	}
+        return user;
+    }
 
 }
