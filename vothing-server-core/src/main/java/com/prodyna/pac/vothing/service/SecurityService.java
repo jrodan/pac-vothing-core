@@ -1,12 +1,12 @@
 package com.prodyna.pac.vothing.service;
 
 import com.nimbusds.jose.JOSEException;
+import com.prodyna.pac.vothing.constants.PermissionEnum;
+import com.prodyna.pac.vothing.model.Permission;
+import com.prodyna.pac.vothing.model.Survey;
+import com.prodyna.pac.vothing.model.User;
 import com.prodyna.pac.vothing.monitoring.VothingMonitoring;
-import com.prodyna.pac.vothing.persistence.Permission;
-import com.prodyna.pac.vothing.persistence.Survey;
-import com.prodyna.pac.vothing.persistence.User;
 import com.prodyna.pac.vothing.security.LoginCredentials;
-import com.prodyna.pac.vothing.security.PermissionEnum;
 
 import java.text.ParseException;
 import java.util.List;

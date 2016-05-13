@@ -1,10 +1,10 @@
 package com.prodyna.pac.vothing.service;
 
-import java.util.Collection;
-
+import com.prodyna.pac.vothing.model.Permission;
+import com.prodyna.pac.vothing.model.Role;
 import com.prodyna.pac.vothing.monitoring.VothingMonitoring;
-import com.prodyna.pac.vothing.persistence.Permission;
-import com.prodyna.pac.vothing.persistence.Role;
+
+import java.util.Collection;
 
 @VothingMonitoring
 public interface RoleService extends BaseService<Role>{

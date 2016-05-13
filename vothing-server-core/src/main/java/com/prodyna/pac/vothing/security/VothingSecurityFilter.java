@@ -17,8 +17,9 @@ import javax.ws.rs.ext.Provider;
 import com.nimbusds.jose.JOSEException;
 import com.prodyna.pac.vothing.Vothing;
 import com.prodyna.pac.vothing.constants.VothingConstants;
+import com.prodyna.pac.vothing.model.User;
 import com.prodyna.pac.vothing.monitoring.VothingMonitoring;
-import com.prodyna.pac.vothing.persistence.User;
+import com.prodyna.pac.vothing.model.impl.UserImpl;
 import com.prodyna.pac.vothing.service.SecurityService;
 
 @Provider

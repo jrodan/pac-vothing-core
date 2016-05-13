@@ -1,12 +1,15 @@
 package com.prodyna.pac.vothing.service;
 
-import com.prodyna.pac.vothing.persistence.BaseModel;
+import com.prodyna.pac.vothing.model.helper.EntityOrder;
+import com.prodyna.pac.vothing.model.BaseModel;
 
 import java.util.List;
 
 public interface BaseService<T extends BaseModel> {
 
     List<T> getElements();
+
+    List<T> getElements(EntityOrder entityOrder);
 
     <T> T getElement(long id);
 

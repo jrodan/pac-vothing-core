@@ -1,12 +1,12 @@
 package com.prodyna.pac.vothing;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityNotFoundException;
-
-import com.prodyna.pac.vothing.persistence.User;
+import com.prodyna.pac.vothing.model.User;
 import com.prodyna.pac.vothing.service.PermissionService;
 import com.prodyna.pac.vothing.service.SecurityService;
 import com.prodyna.pac.vothing.service.UserService;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityNotFoundException;
 
 public interface Vothing {
 

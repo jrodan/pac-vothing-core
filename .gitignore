@@ -6,3 +6,5 @@ node_modules/
 .classpath
 .project
 classes/
+.idea
+.idea/

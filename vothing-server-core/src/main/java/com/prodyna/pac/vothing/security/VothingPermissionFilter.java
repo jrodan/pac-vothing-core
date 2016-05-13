@@ -14,7 +14,8 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.Provider;
 
 import com.prodyna.pac.vothing.Vothing;
-import com.prodyna.pac.vothing.persistence.User;
+import com.prodyna.pac.vothing.constants.PermissionEnum;
+import com.prodyna.pac.vothing.model.User;
 
 @Provider
 //@WebFilter(filterName="VothingServletInterceptor", value="/*") // TODO

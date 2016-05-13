@@ -1,13 +1,8 @@
-package com.prodyna.pac.vothing.persistence;
+package com.prodyna.pac.vothing.model;
 
 import java.util.Date;
-import java.util.List;
 
 public interface BaseModel<T> {
-
-	List<String> getUsersPermissions();
-
-	void setUsersPermissions(List<String> usersPermissions);
 
 	<T> long getId();
 	

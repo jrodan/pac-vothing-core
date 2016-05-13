@@ -1,6 +1,7 @@
 package com.prodyna.pac.vothing.service.impl;
 
-import com.prodyna.pac.vothing.persistence.BaseModel;
+import com.prodyna.pac.vothing.model.BaseModel;
+import com.prodyna.pac.vothing.model.helper.EntityOrder;
 import com.prodyna.pac.vothing.service.BaseService;
 import org.slf4j.Logger;
 
@@ -22,12 +23,18 @@ public class BaseServiceImpl<T extends BaseModel> implements BaseService<T> {
 
     @Override
     public List<T> getElements() {
+        return this.getElements(new EntityOrder());
+    }
 
+    @Override
+    public List<T> getElements(EntityOrder entityOrder) {
         Class<T> persistentClass = (Class<T>)
                 ((ParameterizedType) getClass().getGenericSuperclass())
                         .getActualTypeArguments()[0];
 
-        Query query = entityManager.createQuery("SELECT e FROM " + persistentClass.getSimpleName() + " e");
+        String orderString = entityOrder.getOrder();
+
+        Query query = entityManager.createQuery("SELECT e FROM " + persistentClass.getSimpleName() + " e order by " + orderString);
         List<T> entities = (List<T>) query.getResultList();
 
         return entities;

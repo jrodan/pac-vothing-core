@@ -1,8 +1,9 @@
 package com.prodyna.pac.vothing.service.impl;
 
+import com.prodyna.pac.vothing.model.Permission;
+import com.prodyna.pac.vothing.model.Role;
+import com.prodyna.pac.vothing.model.impl.RoleImpl;
 import com.prodyna.pac.vothing.monitoring.VothingMonitoring;
-import com.prodyna.pac.vothing.persistence.Permission;
-import com.prodyna.pac.vothing.persistence.Role;
 import com.prodyna.pac.vothing.service.RoleService;
 import org.slf4j.Logger;
 
@@ -19,9 +20,9 @@ public class RoleServiceImpl extends BaseServiceImpl<Role> implements RoleServic
 
 	@Override
 	public Role createRole(String name,
-			Collection<Permission> permissions) {
+							   Collection<Permission> permissions) {
 
-		Role role = new Role();
+		Role role = new RoleImpl();
 		role.setName(name);
 		role.setPermissions(permissions);
 		super.addElement(role);

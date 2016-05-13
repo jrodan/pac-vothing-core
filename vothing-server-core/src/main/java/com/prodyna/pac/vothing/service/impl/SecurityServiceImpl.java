@@ -5,15 +5,16 @@ import com.nimbusds.jose.crypto.MACSigner;
 import com.nimbusds.jose.crypto.MACVerifier;
 import com.nimbusds.jose.util.JSONObjectUtils;
 import com.prodyna.pac.vothing.Vothing;
+import com.prodyna.pac.vothing.constants.PermissionEnum;
 import com.prodyna.pac.vothing.constants.RoleConstants;
 import com.prodyna.pac.vothing.constants.VothingConstants;
+import com.prodyna.pac.vothing.exception.PrivateKeyException;
+import com.prodyna.pac.vothing.model.Permission;
+import com.prodyna.pac.vothing.model.Role;
+import com.prodyna.pac.vothing.model.Survey;
+import com.prodyna.pac.vothing.model.User;
 import com.prodyna.pac.vothing.monitoring.VothingMonitoring;
-import com.prodyna.pac.vothing.persistence.Permission;
-import com.prodyna.pac.vothing.persistence.Role;
-import com.prodyna.pac.vothing.persistence.Survey;
-import com.prodyna.pac.vothing.persistence.User;
 import com.prodyna.pac.vothing.security.LoginCredentials;
-import com.prodyna.pac.vothing.security.PermissionEnum;
 import com.prodyna.pac.vothing.service.SecurityService;
 import net.minidev.json.JSONObject;
 import org.slf4j.Logger;
@@ -52,7 +53,13 @@ public class SecurityServiceImpl implements SecurityService, VothingConstants {
 
         if (user != null) {
 
-            String jwtToken = getUserJwt(user);
+            String jwtToken = null;
+            try {
+                jwtToken = getUserJwt(user);
+            } catch (PrivateKeyException e) {
+                // TODO
+                e.printStackTrace();
+            }
             vothing.setUser(user);
 
             JsonObjectBuilder objectBuilder = Json.createObjectBuilder();
@@ -64,11 +71,17 @@ public class SecurityServiceImpl implements SecurityService, VothingConstants {
         return token;
     }
 
-    private String getUserJwt(User user) {
+    private String getUserJwt(User user) throws PrivateKeyException {
         String jwe = null;
 
+        final String privateServerKey = System.getProperty(SERVER_PRIVATE_AUTH_KEY);
+
+        if(privateServerKey == null || privateServerKey.equals("")) {
+            throw new PrivateKeyException("no private server key is set. Please make sure that the VM parameter is set.");
+        }
+
         try {
-            JWSSigner signer = new MACSigner(SERVER_PRIVATE_AUTH_KEY);
+            JWSSigner signer = new MACSigner(privateServerKey);
 
             // Create JWS payload
             final Payload payload = new Payload(user.toFrontendUserJSONObjectString());

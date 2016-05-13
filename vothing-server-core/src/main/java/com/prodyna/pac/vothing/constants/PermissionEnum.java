@@ -1,4 +1,4 @@
-package com.prodyna.pac.vothing.security;
+package com.prodyna.pac.vothing.constants;
 
 public enum PermissionEnum {
 	

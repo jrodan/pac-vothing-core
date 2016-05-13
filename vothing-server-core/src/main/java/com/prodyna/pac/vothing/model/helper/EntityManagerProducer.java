@@ -1,4 +1,4 @@
-package com.prodyna.pac.vothing.persistence;
+package com.prodyna.pac.vothing.model.helper;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;

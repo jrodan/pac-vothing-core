@@ -1,15 +1,14 @@
-package com.prodyna.pac.vothing.persistence;
+package com.prodyna.pac.vothing.model.impl;
 
 import com.google.gson.Gson;
 import com.prodyna.pac.vothing.Vothing;
+import com.prodyna.pac.vothing.model.BaseModel;
 
 import javax.inject.Inject;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 @XmlRootElement
 @Inheritance
@@ -32,19 +31,6 @@ public abstract class BaseModelImpl<T> implements BaseModel<T>, Serializable {
 
 	@Column
 	private Date modifiedDate;
-
-    @Transient
-	private List<String> usersPermissions = new ArrayList<String>();
-
-    @Override
-    public List<String> getUsersPermissions() {
-        return usersPermissions;
-    }
-
-    @Override
-    public void setUsersPermissions(List<String> usersPermissions) {
-        this.usersPermissions = usersPermissions;
-    }
 
 	@Override
 	public long getId() {

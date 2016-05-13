@@ -1,21 +1,19 @@
 package com.prodyna.pac.vothing.service.impl;
 
-import javax.ejb.Stateless;
-import javax.inject.Inject;
-
+import com.prodyna.pac.vothing.Vothing;
+import com.prodyna.pac.vothing.constants.PermissionEnum;
+import com.prodyna.pac.vothing.model.Permission;
+import com.prodyna.pac.vothing.model.impl.PermissionImpl;
+import com.prodyna.pac.vothing.monitoring.VothingMonitoring;
+import com.prodyna.pac.vothing.service.PermissionService;
 import org.slf4j.Logger;
 
-import com.prodyna.pac.vothing.Vothing;
-import com.prodyna.pac.vothing.monitoring.VothingMonitoring;
-import com.prodyna.pac.vothing.persistence.Permission;
-import com.prodyna.pac.vothing.security.PermissionEnum;
-import com.prodyna.pac.vothing.service.PermissionService;
+import javax.ejb.Stateless;
+import javax.inject.Inject;
 
 @Stateless
 @VothingMonitoring
 public class PermissionServiceImpl extends BaseServiceImpl<Permission> implements PermissionService {
-
-	// TODO check permissions before action
 
 	@Inject
 	private Logger logger;
@@ -25,8 +23,8 @@ public class PermissionServiceImpl extends BaseServiceImpl<Permission> implement
 
 	@Override
 	public Permission createPermission(String name) {
-		
-		Permission permission = new Permission();
+
+		Permission permission = new PermissionImpl();
 		permission.setName(name);
 		return super.addElement(permission);
 	}

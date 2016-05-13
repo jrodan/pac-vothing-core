@@ -1,7 +1,7 @@
 package com.prodyna.pac.vothing.service.impl;
 
+import com.prodyna.pac.vothing.model.User;
 import com.prodyna.pac.vothing.monitoring.VothingMonitoring;
-import com.prodyna.pac.vothing.persistence.User;
 import com.prodyna.pac.vothing.service.UserService;
 import org.slf4j.Logger;
 
@@ -36,7 +36,7 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
 
         // if (user == null) {
         // throw new EntityNotFoundException(
-        // "User could not be found for given email and password ["
+        // "UserImpl could not be found for given email and password ["
         // + email + "]");
         // TODO
         // }
