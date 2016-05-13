@@ -1,6 +1,6 @@
 package com.prodyna.pac.vothing.service;
 
-import com.prodyna.pac.vothing.model.User;
+import com.prodyna.pac.vothing.model.impl.User;
 import com.prodyna.pac.vothing.monitoring.VothingMonitoring;
 
 import javax.persistence.EntityNotFoundException;

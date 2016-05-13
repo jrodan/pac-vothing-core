@@ -2,9 +2,10 @@ package com.prodyna.pac.vothing.service.remote;
 
 import com.prodyna.pac.vothing.Vothing;
 import com.prodyna.pac.vothing.constants.PermissionEnum;
-import com.prodyna.pac.vothing.model.Survey;
-import com.prodyna.pac.vothing.model.User;
 import com.prodyna.pac.vothing.model.helper.EntityOrder;
+import com.prodyna.pac.vothing.model.impl.Survey;
+import com.prodyna.pac.vothing.model.impl.User;
+import com.prodyna.pac.vothing.model.remote.ObjectConverterHelper;
 import com.prodyna.pac.vothing.model.remote.SurveyRemote;
 import com.prodyna.pac.vothing.monitoring.VothingMonitoring;
 import com.prodyna.pac.vothing.security.PermissionAnn;
@@ -49,8 +50,7 @@ public class SurveyRemoteServiceHelper {
         // add permissions for each entity
         for (Survey survey : surveys) {
             List<String> permissions = vothing.getSecurityService().getUserSurveyPermissions(userContext, survey);
-            SurveyRemote surveyRemote = new SurveyRemote();
-            // TODO transfer local to remote object
+            SurveyRemote surveyRemote = ObjectConverterHelper.toSurveyRemote(survey);
             surveyRemote.setUsersPermissions(permissions);
             surveysReturn.add(surveyRemote);
         }
@@ -67,10 +67,8 @@ public class SurveyRemoteServiceHelper {
 
     @POST
     @Path("/update")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
     @PermissionAnn(permission = PermissionEnum.SURVEY_UPDATE)
-    public Survey updateSurvey(Survey survey) {
+    public SurveyRemote updateSurvey(SurveyRemote survey) {
         return surveyService.updateElement(survey);
     }
 
@@ -85,8 +83,7 @@ public class SurveyRemoteServiceHelper {
 
         if (surveyDB != null) {
             List<String> permissions = vothing.getSecurityService().getUserSurveyPermissions(userContext, surveyDB);
-            surveyRemote = new SurveyRemote();
-            // TODO transfer local to remote object
+            surveyRemote = ObjectConverterHelper.toSurveyRemote(surveyDB);
             surveyRemote.setUsersPermissions(permissions);
         }
 

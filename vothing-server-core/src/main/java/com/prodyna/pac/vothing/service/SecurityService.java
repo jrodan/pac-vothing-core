@@ -2,9 +2,10 @@ package com.prodyna.pac.vothing.service;
 
 import com.nimbusds.jose.JOSEException;
 import com.prodyna.pac.vothing.constants.PermissionEnum;
-import com.prodyna.pac.vothing.model.Permission;
-import com.prodyna.pac.vothing.model.Survey;
-import com.prodyna.pac.vothing.model.User;
+import com.prodyna.pac.vothing.exception.PrivateKeyException;
+import com.prodyna.pac.vothing.model.impl.Permission;
+import com.prodyna.pac.vothing.model.impl.Survey;
+import com.prodyna.pac.vothing.model.impl.User;
 import com.prodyna.pac.vothing.monitoring.VothingMonitoring;
 import com.prodyna.pac.vothing.security.LoginCredentials;
 
@@ -16,7 +17,7 @@ public interface SecurityService {
 
 	String login(LoginCredentials loginCredentials);
 	
-	User getUserByToken(String token) throws ParseException, JOSEException;
+	User getUserByToken(String token) throws ParseException, JOSEException, PrivateKeyException;
 
 	public boolean hasUserPermission(User user, PermissionEnum permissionEnum);
 	

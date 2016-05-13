@@ -2,8 +2,7 @@ package com.prodyna.pac.vothing.service.impl;
 
 import com.prodyna.pac.vothing.Vothing;
 import com.prodyna.pac.vothing.constants.PermissionEnum;
-import com.prodyna.pac.vothing.model.Permission;
-import com.prodyna.pac.vothing.model.impl.PermissionImpl;
+import com.prodyna.pac.vothing.model.impl.Permission;
 import com.prodyna.pac.vothing.monitoring.VothingMonitoring;
 import com.prodyna.pac.vothing.service.PermissionService;
 import org.slf4j.Logger;
@@ -24,7 +23,7 @@ public class PermissionServiceImpl extends BaseServiceImpl<Permission> implement
 	@Override
 	public Permission createPermission(String name) {
 
-		Permission permission = new PermissionImpl();
+		Permission permission = new Permission();
 		permission.setName(name);
 		return super.addElement(permission);
 	}

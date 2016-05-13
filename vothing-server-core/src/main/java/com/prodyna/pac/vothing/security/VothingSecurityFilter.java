@@ -1,8 +1,12 @@
 package com.prodyna.pac.vothing.security;
 
-import java.io.IOException;
-import java.lang.reflect.Method;
-import java.text.ParseException;
+import com.nimbusds.jose.JOSEException;
+import com.prodyna.pac.vothing.Vothing;
+import com.prodyna.pac.vothing.constants.VothingConstants;
+import com.prodyna.pac.vothing.exception.PrivateKeyException;
+import com.prodyna.pac.vothing.model.impl.User;
+import com.prodyna.pac.vothing.monitoring.VothingMonitoring;
+import com.prodyna.pac.vothing.service.SecurityService;
 
 import javax.annotation.Priority;
 import javax.inject.Inject;
@@ -13,14 +17,9 @@ import javax.ws.rs.container.ResourceInfo;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.Provider;
-
-import com.nimbusds.jose.JOSEException;
-import com.prodyna.pac.vothing.Vothing;
-import com.prodyna.pac.vothing.constants.VothingConstants;
-import com.prodyna.pac.vothing.model.User;
-import com.prodyna.pac.vothing.monitoring.VothingMonitoring;
-import com.prodyna.pac.vothing.model.impl.UserImpl;
-import com.prodyna.pac.vothing.service.SecurityService;
+import java.io.IOException;
+import java.lang.reflect.Method;
+import java.text.ParseException;
 
 @Provider
 @Priority(2)
@@ -69,6 +68,9 @@ public class VothingSecurityFilter implements ContainerRequestFilter, VothingCon
 				e.printStackTrace();
 			} catch (JOSEException e) {
 				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (PrivateKeyException e) {
+				// TODO
 				e.printStackTrace();
 			}
 			if (user != null) {

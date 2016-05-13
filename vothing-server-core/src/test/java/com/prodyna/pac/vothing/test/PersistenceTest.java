@@ -2,11 +2,7 @@ package com.prodyna.pac.vothing.test;
 
 import com.prodyna.pac.vothing.constants.PermissionEnum;
 import com.prodyna.pac.vothing.constants.RoleConstants;
-import com.prodyna.pac.vothing.model.*;
-import com.prodyna.pac.vothing.model.impl.SurveyImpl;
-import com.prodyna.pac.vothing.model.impl.SurveyOptionImpl;
-import com.prodyna.pac.vothing.model.impl.SurveyOptionRatingImpl;
-import com.prodyna.pac.vothing.model.impl.UserImpl;
+import com.prodyna.pac.vothing.model.impl.*;
 import com.prodyna.pac.vothing.service.*;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
@@ -71,7 +67,7 @@ public class PersistenceTest {
     public void testPersistence() {
 
         // test default user impl
-        User user1 = new UserImpl();
+        User user1 = new User();
         user1.setEmail("default@vothing.com");
         user1.setForeName("dummy");
         user1.setName("user");
@@ -105,7 +101,7 @@ public class PersistenceTest {
         Assert.assertEquals(userRole.getPermissions().size(), 6);
 
         // test survey
-        Survey survey = new SurveyImpl();
+        Survey survey = new Survey();
         survey.setUser(user1DB);
         survey.setName("testSurvey1");
         Survey surveyDB = surveyService.addElement(survey);
@@ -121,10 +117,10 @@ public class PersistenceTest {
 
         // test survey options
         // TODO does a survey need to know its survey options in the model?
-        SurveyOption surveyOption1 = new SurveyOptionImpl();
+        SurveyOption surveyOption1 = new SurveyOption();
         surveyOption1.setName("Option 1");
         surveyOption1.setSurvey(survey);
-        SurveyOption surveyOption2 = new SurveyOptionImpl();
+        SurveyOption surveyOption2 = new SurveyOption();
         surveyOption2.setName("Option 2");
         surveyOption2.setSurvey(survey);
         SurveyOption surveyOption1DB = surveyOptionService.addElement(surveyOption1);
@@ -135,10 +131,10 @@ public class PersistenceTest {
         // TODO
 
         // test survey option rating
-        SurveyOptionRating surveyOptionRating1 = new SurveyOptionRatingImpl();
+        SurveyOptionRating surveyOptionRating1 = new SurveyOptionRating();
         surveyOptionRating1.setSurveyOption(surveyOption1);
         surveyOptionRating1.setUser(null); // TODO
-        SurveyOptionRating surveyOptionRating2 = new SurveyOptionRatingImpl();
+        SurveyOptionRating surveyOptionRating2 = new SurveyOptionRating();
         surveyOptionRating2.setSurveyOption(surveyOption2);
         surveyOptionRating2.setUser(null); // TODO
         SurveyOptionRating surveyOptionRating1DB = surveyOptionRatingService.addElement(surveyOptionRating1);
@@ -153,7 +149,7 @@ public class PersistenceTest {
         // TODO does a user need to know its surveys in the model?
 
         // test user with role
-        User user2 = new UserImpl();
+        User user2 = new User();
         user2.setEmail("user@vothing.com");
         user2.setForeName("user");
         user2.setName("user");
@@ -166,7 +162,7 @@ public class PersistenceTest {
         Assert.assertEquals(user2DB.getRoles().size(), 1);
 
         // test user with vote and survey
-        User admin = new UserImpl();
+        User admin = new User();
         admin.setEmail("admin@vothing.com");
         admin.setForeName("admin");
         admin.setName("admin");
@@ -184,8 +180,8 @@ public class PersistenceTest {
         surveyService.updateElement(surveyDB);
         // add survey option
         List<SurveyOption> surveyOptions3 = new ArrayList<SurveyOption>();
-        surveyOptions3.add(surveyOption1DB);
-        surveyOptions3.add(surveyOption2DB);
+        surveyOptions3.add((SurveyOption)surveyOption1DB);
+        surveyOptions3.add((SurveyOption)surveyOption2DB);
         surveyDB.setSurveyOptions(surveyOptions3);
         adminDB.setSurveys(surveys3);
         // update user
@@ -220,14 +216,14 @@ public class PersistenceTest {
         surveyOption2DB.setId(0);
         surveyDB2.setName("survey 2");
         surveyService.addElement(surveyDB2);
-        Survey surveyDB3 = new SurveyImpl();
+        Survey surveyDB3 = new Survey();
         surveyDB3.setUser(adminDB3);
         surveyDB3.setName("survey 3");
         surveyOption1DB.setId(0);
         surveyOption2DB.setId(0);
         List<SurveyOption> surveyOptionList2 = new ArrayList<SurveyOption>();
-        surveyOptionList2.add(surveyOption1DB);
-        surveyOptionList2.add(surveyOption2DB);
+        surveyOptionList2.add((SurveyOption)surveyOption1DB);
+        surveyOptionList2.add((SurveyOption)surveyOption2DB);
         surveyDB3.setSurveyOptions(surveyOptionList2);
         surveyService.addElement(surveyDB3);
 

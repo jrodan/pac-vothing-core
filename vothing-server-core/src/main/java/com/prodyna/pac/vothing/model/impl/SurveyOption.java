@@ -2,9 +2,6 @@ package com.prodyna.pac.vothing.model.impl;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.prodyna.pac.vothing.model.Survey;
-import com.prodyna.pac.vothing.model.SurveyOption;
-import com.prodyna.pac.vothing.model.SurveyOptionRating;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -14,7 +11,7 @@ import java.util.Collection;
 @Entity
 @XmlRootElement
 @Table(name = "vothing_surveyoption")
-public class SurveyOptionImpl extends BaseModelImpl<SurveyOption> implements SurveyOption {
+public class SurveyOption extends BaseModelImpl<SurveyOption> implements BaseModel<SurveyOption> {
 
     /**
      * Generated serial version UID.
@@ -23,30 +20,26 @@ public class SurveyOptionImpl extends BaseModelImpl<SurveyOption> implements Sur
 
     @JsonBackReference
     @JoinColumn(name = "surveyId", referencedColumnName = "id")
-    @ManyToOne(targetEntity = SurveyImpl.class)
+    @ManyToOne(targetEntity = Survey.class)
     private Survey survey;
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "surveyOption", cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, targetEntity = SurveyOptionRatingImpl.class)
+    @OneToMany(mappedBy = "surveyOption", cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, targetEntity = SurveyOptionRating.class)
     private Collection<SurveyOptionRating> surveyOptionRatings = new ArrayList<SurveyOptionRating>();
 
-    @Override
     public Collection<SurveyOptionRating> getSurveyOptionRatings() {
         return surveyOptionRatings;
     }
 
-    @Override
     public void setSurveyOptionRatings(
             Collection<SurveyOptionRating> surveyOptionRatings) {
         this.surveyOptionRatings = surveyOptionRatings;
     }
 
-    @Override
     public Survey getSurvey() {
         return survey;
     }
 
-    @Override
     public void setSurvey(Survey survey) {
         this.survey = survey;
     }
@@ -54,7 +47,7 @@ public class SurveyOptionImpl extends BaseModelImpl<SurveyOption> implements Sur
     /**
      * Default constructor.
      */
-    public SurveyOptionImpl() {
+    public SurveyOption() {
     }
 
 }

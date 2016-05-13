@@ -2,18 +2,16 @@ package com.prodyna.pac.vothing.model.impl;
 
 import com.google.gson.Gson;
 import com.prodyna.pac.vothing.Vothing;
-import com.prodyna.pac.vothing.model.BaseModel;
 
 import javax.inject.Inject;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.io.Serializable;
 import java.util.Date;
 
 @XmlRootElement
 @Inheritance
 @MappedSuperclass
-public abstract class BaseModelImpl<T> implements BaseModel<T>, Serializable {
+public abstract class BaseModelImpl<T> implements BaseModel<T> {
 
     @Inject
     @Transient

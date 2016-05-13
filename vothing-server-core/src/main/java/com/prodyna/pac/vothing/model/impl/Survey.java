@@ -2,9 +2,6 @@ package com.prodyna.pac.vothing.model.impl;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.prodyna.pac.vothing.model.Survey;
-import com.prodyna.pac.vothing.model.SurveyOption;
-import com.prodyna.pac.vothing.model.User;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
@@ -20,36 +17,31 @@ import java.util.Collection;
 @Table(name = "vothing_survey")
 //@JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class SurveyImpl extends BaseModelImpl<Survey> implements Survey {
+public class Survey extends BaseModelImpl<Survey> implements BaseModel<Survey> {
 
     private static final long serialVersionUID = 7912134879739982095L;
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "survey", cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, targetEntity = SurveyOptionImpl.class)
+    @OneToMany(mappedBy = "survey", cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, targetEntity = SurveyOption.class)
     private Collection<SurveyOption> surveyOptions = new ArrayList<SurveyOption>();
 
-    // TODO get a permission map for each entity
     @JsonManagedReference
     @JoinColumn(name = "userId", referencedColumnName = "id")
-    @ManyToOne(targetEntity = UserImpl.class)
+    @ManyToOne(targetEntity = User.class)
     User user;
 
-    @Override
     public Collection<SurveyOption> getSurveyOptions() {
         return surveyOptions;
     }
 
-    @Override
     public void setSurveyOptions(Collection<SurveyOption> surveyOptions) {
         this.surveyOptions = surveyOptions;
     }
 
-    @Override
     public User getUser() {
         return user;
     }
 
-    @Override
     public void setUser(User user) {
         this.user = user;
     }
@@ -57,7 +49,7 @@ public class SurveyImpl extends BaseModelImpl<Survey> implements Survey {
     /**
      * Default constructor.
      */
-    public SurveyImpl() {
+    public Survey() {
     }
 
 }

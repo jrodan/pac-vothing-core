@@ -1,6 +1,6 @@
 package com.prodyna.pac.vothing;
 
-import com.prodyna.pac.vothing.model.User;
+import com.prodyna.pac.vothing.model.impl.User;
 import com.prodyna.pac.vothing.monitoring.VothingMonitoring;
 import com.prodyna.pac.vothing.service.PermissionService;
 import com.prodyna.pac.vothing.service.SecurityService;

@@ -1,7 +1,8 @@
 package com.prodyna.pac.vothing.security;
 
-import java.io.IOException;
-import java.lang.reflect.Method;
+import com.prodyna.pac.vothing.Vothing;
+import com.prodyna.pac.vothing.constants.PermissionEnum;
+import com.prodyna.pac.vothing.model.impl.User;
 
 import javax.annotation.Priority;
 import javax.inject.Inject;
@@ -12,10 +13,8 @@ import javax.ws.rs.container.ResourceInfo;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.Provider;
-
-import com.prodyna.pac.vothing.Vothing;
-import com.prodyna.pac.vothing.constants.PermissionEnum;
-import com.prodyna.pac.vothing.model.User;
+import java.io.IOException;
+import java.lang.reflect.Method;
 
 @Provider
 //@WebFilter(filterName="VothingServletInterceptor", value="/*") // TODO

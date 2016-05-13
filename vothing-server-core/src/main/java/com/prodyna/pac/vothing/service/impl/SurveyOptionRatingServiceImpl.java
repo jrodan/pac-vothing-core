@@ -1,10 +1,10 @@
 package com.prodyna.pac.vothing.service.impl;
 
-import javax.ejb.Stateless;
-
-import com.prodyna.pac.vothing.model.SurveyOptionRating;
+import com.prodyna.pac.vothing.model.impl.SurveyOptionRating;
 import com.prodyna.pac.vothing.monitoring.VothingMonitoring;
 import com.prodyna.pac.vothing.service.SurveyOptionRatingService;
+
+import javax.ejb.Stateless;
 
 @Stateless
 @VothingMonitoring

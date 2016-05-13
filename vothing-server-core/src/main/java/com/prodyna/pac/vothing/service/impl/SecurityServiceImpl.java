@@ -9,10 +9,10 @@ import com.prodyna.pac.vothing.constants.PermissionEnum;
 import com.prodyna.pac.vothing.constants.RoleConstants;
 import com.prodyna.pac.vothing.constants.VothingConstants;
 import com.prodyna.pac.vothing.exception.PrivateKeyException;
-import com.prodyna.pac.vothing.model.Permission;
-import com.prodyna.pac.vothing.model.Role;
-import com.prodyna.pac.vothing.model.Survey;
-import com.prodyna.pac.vothing.model.User;
+import com.prodyna.pac.vothing.model.impl.Permission;
+import com.prodyna.pac.vothing.model.impl.Role;
+import com.prodyna.pac.vothing.model.impl.Survey;
+import com.prodyna.pac.vothing.model.impl.User;
 import com.prodyna.pac.vothing.monitoring.VothingMonitoring;
 import com.prodyna.pac.vothing.security.LoginCredentials;
 import com.prodyna.pac.vothing.service.SecurityService;
@@ -74,14 +74,8 @@ public class SecurityServiceImpl implements SecurityService, VothingConstants {
     private String getUserJwt(User user) throws PrivateKeyException {
         String jwe = null;
 
-        final String privateServerKey = System.getProperty(SERVER_PRIVATE_AUTH_KEY);
-
-        if(privateServerKey == null || privateServerKey.equals("")) {
-            throw new PrivateKeyException("no private server key is set. Please make sure that the VM parameter is set.");
-        }
-
         try {
-            JWSSigner signer = new MACSigner(privateServerKey);
+            JWSSigner signer = new MACSigner(getPrivateServerKey());
 
             // Create JWS payload
             final Payload payload = new Payload(user.toFrontendUserJSONObjectString());
@@ -106,14 +100,24 @@ public class SecurityServiceImpl implements SecurityService, VothingConstants {
         return jwe;
     }
 
+    private String getPrivateServerKey() throws PrivateKeyException {
+        final String privateServerKey = System.getProperty(SERVER_PRIVATE_AUTH_KEY);
+
+        if (privateServerKey == null || privateServerKey.equals("")) {
+            throw new PrivateKeyException("no private server key is set. Please make sure that the VM parameter is set.");
+        }
+
+        return privateServerKey;
+    }
+
     @Override
     public User getUserByToken(String token) throws ParseException,
-            JOSEException {
+            JOSEException, PrivateKeyException {
 
         User user = null;
 
         JWSObject jwsObject = JWSObject.parse(token);
-        JWSVerifier verifier = new MACVerifier(SERVER_PRIVATE_AUTH_KEY);
+        JWSVerifier verifier = new MACVerifier(getPrivateServerKey());
         jwsObject.verify(verifier);
 
         JSONObject claims = jwsObject.getPayload().toJSONObject();

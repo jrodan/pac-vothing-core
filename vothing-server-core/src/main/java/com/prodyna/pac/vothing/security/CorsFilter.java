@@ -1,12 +1,11 @@
 package com.prodyna.pac.vothing.security;
 
-import java.io.IOException;
-
 import javax.annotation.Priority;
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerResponseContext;
 import javax.ws.rs.container.ContainerResponseFilter;
 import javax.ws.rs.ext.Provider;
+import java.io.IOException;
 
 @Provider
 @Priority(1)

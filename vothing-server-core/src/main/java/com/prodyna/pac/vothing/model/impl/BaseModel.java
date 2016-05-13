@@ -1,8 +1,9 @@
-package com.prodyna.pac.vothing.model;
+package com.prodyna.pac.vothing.model.impl;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public interface BaseModel<T> {
+public interface BaseModel<T> extends Serializable {
 
 	<T> long getId();
 	

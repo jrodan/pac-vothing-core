@@ -1,7 +1,7 @@
 package com.prodyna.pac.vothing.service;
 
 import com.prodyna.pac.vothing.model.helper.EntityOrder;
-import com.prodyna.pac.vothing.model.BaseModel;
+import com.prodyna.pac.vothing.model.impl.BaseModel;
 
 import java.util.List;
 
