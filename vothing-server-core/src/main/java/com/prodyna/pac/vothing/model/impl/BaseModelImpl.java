@@ -1,5 +1,8 @@
 package com.prodyna.pac.vothing.model.impl;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.google.gson.Gson;
 import com.prodyna.pac.vothing.Vothing;
 
@@ -7,10 +10,14 @@ import javax.inject.Inject;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Date;
+import java.util.Random;
 
 @XmlRootElement
 @Inheritance
 @MappedSuperclass
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "objectKey")
+@JsonIgnoreProperties(ignoreUnknown = true)
+//@JsonDeserialize(using = RemoteEntityDeserializer.class)
 public abstract class BaseModelImpl<T> implements BaseModel<T> {
 
     @Inject
@@ -20,7 +27,10 @@ public abstract class BaseModelImpl<T> implements BaseModel<T> {
 	@Id
 	@GeneratedValue
 	private long id;
-	
+
+	@Transient
+	private long objectKey = new Random().nextLong();
+
 	@Column
 	private String name;
 
@@ -29,6 +39,16 @@ public abstract class BaseModelImpl<T> implements BaseModel<T> {
 
 	@Column
 	private Date modifiedDate;
+
+	@Override
+	public long getObjectKey() {
+		return objectKey;
+	}
+
+	@Override
+	public void setObjectKey(long objectKey) {
+		this.objectKey = objectKey;
+	}
 
 	@Override
 	public long getId() {

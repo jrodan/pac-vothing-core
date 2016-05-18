@@ -232,11 +232,28 @@ public class PersistenceTest {
 
 //    @Test
 //    @InSequence(2)
-//    public void testCollectionSerialization() {
+//    public void testEntitySerialization() {
 //        User admin = userService.getUser("admin@vothing.com","123");
 //
-//        admin.getSurveys()
+////        admin.getSurveys()
 //
 //    }
-
+//
+//    @Test
+//    @InSequence(3)
+//    public void testEntityDerialization() {
+//        User admin = userService.getUser("admin@vothing.com","123");
+//
+////        admin.getSurveys()
+//
+//    }
+//
+//    @Test
+//    @InSequence(2)
+//    public void testEntityDerialization() {
+//        User admin = userService.getUser("admin@vothing.com","123");
+//
+////        admin.getSurveys()
+//
+//    }
 }

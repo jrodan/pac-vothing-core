@@ -1,7 +1,6 @@
 package com.prodyna.pac.vothing.test;
 
-import java.net.URL;
-
+import com.prodyna.pac.vothing.service.remote.SecurityRemoteService;
 import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.test.api.ArquillianResource;
@@ -9,7 +8,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.prodyna.pac.vothing.service.SecurityService;
+import java.net.URL;
 
 @RunWith(Arquillian.class)
 public class VotingRESTTest extends BaseRESTTest {
@@ -21,7 +20,7 @@ public class VotingRESTTest extends BaseRESTTest {
 	@RunAsClient
 //	@InSequence(1)
 	public void createUser() {
-		SecurityService securityService = createService(SecurityService.class);
+		SecurityRemoteService securityService = createService(SecurityRemoteService.class);
 //		LoginCredentials cred = new LoginCredentials();
 //		cred.setEmail("user@vothing.com");
 //		cred.setPassword("123");

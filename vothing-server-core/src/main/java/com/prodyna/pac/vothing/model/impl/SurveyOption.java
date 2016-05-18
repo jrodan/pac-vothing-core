@@ -1,15 +1,13 @@
 package com.prodyna.pac.vothing.model.impl;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 import java.util.Collection;
 
 @Entity
-@XmlRootElement
+//@XmlRootElement
 @Table(name = "vothing_surveyoption")
 public class SurveyOption extends BaseModelImpl<SurveyOption> implements BaseModel<SurveyOption> {
 
@@ -18,13 +16,14 @@ public class SurveyOption extends BaseModelImpl<SurveyOption> implements BaseMod
      */
     private static final long serialVersionUID = 1219546602331216625L;
 
-    @JsonBackReference
+    //    @JsonBackReference
+    @JsonIgnore
     @JoinColumn(name = "surveyId", referencedColumnName = "id")
-    @ManyToOne(targetEntity = Survey.class)
+    @ManyToOne(cascade = {})
     private Survey survey;
 
-    @JsonManagedReference
-    @OneToMany(mappedBy = "surveyOption", cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, targetEntity = SurveyOptionRating.class)
+    //    @JsonManagedReference
+    @OneToMany(mappedBy = "surveyOption", cascade = {CascadeType.REMOVE, CascadeType.MERGE})
     private Collection<SurveyOptionRating> surveyOptionRatings = new ArrayList<SurveyOptionRating>();
 
     public Collection<SurveyOptionRating> getSurveyOptionRatings() {

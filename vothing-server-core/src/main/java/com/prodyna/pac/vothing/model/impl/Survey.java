@@ -1,33 +1,27 @@
 package com.prodyna.pac.vothing.model.impl;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 import java.util.Collection;
 
 @Entity
 @Named
 @RequestScoped
-@XmlRootElement
+//@XmlRootElement
 @Table(name = "vothing_survey")
-//@JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class Survey extends BaseModelImpl<Survey> implements BaseModel<Survey> {
 
     private static final long serialVersionUID = 7912134879739982095L;
 
-    @JsonManagedReference
-    @OneToMany(mappedBy = "survey", cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, targetEntity = SurveyOption.class)
+    //    @JsonManagedReference
+    @OneToMany(mappedBy = "survey", cascade = {CascadeType.REMOVE, CascadeType.MERGE})
     private Collection<SurveyOption> surveyOptions = new ArrayList<SurveyOption>();
 
-    @JsonManagedReference
+    //    @JsonManagedReference
     @JoinColumn(name = "userId", referencedColumnName = "id")
-    @ManyToOne(targetEntity = User.class)
+    @ManyToOne(cascade = {CascadeType.MERGE})
     User user;
 
     public Collection<SurveyOption> getSurveyOptions() {

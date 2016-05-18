@@ -12,7 +12,7 @@ public class Role extends BaseModelImpl<Role> implements BaseModel<Role> {
 
 	private static final long serialVersionUID = -4959572841738825267L;
 
-	@ManyToMany(targetEntity = Permission.class)
+	@ManyToMany(cascade = {})
 	@JoinTable(name = "vothing_rolepermission", joinColumns = @JoinColumn(name = "roleId", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "permissionId", referencedColumnName = "id"))
 	private Collection<Permission> permissions = new ArrayList<Permission>();
 

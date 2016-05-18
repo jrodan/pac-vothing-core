@@ -1,51 +1,50 @@
 package com.prodyna.pac.vothing.model.impl;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.persistence.*;
 
 @Entity
-@XmlRootElement
+//@XmlRootElement
 @Table(name = "vothing_surveyoptionrating")
 public class SurveyOptionRating extends BaseModelImpl<SurveyOptionRating> implements BaseModel<SurveyOptionRating> {
-	
-	/** Generated serial version UID. */
-	private static final long serialVersionUID = 22192424331216625L;
 
-    @JsonBackReference
-	@JoinColumn(name = "userId", referencedColumnName = "id")
-	@ManyToOne(targetEntity = User.class)
-	User user;
+    /**
+     * Generated serial version UID.
+     */
+    private static final long serialVersionUID = 22192424331216625L;
 
-    @JsonBackReference
-	@JoinColumn(name = "surveyOptionId", referencedColumnName = "id")
-	@ManyToOne(targetEntity = SurveyOption.class)
-	SurveyOption surveyOption;
-	
-	public SurveyOption getSurveyOption() {
-		return surveyOption;
-	}
+    //    @JsonBackReference
+    @JoinColumn(name = "userId", referencedColumnName = "id")
+    @ManyToOne(cascade = {})
+    User user;
 
-	public void setSurveyOption(SurveyOption surveyOption) {
-		this.surveyOption = surveyOption;
-	}
+    //    @JsonBackReference
+    @JsonIgnore
+    @JoinColumn(name = "surveyOptionId", referencedColumnName = "id")
+    @ManyToOne(cascade = {})
+    SurveyOption surveyOption;
 
-	public User getUser() {
-		return user;
-	}
+    public SurveyOption getSurveyOption() {
+        return surveyOption;
+    }
 
-	public void setUser(User user) {
-		this.user = user;
-	}
+    public void setSurveyOption(SurveyOption surveyOption) {
+        this.surveyOption = surveyOption;
+    }
 
-	/**
-	 * Default constructor.
-	 */
-	public SurveyOptionRating() {
-	}
-	
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    /**
+     * Default constructor.
+     */
+    public SurveyOptionRating() {
+    }
+
 }

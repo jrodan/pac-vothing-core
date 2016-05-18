@@ -10,4 +10,8 @@ public interface BaseRemoteEntity {
     List<String> getUsersPermissions();
 
     void setUsersPermissions(List<String> usersPermissions);
+
+    boolean isNew();
+
+    void setIsNew(boolean isNew);
 }

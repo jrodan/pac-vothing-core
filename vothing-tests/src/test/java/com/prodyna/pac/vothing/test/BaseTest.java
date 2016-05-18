@@ -1,11 +1,10 @@
 package com.prodyna.pac.vothing.test;
 
+import com.prodyna.pac.vothing.service.SecurityService;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-
-import com.prodyna.pac.vothing.service.SecurityService;
 
 public abstract class BaseTest {
 
@@ -24,7 +23,8 @@ public abstract class BaseTest {
 		// "src/test/resources/META-INF/persistence-test.xml"),
 		// "classes/META-INF/persistence.xml");
 		war.addPackages(true, "com.prodyna.pac.vothing");
-		war.addPackages(true, "com.prodyna.pac.vothing.service");
+		war.addPackages(true, "com.nimbusds.jose");
+		war.addPackages(true, "com.fasterxml.jackson");
 		war.addClass(SecurityService.class);
 		// war.addClass(LoginCredentials.class);
 		war.addAsResource("persistence.xml", "META-INF/persistence.xml");

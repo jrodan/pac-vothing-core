@@ -5,6 +5,10 @@ import java.util.Date;
 
 public interface BaseModel<T> extends Serializable {
 
+	long getObjectKey();
+
+	void setObjectKey(long objectKey);
+
 	<T> long getId();
 	
 	<T> void setId(long id);
