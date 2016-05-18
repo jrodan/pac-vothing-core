@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="
         http://maven.apache.org/POM/4.0.0
         http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -9,6 +10,7 @@
     <groupId>com.prodyna.pac.vothing</groupId>
     <version>0.0.1-SNAPSHOT</version>
     <artifactId>vothing-core</artifactId>
+    <!--<name>vothing-core</name>-->
     <packaging>war</packaging>
 
     <dependencyManagement>
@@ -131,8 +133,9 @@
                 <configuration>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                     <archiveClasses>true</archiveClasses>
-                    <packagingIncludes>WEB-INF/lib/*.jar</packagingIncludes>
+                    <!--<packagingIncludes>WEB-INF/lib/*.jar</packagingIncludes>-->
                     <attachClasses>true</attachClasses>
+                    <warName>vothing-core</warName>
                 </configuration>
             </plugin>
 
@@ -166,6 +169,7 @@
                 <configuration>
                     <hostname>macci</hostname>
                     <port>9990</port>
+                    <filename>vothing-core.war</filename>
                     <!-- <username>mkyong</username> <password>password</password> <name>spring4ajax.war</name> -->
                 </configuration>
                 <executions>
