@@ -5,7 +5,7 @@
     <persistence-unit name="vothingPU">
         <jta-data-source>java:/MysqlDS</jta-data-source>
         <properties>
-            <property name="hibernate.hbm2ddl.auto" value="update" />
+            <property name="hibernate.hbm2ddl.auto" value="create" />
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
             <property name="hibernate.enable_lazy_load_no_trans" value="true"/>
         </properties>

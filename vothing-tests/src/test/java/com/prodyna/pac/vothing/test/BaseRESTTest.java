@@ -9,7 +9,11 @@ import org.slf4j.LoggerFactory;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.Cookie;
+import javax.ws.rs.core.Form;
+import javax.ws.rs.core.MultivaluedHashMap;
 import java.net.URL;
+import java.util.ArrayList;
 
 public abstract class BaseRESTTest extends BaseTest {
 
@@ -24,16 +28,18 @@ public abstract class BaseRESTTest extends BaseTest {
 		client.register(JacksonFeature.class);
 		return client;
 	}
-	
+
 	protected WebTarget createWebTarget() {
-		String fullPath = url.toString() ;//+ "rest";
+		String fullPath = url.toString();//+ "rest";
 		log.info("URL = " + fullPath);
 		WebTarget target = createClient().target(fullPath);
 		return target;
 	}
 
-	protected <C> C createService(Class<C> ifaceType) {
-		return WebResourceFactory.newResource(ifaceType, createWebTarget());
+	protected <C> C createService(Class<C> ifaceType, String token) {
+		MultivaluedHashMap<String, Object> headers = new MultivaluedHashMap<String, Object>();
+		headers.add("Vothing-Token",token);
+		return WebResourceFactory.newResource(ifaceType, createWebTarget(), false, headers, new ArrayList<Cookie>(), new Form());
 	}
 
 }
