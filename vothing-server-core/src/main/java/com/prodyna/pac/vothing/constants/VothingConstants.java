@@ -2,7 +2,7 @@ package com.prodyna.pac.vothing.constants;
 
 public interface VothingConstants {
 
-    String ORDER_DEFAULT = "createDate ASC";
+    String ORDER_DEFAULT = "createDate DESC";
 
     String ORDER_MODIFIED_ASC = "modifiedDate ASC";
 
@@ -20,8 +20,6 @@ public interface VothingConstants {
 
     int HTTP_STATUS_OK = 200;
 
-    // TODO read private server key via VM parameter and remove him here
     String SERVER_PRIVATE_AUTH_KEY = "vothing.server.private.key";
-    //"dP5fq4GzFgvySVGX";
 
 }

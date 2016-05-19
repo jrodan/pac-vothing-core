@@ -91,22 +91,10 @@ public class SurveyRemoteServiceImpl implements SurveyRemoteService {
 		surveyDB.setUser(vothing.getUser());
 		surveyDB.setSurveyOptions(survey.getSurveyOptions());
 
-		// update surveyOptions
+		// update surveyOptions and survey
 		surveyDB = surveyOptionService.updateSurveyOptions(surveyDB.getId(), survey.getSurveyOptions());
 
-//		for (SurveyOption option : surveyDB.getSurveyOptions()) {
-//			option.setSurvey(surveyDB);
-//			option.setName(option.getName());
-//			if (option.getId() == 0) {
-//				option = surveyOptionService.addElement(option);
-//			} else {
-//				option = surveyOptionService.updateElement(option);
-//			}
-//		}
-
-		// persist
-		Survey surveyDB2 = surveyService.updateElement(surveyDB);
-		surveyRemote = getRemoteSurveyFromSurvey(surveyDB2);
+		surveyRemote = getRemoteSurveyFromSurvey(surveyDB);
 
 		return surveyRemote;
 	}

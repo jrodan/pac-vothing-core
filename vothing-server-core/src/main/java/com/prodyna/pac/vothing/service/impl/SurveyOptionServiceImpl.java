@@ -38,7 +38,7 @@ public class SurveyOptionServiceImpl extends BaseServiceImpl<SurveyOption> imple
 
 		// add or update surveyOptions
 		for (SurveyOption surveyOption : surveyOptionList) {
-			if(surveyOption.getId() == 0) {
+			if (surveyOption.getId() == 0) {
 				surveyOption.setSurvey(survey);
 				SurveyOption surveyOptionDB = this.addElement(surveyOption);
 				surveyOptionListNew.add(surveyOptionDB);
