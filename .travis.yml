@@ -1,9 +1,5 @@
 language: node_js
-matrix:
-fast_finish: true
-include:
-  - os: linux
-    jdk: oraclejdk8
-  - os: osx
+jdk:
+  - oraclejdk8
 script: 
   - mvn clean install -DskipTests=true
