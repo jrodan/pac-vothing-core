@@ -17,6 +17,7 @@
 - move tests to volative database
 - create parent maven project
 - create more tests
+- CI
 - cleanup
 - documentation
 
