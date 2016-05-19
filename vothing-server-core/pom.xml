@@ -5,12 +5,13 @@
         http://maven.apache.org/POM/4.0.0
         http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <!-- <parent> <groupId>com.prodyna.pac.vothing</groupId> <artifactId>vothing</artifactId>
-        <version>0.0.1-SNAPSHOT</version> </parent> -->
+    <parent>
+        <groupId>com.prodyna.pac.vothing</groupId>
+        <artifactId>vothing</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
     <groupId>com.prodyna.pac.vothing</groupId>
-    <version>0.0.1-SNAPSHOT</version>
     <artifactId>vothing-core</artifactId>
-    <!--<name>vothing-core</name>-->
     <packaging>war</packaging>
 
     <dependencyManagement>

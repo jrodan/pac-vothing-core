@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="
         http://maven.apache.org/POM/4.0.0
         http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.prodyna.pac.vothing</groupId>
+        <artifactId>vothing</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
     <groupId>com.prodyna.pac.vothing</groupId>
-    <version>0.0.1-SNAPSHOT</version>
     <artifactId>vothing-tests</artifactId>
 
     <dependencies>
@@ -19,11 +24,11 @@
         </dependency>
 
         <!--<dependency>-->
-            <!--<groupId>com.prodyna.pac.vothing</groupId>-->
-            <!--<artifactId>vothing-core</artifactId>-->
-            <!--<version>0.0.1-SNAPSHOT</version>-->
-            <!--<type>war</type>-->
-            <!--<scope>test</scope>-->
+        <!--<groupId>com.prodyna.pac.vothing</groupId>-->
+        <!--<artifactId>vothing-core</artifactId>-->
+        <!--<version>0.0.1-SNAPSHOT</version>-->
+        <!--<type>war</type>-->
+        <!--<scope>test</scope>-->
         <!--</dependency>-->
 
         <!-- JUnit and Arquillian JUnit -->
@@ -44,10 +49,10 @@
         <!-- <dependency> <groupId>org.wildfly</groupId> <artifactId>wildfly-arquillian-container-remote</artifactId>
             <version>8.2.1.Final</version> <scope>test</scope> </dependency> -->
         <!--<dependency>-->
-            <!--<groupId>org.wildfly.arquillian</groupId>-->
-            <!--<artifactId>wildfly-arquillian-container-managed</artifactId>-->
-            <!--<version>1.1.0.Final</version>-->
-            <!--<scope>test</scope>-->
+        <!--<groupId>org.wildfly.arquillian</groupId>-->
+        <!--<artifactId>wildfly-arquillian-container-managed</artifactId>-->
+        <!--<version>1.1.0.Final</version>-->
+        <!--<scope>test</scope>-->
         <!--</dependency>-->
         <dependency>
             <groupId>org.wildfly.arquillian</groupId>
@@ -81,10 +86,10 @@
             <scope>test</scope>
         </dependency>
         <!--<dependency>-->
-            <!--<groupId>com.fasterxml.jackson.jaxrs</groupId>-->
-            <!--<artifactId>jackson-jaxrs-json-provider</artifactId>-->
-            <!--<version>2.7.4</version>-->
-            <!--<scope>test</scope>-->
+        <!--<groupId>com.fasterxml.jackson.jaxrs</groupId>-->
+        <!--<artifactId>jackson-jaxrs-json-provider</artifactId>-->
+        <!--<version>2.7.4</version>-->
+        <!--<scope>test</scope>-->
         <!--</dependency>-->
         <dependency>
             <groupId>org.jboss.arquillian.test</groupId>
@@ -99,10 +104,10 @@
             <scope>test</scope>
         </dependency>
         <!--<dependency>-->
-            <!--<groupId>org.jboss.resteasy</groupId>-->
-            <!--<artifactId>jaxrs-api</artifactId>-->
-            <!--<version>3.0.12.Final</version>-->
-            <!--<scope>test</scope>-->
+        <!--<groupId>org.jboss.resteasy</groupId>-->
+        <!--<artifactId>jaxrs-api</artifactId>-->
+        <!--<version>3.0.12.Final</version>-->
+        <!--<scope>test</scope>-->
         <!--</dependency>-->
         <dependency>
             <groupId>org.glassfish.jersey.media</groupId>

@@ -1,2 +1,2 @@
 language: node_js
-script: mvn clean install
+script: mvn clean install -DskipTests=true
