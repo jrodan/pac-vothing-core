@@ -9,6 +9,10 @@
     <packaging>pom</packaging>
     <version>0.0.1-SNAPSHOT</version>
 
+    <properties>
+        <skip.deployment>true</skip.deployment> <!-- default -->
+    </properties>
+
     <modules>
         <module>vothing-server-core</module>
         <module>vothing-tests</module>
