@@ -14,40 +14,17 @@ import java.util.List;
 /**
  * Created by jrodan on 18/05/16.
  */
-//@Provider
-//@Path("/restricted/survey")
-//@Consumes(MediaType.APPLICATION_JSON)
-//@Produces(MediaType.APPLICATION_JSON)
-//@VothingMonitoring
 public interface SurveyRemoteService {
 
-//    @POST
-//    @Path("/add")
-//    @PermissionAnn(permission = PermissionEnum.SURVEY_ADD)
-    SurveyRemote createSurvey(SurveyRemote survey);
+    SurveyRemote createSurvey(Survey survey);
 
-//    @GET
-//    @Path("/list")
-//    @PermissionAnn(permission = PermissionEnum.SURVEY_LIST)
     List<SurveyRemote> getSurveys(@PathParam("order") String order);
 
-//    @GET
-//    @Path("/list")
-//    @PermissionAnn(permission = PermissionEnum.SURVEY_LIST)
     List<SurveyRemote> getSurveys();
 
-//    @POST
-//    @Path("/update")
-//    @PermissionAnn(permission = PermissionEnum.SURVEY_UPDATE)
     SurveyRemote updateSurvey(Survey survey);
 
-//    @GET
-//    @Path("/get/{surveyId}")
-//    @PermissionAnn(permission = PermissionEnum.SURVEY_LIST)
     SurveyRemote getSurvey(@PathParam("surveyId") long surveyId);
 
-//    @GET
-//    @Path("/delete/{surveyId}")
-//    @PermissionAnn(permission = PermissionEnum.SURVEY_DELETE)
     void deleteVote(@PathParam("surveyId") long surveyId);
 }

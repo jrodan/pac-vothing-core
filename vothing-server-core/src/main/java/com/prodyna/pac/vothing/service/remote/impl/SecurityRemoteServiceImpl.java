@@ -1,9 +1,10 @@
-package com.prodyna.pac.vothing.service.remote;
+package com.prodyna.pac.vothing.service.remote.impl;
 
 import com.prodyna.pac.vothing.Vothing;
 import com.prodyna.pac.vothing.monitoring.VothingMonitoring;
 import com.prodyna.pac.vothing.security.LoginCredentials;
 import com.prodyna.pac.vothing.service.SecurityService;
+import com.prodyna.pac.vothing.service.remote.SecurityRemoteService;
 import org.slf4j.Logger;
 
 import javax.inject.Inject;
@@ -25,7 +26,7 @@ import static com.prodyna.pac.vothing.constants.VothingConstants.HTTP_CLIENT_STA
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 @VothingMonitoring
-public class SecurityRemoteServiceHelper implements SecurityRemoteService {
+public class SecurityRemoteServiceImpl implements SecurityRemoteService {
 
     @Inject
     private Vothing vothing;

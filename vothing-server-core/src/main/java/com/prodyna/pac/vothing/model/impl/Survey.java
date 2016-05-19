@@ -16,7 +16,7 @@ public class Survey extends BaseModelImpl<Survey> implements BaseModel<Survey> {
     private static final long serialVersionUID = 7912134879739982095L;
 
     //    @JsonManagedReference
-    @OneToMany(mappedBy = "survey", cascade = {CascadeType.REMOVE, CascadeType.MERGE})
+    @OneToMany(mappedBy = "survey", cascade = {CascadeType.REMOVE, CascadeType.REFRESH, CascadeType.PERSIST})
     private Collection<SurveyOption> surveyOptions = new ArrayList<SurveyOption>();
 
     //    @JsonManagedReference
