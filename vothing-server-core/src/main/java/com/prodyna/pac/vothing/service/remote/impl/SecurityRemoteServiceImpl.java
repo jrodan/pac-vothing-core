@@ -53,6 +53,7 @@ public class SecurityRemoteServiceImpl implements SecurityRemoteService {
 
         if (token == null) {
             try {
+                httpResponse.setHeader("Access-Control-Allow-Origin","*");
                 httpResponse.sendError(HTTP_CLIENT_STATUS_LOGIN_INVALID);
             } catch (IOException e) {
                 logger.error("could not send error message 403", e);

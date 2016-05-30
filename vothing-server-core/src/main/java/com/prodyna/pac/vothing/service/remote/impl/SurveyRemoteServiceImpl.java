@@ -44,6 +44,7 @@ public class SurveyRemoteServiceImpl implements SurveyRemoteService {
 	public SurveyRemote createSurvey(Survey survey) {
 		survey.setUser(vothing.getUser());
 		Survey surveyDB = surveyService.addElement(survey);
+		surveyDB = surveyOptionService.updateSurveyOptions(surveyDB.getId(), survey.getSurveyOptions());
 		SurveyRemote surveyRemote = getRemoteSurveyFromSurvey(surveyDB);
 		return surveyRemote;
 	}
