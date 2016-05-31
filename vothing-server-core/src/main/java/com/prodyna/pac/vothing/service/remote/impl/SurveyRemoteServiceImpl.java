@@ -118,7 +118,7 @@ public class SurveyRemoteServiceImpl implements SurveyRemoteService {
 
 	private SurveyRemote getRemoteSurveyFromSurvey(Survey survey) {
 		User userContext = vothing.getUser();
-		SurveyRemote surveyRemote = ObjectConverterHelper.toSurveyRemote(survey);
+		SurveyRemote surveyRemote = ObjectConverterHelper.toSurveyRemote(userContext.getId(), survey);
 		List<String> permissions = vothing.getSecurityService().getUserSurveyPermissions(userContext, survey);
 		surveyRemote.setUsersPermissions(permissions);
 		return surveyRemote;

@@ -1,7 +1,6 @@
 package com.prodyna.pac.vothing.model.impl;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.json.Json;
 import javax.json.JsonObjectBuilder;
@@ -30,7 +29,7 @@ public class User extends BaseModelImpl<User> implements BaseModel<User> {
     @NotNull
     private String email;
 
-    @JsonIgnoreProperties
+    @JsonIgnore
     @Column
     @NotNull
     private String password;

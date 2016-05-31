@@ -14,6 +14,10 @@ public class SurveyRemote extends Survey implements BaseRemoteEntity {
 
     private boolean isNew = false;
 
+    private boolean userVoted = false;
+
+    private int votes = 0;
+
     @Override
     public List<String> getUsersPermissions() {
         return usersPermissions;
@@ -33,4 +37,21 @@ public class SurveyRemote extends Survey implements BaseRemoteEntity {
     public void setIsNew(boolean isNew) {
         this.isNew = isNew;
     }
+
+    public boolean isUserVoted() {
+        return userVoted;
+    }
+
+    public void setUserVoted(boolean userVoted) {
+        this.userVoted = userVoted;
+    }
+
+    public int getVotes() {
+        return votes;
+    }
+
+    public void setVotes(int votes) {
+        this.votes = votes;
+    }
+
 }

@@ -56,8 +56,9 @@ public class VothingPermissionFilter implements ContainerRequestFilter {
 			} 
 			
 			if (!hasPermission && user != null) {
-	
-				if (vothing.getSecurityService().hasUserPermission(user, permission)) {
+
+				if (vothing.getSecurityService().hasUserPermission(user, permission)
+						|| vothing.getSecurityService().isUserAdmin(user)) {
 					hasPermission = true;
 				}
 	
