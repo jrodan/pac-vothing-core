@@ -86,14 +86,16 @@ public class SurveyRemoteServiceImpl implements SurveyRemoteService {
 		Survey surveyDB = surveyService.getElement(survey.getId());
 
 		// copy attributes
-		// TODO check permissions
 		surveyDB.setName(survey.getName());
 		surveyDB.setModifiedDate(new Date());
 		surveyDB.setUser(vothing.getUser());
 		surveyDB.setSurveyOptions(survey.getSurveyOptions());
 
 		// update surveyOptions and survey
-		surveyDB = surveyOptionService.updateSurveyOptions(surveyDB.getId(), survey.getSurveyOptions());
+		Survey surveyDB2 = surveyOptionService.updateSurveyOptions(surveyDB.getId(), survey.getSurveyOptions());
+
+		surveyDB.setSurveyOptions(surveyDB2.getSurveyOptions());
+		surveyService.updateElement(surveyDB);
 
 		surveyRemote = getRemoteSurveyFromSurvey(surveyDB);
 
