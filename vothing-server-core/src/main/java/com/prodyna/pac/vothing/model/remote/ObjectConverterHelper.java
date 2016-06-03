@@ -3,6 +3,10 @@ package com.prodyna.pac.vothing.model.remote;
 import com.prodyna.pac.vothing.model.impl.Survey;
 import com.prodyna.pac.vothing.model.impl.SurveyOption;
 import com.prodyna.pac.vothing.model.impl.SurveyOptionRating;
+import com.prodyna.pac.vothing.model.impl.User;
+import com.prodyna.pac.vothing.service.SecurityService;
+
+import java.util.List;
 
 /**
  * Created by jrodan on 13/05/16.
@@ -23,7 +27,7 @@ public class ObjectConverterHelper {
         return survey;
     }
 
-    public static SurveyRemote toSurveyRemote(long userId, Survey survey) {
+    public static SurveyRemote toSurveyRemote(User user, SecurityService securityService, Survey survey) {
 
         SurveyRemote surveyRemote = new SurveyRemote();
 
@@ -40,7 +44,7 @@ public class ObjectConverterHelper {
         for(SurveyOption surveyOptionLocal : survey.getSurveyOptions()) {
             votes += surveyOptionLocal.getSurveyOptionRatings().size();
             for(SurveyOptionRating surveyOptionRating : surveyOptionLocal.getSurveyOptionRatings()) {
-                if(surveyOptionRating.getUser().getId() == userId) {
+                if(surveyOptionRating.getUser().getId() == user.getId()) {
                     hasUserVoted = true;
                     break;
                 }
@@ -48,6 +52,10 @@ public class ObjectConverterHelper {
         }
         surveyRemote.setVotes(votes);
         surveyRemote.setUserVoted(hasUserVoted);
+
+        // set permissions to object
+        List<String> permissions = securityService.getUserSurveyPermissions(user, survey);
+        surveyRemote.setUsersPermissions(permissions);
 
         return surveyRemote;
     }

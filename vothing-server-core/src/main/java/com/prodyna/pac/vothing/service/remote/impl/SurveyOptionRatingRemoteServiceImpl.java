@@ -6,6 +6,8 @@ import com.prodyna.pac.vothing.model.impl.Survey;
 import com.prodyna.pac.vothing.model.impl.SurveyOption;
 import com.prodyna.pac.vothing.model.impl.SurveyOptionRating;
 import com.prodyna.pac.vothing.model.impl.User;
+import com.prodyna.pac.vothing.model.remote.ObjectConverterHelper;
+import com.prodyna.pac.vothing.model.remote.SurveyRemote;
 import com.prodyna.pac.vothing.monitoring.VothingMonitoring;
 import com.prodyna.pac.vothing.security.PermissionAnn;
 import com.prodyna.pac.vothing.service.SurveyOptionRatingService;
@@ -33,26 +35,28 @@ public class SurveyOptionRatingRemoteServiceImpl implements SurveyOptionRatingRe
 	@Inject
 	private Vothing vothing;
 
-	@PUT
+	@GET
 	@Path("/add/{surveyOptionId}")
 	@PermissionAnn(permission = PermissionEnum.SURVEYOPTIONRATING_UPDATE)
 	@Override
-	public SurveyOptionRating addSurveyOptionRating(@PathParam("surveyOptionId") long surveyOptionId) {
+	public Survey addSurveyOptionRating(@PathParam("surveyOptionId") long surveyOptionId) {
 
-		SurveyOptionRating surveyOptionRatingDB = null;
 		User userContext = vothing.getUser();
 		SurveyOption surveyOptionDB = surveyOptionService.getElement(surveyOptionId);
+		Survey survey = surveyOptionDB.getSurvey();
 
 		if (!hasUserVoted(surveyOptionDB.getSurvey())) {
 			SurveyOptionRating surveyOptionRating = new SurveyOptionRating();
 			surveyOptionRating.setUser(userContext);
 			surveyOptionRating.setSurveyOption(surveyOptionDB);
-			surveyOptionRatingDB = surveyOptionRatingService.addElement(surveyOptionRating);
+			surveyOptionRatingService.addElement(surveyOptionRating);
 		} else {
 			// TODO throw error
 		}
 
-		return surveyOptionRatingDB;
+		SurveyRemote surveyRemote = ObjectConverterHelper.toSurveyRemote(userContext, vothing.getSecurityService(), survey);
+
+		return surveyRemote;
 	}
 
 	private boolean hasUserVoted(Survey survey) {
