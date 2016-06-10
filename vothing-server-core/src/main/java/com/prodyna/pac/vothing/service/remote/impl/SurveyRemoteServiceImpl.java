@@ -37,6 +37,9 @@ public class SurveyRemoteServiceImpl implements SurveyRemoteService {
 	@Inject
 	private Vothing vothing;
 
+	@Inject
+	private ObjectConverterHelper objectConverterHelper;
+
 	@Override
 	@POST
 	@Path("/add")
@@ -119,8 +122,7 @@ public class SurveyRemoteServiceImpl implements SurveyRemoteService {
 	}
 
 	private SurveyRemote getRemoteSurveyFromSurvey(Survey survey) {
-		User userContext = vothing.getUser();
-		SurveyRemote surveyRemote = ObjectConverterHelper.toSurveyRemote(userContext, vothing.getSecurityService(), survey);
+		SurveyRemote surveyRemote = objectConverterHelper.toSurveyRemote(survey.getId());
 		return surveyRemote;
 	}
 

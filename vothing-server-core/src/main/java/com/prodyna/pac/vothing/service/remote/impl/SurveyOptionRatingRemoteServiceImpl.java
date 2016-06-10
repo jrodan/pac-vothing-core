@@ -12,6 +12,7 @@ import com.prodyna.pac.vothing.monitoring.VothingMonitoring;
 import com.prodyna.pac.vothing.security.PermissionAnn;
 import com.prodyna.pac.vothing.service.SurveyOptionRatingService;
 import com.prodyna.pac.vothing.service.SurveyOptionService;
+import com.prodyna.pac.vothing.service.SurveyService;
 import com.prodyna.pac.vothing.service.remote.SurveyOptionRatingRemoteService;
 
 import javax.inject.Inject;
@@ -27,6 +28,9 @@ import javax.ws.rs.ext.Provider;
 public class SurveyOptionRatingRemoteServiceImpl implements SurveyOptionRatingRemoteService {
 
 	@Inject
+	private SurveyService surveyService;
+
+	@Inject
 	private SurveyOptionService surveyOptionService;
 
 	@Inject
@@ -34,6 +38,9 @@ public class SurveyOptionRatingRemoteServiceImpl implements SurveyOptionRatingRe
 
 	@Inject
 	private Vothing vothing;
+
+	@Inject
+	private ObjectConverterHelper objectConverterHelper;
 
 	@GET
 	@Path("/add/{surveyOptionId}")
@@ -44,17 +51,21 @@ public class SurveyOptionRatingRemoteServiceImpl implements SurveyOptionRatingRe
 		User userContext = vothing.getUser();
 		SurveyOption surveyOptionDB = surveyOptionService.getElement(surveyOptionId);
 		Survey survey = surveyOptionDB.getSurvey();
+		boolean hasVoted = false;
+		long surveyId = surveyOptionDB.getSurvey().getId();
 
 		if (!hasUserVoted(surveyOptionDB.getSurvey())) {
 			SurveyOptionRating surveyOptionRating = new SurveyOptionRating();
 			surveyOptionRating.setUser(userContext);
 			surveyOptionRating.setSurveyOption(surveyOptionDB);
 			surveyOptionRatingService.addElement(surveyOptionRating);
+			hasVoted = true;
 		} else {
 			// TODO throw error
 		}
 
-		SurveyRemote surveyRemote = ObjectConverterHelper.toSurveyRemote(userContext, vothing.getSecurityService(), survey);
+		SurveyRemote surveyRemote = objectConverterHelper.toSurveyRemote(surveyId);
+		surveyRemote.setUserVoted(hasVoted);
 
 		return surveyRemote;
 	}

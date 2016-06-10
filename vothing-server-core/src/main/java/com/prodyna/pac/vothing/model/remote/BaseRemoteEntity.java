@@ -7,6 +7,10 @@ import java.util.List;
  */
 public interface BaseRemoteEntity {
 
+    boolean getUserVotedThisOption();
+
+    void setUserVotedThisOption(boolean userVotedThisOption);
+
     List<String> getUsersPermissions();
 
     void setUsersPermissions(List<String> usersPermissions);

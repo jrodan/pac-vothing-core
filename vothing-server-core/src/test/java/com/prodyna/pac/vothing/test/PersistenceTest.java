@@ -90,7 +90,9 @@ public class PersistenceTest {
         permissions.add(permissionService.createPermission(PermissionEnum.SURVEY_UPDATE));
         permissions.add(permissionService.createPermission(PermissionEnum.SURVEY_LIST));
         permissions.add(permissionService.createPermission(PermissionEnum.ADMIN));
-        Assert.assertEquals(permissionService.getElements().size(), 6);
+        permissions.add(permissionService.createPermission(PermissionEnum.SURVEYOPTIONRATING_UPDATE));
+        permissions.add(permissionService.createPermission(PermissionEnum.SURVEYOPTIONRATING_UPDATE_DELETE));
+        Assert.assertEquals(permissionService.getElements().size(), 8);
 
         // test roles
         Role adminRole = roleService.createRole(RoleConstants.ROLE_ADMIN, new ArrayList<Permission>());
@@ -98,7 +100,7 @@ public class PersistenceTest {
         Assert.assertEquals(adminRole.getPermissions().size(), 0);
         Role userRole = roleService.createRole(RoleConstants.ROLE_USER, permissions);
         Assert.assertNotNull(userRole);
-        Assert.assertEquals(userRole.getPermissions().size(), 6);
+        Assert.assertEquals(userRole.getPermissions().size(), 8);
 
         // test survey
         Survey survey = new Survey();
