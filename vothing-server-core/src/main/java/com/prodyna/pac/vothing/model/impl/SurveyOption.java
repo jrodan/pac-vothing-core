@@ -7,46 +7,43 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 @Entity
-//@XmlRootElement
 @Table(name = "vothing_surveyoption")
 public class SurveyOption extends BaseModelImpl<SurveyOption> implements BaseModel<SurveyOption> {
 
-    /**
-     * Generated serial version UID.
-     */
-    private static final long serialVersionUID = 1219546602331216625L;
+	/**
+	 * Generated serial version UID.
+	 */
+	private static final long serialVersionUID = 1219546602331216625L;
 
-    //    @JsonBackReference
-    @JsonIgnore
-    @JoinColumn(name = "surveyId", referencedColumnName = "id")
-    @ManyToOne(cascade = {})
-    private Survey survey;
+	@JsonIgnore
+	@JoinColumn(name = "surveyId", referencedColumnName = "id")
+	@ManyToOne(cascade = {})
+	private Survey survey;
 
-    //    @JsonManagedReference
-    @OneToMany(mappedBy = "surveyOption", cascade = {CascadeType.REMOVE, CascadeType.MERGE})
-    private Collection<SurveyOptionRating> surveyOptionRatings = new ArrayList<SurveyOptionRating>();
+	@OneToMany(mappedBy = "surveyOption", cascade = {CascadeType.REMOVE, CascadeType.MERGE})
+	private Collection<SurveyOptionRating> surveyOptionRatings = new ArrayList<>();
 
-    public Collection<SurveyOptionRating> getSurveyOptionRatings() {
-        return surveyOptionRatings;
-    }
+	/**
+	 * Default constructor.
+	 */
+	public SurveyOption() {
+	}
 
-    public void setSurveyOptionRatings(
-            Collection<SurveyOptionRating> surveyOptionRatings) {
-        this.surveyOptionRatings = surveyOptionRatings;
-    }
+	public Collection<SurveyOptionRating> getSurveyOptionRatings() {
+		return surveyOptionRatings;
+	}
 
-    public Survey getSurvey() {
-        return survey;
-    }
+	public void setSurveyOptionRatings(
+			Collection<SurveyOptionRating> surveyOptionRatings) {
+		this.surveyOptionRatings = surveyOptionRatings;
+	}
 
-    public void setSurvey(Survey survey) {
-        this.survey = survey;
-    }
+	public Survey getSurvey() {
+		return survey;
+	}
 
-    /**
-     * Default constructor.
-     */
-    public SurveyOption() {
-    }
+	public void setSurvey(Survey survey) {
+		this.survey = survey;
+	}
 
 }

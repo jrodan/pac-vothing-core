@@ -4,7 +4,6 @@ import com.prodyna.pac.vothing.Vothing;
 import com.prodyna.pac.vothing.constants.PermissionEnum;
 import com.prodyna.pac.vothing.model.helper.EntityOrder;
 import com.prodyna.pac.vothing.model.impl.Survey;
-import com.prodyna.pac.vothing.model.impl.User;
 import com.prodyna.pac.vothing.model.remote.ObjectConverterHelper;
 import com.prodyna.pac.vothing.model.remote.SurveyRemote;
 import com.prodyna.pac.vothing.monitoring.VothingMonitoring;
@@ -21,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+@SuppressWarnings("VoidMethodAnnotatedWithGET")
 @Provider
 @Path("/restricted/survey")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -57,7 +57,7 @@ public class SurveyRemoteServiceImpl implements SurveyRemoteService {
 	@Path("/list")
 	@PermissionAnn(permission = PermissionEnum.SURVEY_LIST)
 	public List<SurveyRemote> getSurveys(@PathParam("order") String order) {
-		List<SurveyRemote> surveysReturn = new ArrayList<SurveyRemote>();
+		List<SurveyRemote> surveysReturn = new ArrayList<>();
 
 		List<Survey> surveys = surveyService.getElements(new EntityOrder(order));
 
@@ -83,7 +83,7 @@ public class SurveyRemoteServiceImpl implements SurveyRemoteService {
 	@Path("/update")
 	@PermissionAnn(permission = PermissionEnum.SURVEY_UPDATE)
 	public SurveyRemote updateSurvey(Survey survey) {
-		SurveyRemote surveyRemote = null;
+		SurveyRemote surveyRemote;
 
 		// get existing element from db
 		Survey surveyDB = surveyService.getElement(survey.getId());
@@ -127,7 +127,7 @@ public class SurveyRemoteServiceImpl implements SurveyRemoteService {
 	}
 
 	@Override
-	@GET
+	@PUT
 	@Path("/delete/{surveyId}")
 	@PermissionAnn(permission = PermissionEnum.SURVEY_DELETE)
 	public void deleteVote(@PathParam("surveyId") long surveyId) {

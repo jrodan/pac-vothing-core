@@ -15,90 +15,90 @@ import java.util.List;
 
 public class BaseServiceImpl<T extends BaseModel> implements BaseService<T> {
 
-    @Inject
-    private Logger logger;
+	@Inject
+	private Logger logger;
 
-    @Inject
-    private EntityManager entityManager;
+	@Inject
+	private EntityManager entityManager;
 
-    @Override
-    public List<T> getElements() {
-        return this.getElements(new EntityOrder());
-    }
+	@Override
+	public List<T> getElements() {
+		return this.getElements(new EntityOrder());
+	}
 
-    @Override
-    public List<T> getElements(EntityOrder entityOrder) {
-        Class<T> persistentClass = (Class<T>)
-                ((ParameterizedType) getClass().getGenericSuperclass())
-                        .getActualTypeArguments()[0];
+	@Override
+	public List<T> getElements(EntityOrder entityOrder) {
+		Class<T> persistentClass = (Class<T>)
+				((ParameterizedType) getClass().getGenericSuperclass())
+						.getActualTypeArguments()[0];
 
-        String orderString = entityOrder.getOrder();
+		String orderString = entityOrder.getOrder();
 
-        Query query = entityManager.createQuery("SELECT e FROM " + persistentClass.getSimpleName() + " e order by " + orderString);
-        List<T> entities = (List<T>) query.getResultList();
+		Query query = entityManager.createQuery("SELECT e FROM " + persistentClass.getSimpleName() + " e order by " + orderString);
+		List<T> entities = (List<T>) query.getResultList();
 
-        return entities;
-    }
+		return entities;
+	}
 
-    @Override
-    public <T> T getElement(long id) {
+	@Override
+	public <T> T getElement(long id) {
 
-        Class<T> persistentClass = (Class<T>)
-                ((ParameterizedType) getClass().getGenericSuperclass())
-                        .getActualTypeArguments()[0];
+		Class<T> persistentClass = (Class<T>)
+				((ParameterizedType) getClass().getGenericSuperclass())
+						.getActualTypeArguments()[0];
 
-        T element = entityManager.find(
-                persistentClass, id);
-        if (element == null) {
-            throw new EntityNotFoundException(
-                    persistentClass.getSimpleName() + " could not be found for given id [" + id
-                            + "]");
-        }
+		T element = entityManager.find(
+				persistentClass, id);
+		if (element == null) {
+			throw new EntityNotFoundException(
+					persistentClass.getSimpleName() + " could not be found for given id [" + id
+							+ "]");
+		}
 
-        return element;
-    }
+		return element;
+	}
 
-    @Override
-    public <T> void deleteElement(long id) {
-        T element = this.getElement(id);
-        entityManager.remove(element);
+	@Override
+	public <T> void deleteElement(long id) {
+		T element = this.getElement(id);
+		entityManager.remove(element);
 
-    }
+	}
 
-    @Override
-    public <T extends BaseModel> T addElement(T element) {
+	@Override
+	public <T extends BaseModel> T addElement(T element) {
 
-        if (element.getId() > 0) {
-            T dbElement = getElement(element.getId());
-            if (dbElement != null) {
-                this.updateElement(element);
-            } else {
-                // TODO throw error in this case?
-                // this.vothing.getEntityManager().persist(element);
-            }
+		if (element.getId() > 0) {
+			T dbElement = getElement(element.getId());
+			if (dbElement != null) {
+				this.updateElement(element);
+			} else {
+				// TODO throw error in this case?
+				// this.vothing.getEntityManager().persist(element);
+			}
 
-        } else {
-            element.setCreateDate(new Date());
-            element.setModifiedDate(new Date());
-            entityManager.persist(element);
-        }
+		} else {
+			element.setCreateDate(new Date());
+			element.setModifiedDate(new Date());
+			entityManager.persist(element);
+		}
 
-        return element;
-    }
+		return element;
+	}
 
-    @Override
-    public <T extends BaseModel> T updateElement(T element) {
+	@Override
+	public <T extends BaseModel> T updateElement(T element) {
 
-        T dbElement = getElement(element.getId());
-        if (dbElement != null) {
-            element.setModifiedDate(new Date());
-            element = entityManager.merge(element);
-        } else {
-            // TODO throw error
-        }
+		T dbElement = getElement(element.getId());
+		if (dbElement != null) {
+			element.setModifiedDate(new Date());
+			element = entityManager.merge(element);
+		} else {
+			// TODO throw error
+		}
 
-        return element;
+		return element;
 
-    }
+	}
 
 }

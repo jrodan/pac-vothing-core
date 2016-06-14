@@ -37,9 +37,9 @@ public abstract class BaseRESTTest extends BaseTest {
 	}
 
 	protected <C> C createService(Class<C> ifaceType, String token) {
-		MultivaluedHashMap<String, Object> headers = new MultivaluedHashMap<String, Object>();
+		MultivaluedHashMap<String, Object> headers = new MultivaluedHashMap<>();
 		headers.add("Vothing-Token",token);
-		return WebResourceFactory.newResource(ifaceType, createWebTarget(), false, headers, new ArrayList<Cookie>(), new Form());
+		return WebResourceFactory.newResource(ifaceType, createWebTarget(), false, headers, new ArrayList<>(), new Form());
 	}
 
 }

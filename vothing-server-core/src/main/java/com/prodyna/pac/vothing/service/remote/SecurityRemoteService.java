@@ -7,5 +7,5 @@ import com.prodyna.pac.vothing.security.LoginCredentials;
  */
 public interface SecurityRemoteService {
 
-    String login(LoginCredentials loginCredentials);
+	String login(LoginCredentials loginCredentials);
 }

@@ -2,49 +2,49 @@ package com.prodyna.pac.vothing.model.impl;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
-//@XmlRootElement
 @Table(name = "vothing_surveyoptionrating")
 public class SurveyOptionRating extends BaseModelImpl<SurveyOptionRating> implements BaseModel<SurveyOptionRating> {
 
-    /**
-     * Generated serial version UID.
-     */
-    private static final long serialVersionUID = 22192424331216625L;
+	/**
+	 * Generated serial version UID.
+	 */
+	private static final long serialVersionUID = 22192424331216625L;
 
-    //    @JsonBackReference
-    @JoinColumn(name = "userId", referencedColumnName = "id")
-    @ManyToOne(cascade = {})
-    User user;
+	@JoinColumn(name = "userId", referencedColumnName = "id")
+	@ManyToOne(cascade = {})
+	User user;
 
-    //    @JsonBackReference
-    @JsonIgnore
-    @JoinColumn(name = "surveyOptionId", referencedColumnName = "id")
-    @ManyToOne(cascade = {})
-    SurveyOption surveyOption;
+	@JsonIgnore
+	@JoinColumn(name = "surveyOptionId", referencedColumnName = "id")
+	@ManyToOne(cascade = {})
+	SurveyOption surveyOption;
 
-    public SurveyOption getSurveyOption() {
-        return surveyOption;
-    }
+	/**
+	 * Default constructor.
+	 */
+	public SurveyOptionRating() {
+	}
 
-    public void setSurveyOption(SurveyOption surveyOption) {
-        this.surveyOption = surveyOption;
-    }
+	public SurveyOption getSurveyOption() {
+		return surveyOption;
+	}
 
-    public User getUser() {
-        return user;
-    }
+	public void setSurveyOption(SurveyOption surveyOption) {
+		this.surveyOption = surveyOption;
+	}
 
-    public void setUser(User user) {
-        this.user = user;
-    }
+	public User getUser() {
+		return user;
+	}
 
-    /**
-     * Default constructor.
-     */
-    public SurveyOptionRating() {
-    }
+	public void setUser(User user) {
+		this.user = user;
+	}
 
 }

@@ -6,9 +6,9 @@ import javax.inject.Named;
 @Named
 @RequestScoped
 public class LoginCredentials {
-	
+
 	private String email;
-	
+
 	private String password;
 
 	public String getEmail() {

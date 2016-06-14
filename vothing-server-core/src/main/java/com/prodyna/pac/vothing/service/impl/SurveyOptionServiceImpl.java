@@ -24,17 +24,13 @@ public class SurveyOptionServiceImpl extends BaseServiceImpl<SurveyOption> imple
 		// get survey
 		Survey survey = surveyService.getElement(surveyId);
 
-		Collection<SurveyOption> surveyOptionListNew = new ArrayList<SurveyOption>();
+		Collection<SurveyOption> surveyOptionListNew = new ArrayList<>();
 
 		// remove DB surveyOptions
-		for (SurveyOption surveyOptionDB : survey.getSurveyOptions()) {
-
-			// if DB element was removed
-			if (!surveyOptionList.contains(surveyOptionDB)) {
-				this.deleteElement(surveyOptionDB.getId());
-			}
-
-		}
+		// if DB element was removed
+		survey.getSurveyOptions().stream().filter(surveyOptionDB -> !surveyOptionList.contains(surveyOptionDB)).forEach(surveyOptionDB -> {
+			this.deleteElement(surveyOptionDB.getId());
+		});
 
 		// add or update surveyOptions
 		for (SurveyOption surveyOption : surveyOptionList) {

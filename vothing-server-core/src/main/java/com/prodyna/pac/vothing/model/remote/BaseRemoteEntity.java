@@ -5,17 +5,18 @@ import java.util.List;
 /**
  * Created by jrodan on 13/05/16.
  */
+@SuppressWarnings("ALL")
 public interface BaseRemoteEntity {
 
-    boolean getUserVotedThisOption();
+	boolean getUserVotedThisOption();
 
-    void setUserVotedThisOption(boolean userVotedThisOption);
+	void setUserVotedThisOption(boolean userVotedThisOption);
 
-    List<String> getUsersPermissions();
+	List<String> getUsersPermissions();
 
-    void setUsersPermissions(List<String> usersPermissions);
+	void setUsersPermissions(List<String> usersPermissions);
 
-    boolean isNew();
+	boolean isNew();
 
-    void setIsNew(boolean isNew);
+	void setIsNew(boolean isNew);
 }

@@ -13,6 +13,7 @@ import javax.inject.Inject;
 import javax.ws.rs.Path;
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerRequestFilter;
+import javax.ws.rs.container.PreMatching;
 import javax.ws.rs.container.ResourceInfo;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
@@ -21,19 +22,15 @@ import java.io.IOException;
 import java.lang.reflect.Method;
 import java.text.ParseException;
 
-@Provider
 @Priority(2)
-// @PreMatching
-// @Priority(Priorities.AUTHENTICATION)
-// TODO @WebFilter(filterName="VothingServletSecurityFilter",
-// value="/restricted/*")
+@PreMatching
 @Path("/restricted/*")
 @VothingMonitoring
 public class VothingSecurityFilter implements ContainerRequestFilter, VothingConstants {
-	
+
 	@Context
 	private ResourceInfo resourceInfo;
-	
+
 	@Inject
 	private SecurityService securityService;
 
@@ -42,11 +39,11 @@ public class VothingSecurityFilter implements ContainerRequestFilter, VothingCon
 
 	@Override
 	public void filter(ContainerRequestContext requestContext) throws IOException {
-		
+
 		boolean isLoginValid = false;
-		
+
 		Method method = resourceInfo.getResourceMethod();
-		if(method.getName().equals("login")) {
+		if (method.getName().equals("login")) {
 			return;
 		}
 
@@ -56,21 +53,15 @@ public class VothingSecurityFilter implements ContainerRequestFilter, VothingCon
 		 * is still valid. The login method can be accessed without permission
 		 * check and is excluded from the servlet's URL mapper.
 		 */
-		
+
 		// check if token is valid
 		String token = requestContext.getHeaderString(VOTHING_ACCESS_TOKEN);
 		if (token != null) {
 			User user = null;
 			try {
 				user = securityService.getUserByToken(token);
-			} catch (ParseException e) {
+			} catch (ParseException | PrivateKeyException | JOSEException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (JOSEException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (PrivateKeyException e) {
-				// TODO
 				e.printStackTrace();
 			}
 			if (user != null) {
@@ -87,7 +78,7 @@ public class VothingSecurityFilter implements ContainerRequestFilter, VothingCon
 			requestContext.abortWith(Response.status(Response.Status.FORBIDDEN)
 					.build());
 		}
-		
+
 	}
 
 }

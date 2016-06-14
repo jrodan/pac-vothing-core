@@ -13,5 +13,5 @@ public class Permission extends BaseModelImpl<Permission> implements BaseModel<P
 
 	public Permission() {
 	}
-	
+
 }

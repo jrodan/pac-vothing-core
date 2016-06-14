@@ -10,7 +10,6 @@
         <artifactId>vothing</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <groupId>com.prodyna.pac.vothing</groupId>
     <artifactId>vothing-tests</artifactId>
 
     <dependencies>

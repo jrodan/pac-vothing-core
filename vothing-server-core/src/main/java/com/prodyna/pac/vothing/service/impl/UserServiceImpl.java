@@ -14,34 +14,34 @@ import java.util.List;
 @VothingMonitoring
 public class UserServiceImpl extends BaseServiceImpl<User> implements UserService {
 
-    @Inject
-    private Logger logger;
+	@Inject
+	private Logger logger;
 
-    @Override
-    public User getUser(String email, String password)
-            throws EntityNotFoundException {
-        User user = null;
-        List<User> users = this.getElements();
+	@Override
+	public User getUser(String email, String password)
+			throws EntityNotFoundException {
+		User user = null;
+		List<User> users = this.getElements();
 
-        if (users != null) {
-            for (User userTemp : users) {
-                if (userTemp.getEmail().equalsIgnoreCase(email)
-                        && userTemp.getPassword().equals(password)) {
-                    // TODO encrypt/decrypt password
-                    user = userTemp;
-                    break;
-                }
-            }
-        }
+		if (users != null) {
+			for (User userTemp : users) {
+				if (userTemp.getEmail().equalsIgnoreCase(email)
+						&& userTemp.getPassword().equals(password)) {
+					// TODO encrypt/decrypt password
+					user = userTemp;
+					break;
+				}
+			}
+		}
 
-        // if (user == null) {
-        // throw new EntityNotFoundException(
-        // "User could not be found for given email and password ["
-        // + email + "]");
-        // TODO
-        // }
+		// if (user == null) {
+		// throw new EntityNotFoundException(
+		// "User could not be found for given email and password ["
+		// + email + "]");
+		// TODO
+		// }
 
-        return user;
-    }
+		return user;
+	}
 
 }

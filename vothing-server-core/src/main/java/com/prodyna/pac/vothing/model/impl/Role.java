@@ -14,7 +14,10 @@ public class Role extends BaseModelImpl<Role> implements BaseModel<Role> {
 
 	@ManyToMany(cascade = {})
 	@JoinTable(name = "vothing_rolepermission", joinColumns = @JoinColumn(name = "roleId", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "permissionId", referencedColumnName = "id"))
-	private Collection<Permission> permissions = new ArrayList<Permission>();
+	private Collection<Permission> permissions = new ArrayList<>();
+
+	public Role() {
+	}
 
 	public Collection<Permission> getPermissions() {
 		return permissions;
@@ -22,9 +25,6 @@ public class Role extends BaseModelImpl<Role> implements BaseModel<Role> {
 
 	public void setPermissions(Collection<Permission> permissions) {
 		this.permissions = permissions;
-	}
-
-	public Role() {
 	}
 
 }

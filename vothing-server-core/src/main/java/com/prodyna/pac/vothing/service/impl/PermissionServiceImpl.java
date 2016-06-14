@@ -34,5 +34,4 @@ public class PermissionServiceImpl extends BaseServiceImpl<Permission> implement
 	}
 
 
-
 }

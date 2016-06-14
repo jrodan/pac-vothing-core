@@ -28,38 +28,38 @@ import static com.prodyna.pac.vothing.constants.VothingConstants.HTTP_CLIENT_STA
 @VothingMonitoring
 public class SecurityRemoteServiceImpl implements SecurityRemoteService {
 
-    @Inject
-    private Vothing vothing;
+	@Inject
+	private Vothing vothing;
 
-    @Inject
-    private SecurityService securityService;
+	@Inject
+	private SecurityService securityService;
 
-    @Context
-    private HttpServletRequest httpRequest;
+	@Context
+	private HttpServletRequest httpRequest;
 
-    @Context
-    private HttpServletResponse httpResponse;
+	@Context
+	private HttpServletResponse httpResponse;
 
-    @Inject
-    private Logger logger;
+	@Inject
+	private Logger logger;
 
-    @POST
-    @Path("/login")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    @Override
-    public String login(LoginCredentials loginCredentials) {
-        String token = securityService.login(loginCredentials);
+	@POST
+	@Path("/login")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	@Override
+	public String login(LoginCredentials loginCredentials) {
+		String token = securityService.login(loginCredentials);
 
-        if (token == null) {
-            try {
-                httpResponse.setHeader("Access-Control-Allow-Origin","*");
-                httpResponse.sendError(HTTP_CLIENT_STATUS_LOGIN_INVALID);
-            } catch (IOException e) {
-                logger.error("could not send error message 403", e);
-            }
-        }
+		if (token == null) {
+			try {
+				httpResponse.setHeader("Access-Control-Allow-Origin", "*");
+				httpResponse.sendError(HTTP_CLIENT_STATUS_LOGIN_INVALID);
+			} catch (IOException e) {
+				logger.error("could not send error message 403", e);
+			}
+		}
 
-        return token;
-    }
+		return token;
+	}
 }

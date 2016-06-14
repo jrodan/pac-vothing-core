@@ -7,8 +7,8 @@ import com.prodyna.pac.vothing.monitoring.VothingMonitoring;
 import java.util.Collection;
 
 @VothingMonitoring
-public interface RoleService extends BaseService<Role>{
-	
+public interface RoleService extends BaseService<Role> {
+
 	Role createRole(String name, Collection<Permission> permissions);
 
 }

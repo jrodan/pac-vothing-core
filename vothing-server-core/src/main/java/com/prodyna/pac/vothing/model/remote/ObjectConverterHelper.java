@@ -55,7 +55,7 @@ public class ObjectConverterHelper {
 		surveyRemote.setCreateDate(survey.getCreateDate());
 		surveyRemote.setModifiedDate(survey.getModifiedDate());
 
-		List<SurveyOptionRemote> surveyOptions = new ArrayList<SurveyOptionRemote>();
+		List<SurveyOptionRemote> surveyOptions = new ArrayList<>();
 
 		// count votes and set if user has already voted
 		int votes = 0;

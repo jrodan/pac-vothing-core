@@ -6,7 +6,7 @@ import com.prodyna.pac.vothing.monitoring.VothingMonitoring;
 import javax.persistence.EntityNotFoundException;
 
 @VothingMonitoring
-public interface UserService extends BaseService<User>{
+public interface UserService extends BaseService<User> {
 
 	User getUser(String email, String password) throws EntityNotFoundException;
 

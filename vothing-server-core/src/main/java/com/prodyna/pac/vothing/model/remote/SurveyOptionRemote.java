@@ -12,13 +12,24 @@ public class SurveyOptionRemote extends SurveyOption implements BaseRemoteEntity
 
 	private boolean userVotedThisOption = false;
 
-	private List<String> usersPermissions = new ArrayList<String>();
+	private List<String> usersPermissions = new ArrayList<>();
 
 	private boolean isNew = false;
 
 	private boolean userVoted = false;
 
 	private int votes = 0;
+
+	public SurveyOptionRemote(SurveyOption surveyOption) {
+
+		this.setSurvey(surveyOption.getSurvey());
+		this.setCreateDate(surveyOption.getCreateDate());
+		this.setModifiedDate(surveyOption.getModifiedDate());
+		this.setId(surveyOption.getId());
+		this.setName(surveyOption.getName());
+		this.setSurveyOptionRatings(surveyOption.getSurveyOptionRatings());
+
+	}
 
 	@Override
 	public boolean getUserVotedThisOption() {
@@ -64,17 +75,6 @@ public class SurveyOptionRemote extends SurveyOption implements BaseRemoteEntity
 
 	public void setVotes(int votes) {
 		this.votes = votes;
-	}
-
-	public SurveyOptionRemote(SurveyOption surveyOption) {
-
-		this.setSurvey(surveyOption.getSurvey());
-		this.setCreateDate(surveyOption.getCreateDate());
-		this.setModifiedDate(surveyOption.getModifiedDate());
-		this.setId(surveyOption.getId());
-		this.setName(surveyOption.getName());
-		this.setSurveyOptionRatings(surveyOption.getSurveyOptionRatings());
-
 	}
 
 }

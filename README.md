@@ -1,4 +1,4 @@
-# pac-vothing-core
+# PAC VoThing Core
 
 ## Setup
 - ...
@@ -9,20 +9,23 @@
 ## Testing
 
 # TODO
+- fix: voting after updating a survey
 - reimplementation of remote model level - how to improve handling of JSON entities for the frontend?
 -- how can in a good way a local entity enriched with some client metadata?
+- separate core, model, services and remote services in separate release units
 - consistency check of implemented methods and naming
 - check permissions before persistence actions
-- adding / editing of surveys
 - add exception handling
 - testing
-- create database create dump
 - move tests to volative database
-- create parent maven project
 - create more tests
+-- test every usecase which are relevant for the client
 - CI
 - cleanup
 - documentation
 
 # Resolved Tasks
 - send permissions to client
+- create database create dump
+- adding / editing of surveys
+- create parent maven project

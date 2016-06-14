@@ -50,7 +50,6 @@ public class SurveyOptionRatingRemoteServiceImpl implements SurveyOptionRatingRe
 
 		User userContext = vothing.getUser();
 		SurveyOption surveyOptionDB = surveyOptionService.getElement(surveyOptionId);
-		Survey survey = surveyOptionDB.getSurvey();
 		boolean hasVoted = false;
 		long surveyId = surveyOptionDB.getSurvey().getId();
 

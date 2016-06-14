@@ -7,7 +7,7 @@ import com.prodyna.pac.vothing.monitoring.VothingMonitoring;
 import java.util.Collection;
 
 @VothingMonitoring
-public interface SurveyOptionService extends BaseService<SurveyOption>{
+public interface SurveyOptionService extends BaseService<SurveyOption> {
 
 	Survey updateSurveyOptions(long surveyId, Collection<SurveyOption> surveyOptionList);
 }

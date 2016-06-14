@@ -9,9 +9,9 @@ import javax.enterprise.inject.spi.InjectionPoint;
 
 @ApplicationScoped
 public class LogProducer {
- 
-   @Produces
-   public Logger producer(InjectionPoint ip) {
-      return LoggerFactory.getLogger(ip.getMember().getDeclaringClass().getName());
-   }
+
+	@Produces
+	public Logger producer(InjectionPoint ip) {
+		return LoggerFactory.getLogger(ip.getMember().getDeclaringClass().getName());
+	}
 }

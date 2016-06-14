@@ -16,17 +16,17 @@ import java.util.List;
 public interface SecurityService {
 
 	String login(LoginCredentials loginCredentials);
-	
+
 	User getUserByToken(String token) throws ParseException, JOSEException, PrivateKeyException;
 
-	public boolean hasUserPermission(User user, PermissionEnum permissionEnum);
-	
-	public boolean hasUserPermission(User user, Permission permission);
-	
-	public boolean hasUserPermission(User user, String permissionKey);
+	boolean hasUserPermission(User user, PermissionEnum permissionEnum);
 
-	public List<String> getUserSurveyPermissions(User user, Survey survey);
+	boolean hasUserPermission(User user, Permission permission);
 
-	public boolean isUserAdmin(User user);
+	boolean hasUserPermission(User user, String permissionKey);
+
+	List<String> getUserSurveyPermissions(User user, Survey survey);
+
+	boolean isUserAdmin(User user);
 
 }

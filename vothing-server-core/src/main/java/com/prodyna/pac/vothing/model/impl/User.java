@@ -16,116 +16,114 @@ import java.util.Date;
 @Table(name = "vothing_user")
 public class User extends BaseModelImpl<User> implements BaseModel<User> {
 
-    /**
-     * Generated serial version UID.
-     */
-    private static final long serialVersionUID = 3424622331216625L;
+	/**
+	 * Generated serial version UID.
+	 */
+	private static final long serialVersionUID = 3424622331216625L;
 
-    @Column
-    @NotNull
-    private String foreName;
+	@Column
+	@NotNull
+	private String foreName;
 
-    @Column
-    @NotNull
-    private String email;
+	@Column
+	@NotNull
+	private String email;
 
-    @JsonIgnore
-    @Column
-    @NotNull
-    private String password;
+	@JsonIgnore
+	@Column
+	@NotNull
+	private String password;
 
-    @Column
-    private Date lastLogin;
+	@Column
+	private Date lastLogin;
 
-    //	@JsonBackReference
-    @JsonIgnore
-    @OneToMany(mappedBy = "user", cascade = {})
-    private Collection<Survey> surveys = new ArrayList<Survey>();
+	@JsonIgnore
+	@OneToMany(mappedBy = "user", cascade = {})
+	private Collection<Survey> surveys = new ArrayList<>();
 
-    @JsonIgnore
-    @ManyToMany(cascade = {})
-    @JoinTable(name = "vothing_userrole", joinColumns = @JoinColumn(name = "userId", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "roleId", referencedColumnName = "id"))
-    private Collection<Role> roles = new ArrayList<Role>();
+	@JsonIgnore
+	@ManyToMany(cascade = {})
+	@JoinTable(name = "vothing_userrole", joinColumns = @JoinColumn(name = "userId", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "roleId", referencedColumnName = "id"))
+	private Collection<Role> roles = new ArrayList<>();
 
-    @JsonIgnore
-//	@JsonManagedReference
-    @OneToMany(mappedBy = "user", cascade = {})
-    private Collection<SurveyOptionRating> votes = new ArrayList<SurveyOptionRating>();
+	@JsonIgnore
+	@OneToMany(mappedBy = "user", cascade = {})
+	private Collection<SurveyOptionRating> votes = new ArrayList<>();
 
-    public String getForeName() {
-        return foreName;
-    }
+	/**
+	 * Default constructor.
+	 */
+	public User() {
+	}
 
-    public void setForeName(String foreName) {
-        this.foreName = foreName;
-    }
+	public String getForeName() {
+		return foreName;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public void setForeName(String foreName) {
+		this.foreName = foreName;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    public String getPassword() {
-        return password;
-    }
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+	public String getPassword() {
+		return password;
+	}
 
-    public Date getLastLogin() {
-        return lastLogin;
-    }
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-    public void setLastLogin(Date lastLogin) {
-        this.lastLogin = lastLogin;
-    }
+	public Date getLastLogin() {
+		return lastLogin;
+	}
 
-    public Collection<Survey> getSurveys() {
-        return surveys;
-    }
+	public void setLastLogin(Date lastLogin) {
+		this.lastLogin = lastLogin;
+	}
 
-    @JsonIgnore
-    public void setSurveys(Collection<Survey> surveys) {
-        this.surveys = surveys;
-    }
+	public Collection<Survey> getSurveys() {
+		return surveys;
+	}
 
-    public Collection<Role> getRoles() {
-        return roles;
-    }
+	@JsonIgnore
+	public void setSurveys(Collection<Survey> surveys) {
+		this.surveys = surveys;
+	}
 
-    @JsonIgnore
-    public void setRoles(Collection<Role> roles) {
-        this.roles = roles;
-    }
+	public Collection<Role> getRoles() {
+		return roles;
+	}
 
-    public Collection<SurveyOptionRating> getSurveyOptionRatings() {
-        return votes;
-    }
+	@JsonIgnore
+	public void setRoles(Collection<Role> roles) {
+		this.roles = roles;
+	}
 
-    @JsonIgnore
-    public void setSurveyOptionRatings(Collection<SurveyOptionRating> votes) {
-        this.votes = votes;
-    }
+	public Collection<SurveyOptionRating> getSurveyOptionRatings() {
+		return votes;
+	}
 
-    /**
-     * Default constructor.
-     */
-    public User() {
-    }
+	@JsonIgnore
+	public void setSurveyOptionRatings(Collection<SurveyOptionRating> votes) {
+		this.votes = votes;
+	}
 
-    @JsonIgnore
-    public String toFrontendUserJSONObjectString() {
-        JsonObjectBuilder userAttributes = Json.createObjectBuilder();
-        userAttributes.add("email", this.getEmail());
-        userAttributes.add("forename", this.getForeName());
-        userAttributes.add("lastname", this.getName());
-        userAttributes.add("userid", this.getId());
-        JsonObjectBuilder user = Json.createObjectBuilder();
-        user.add("user", userAttributes);
-        return user.build().toString();
-    }
+	@JsonIgnore
+	public String toFrontendUserJSONObjectString() {
+		JsonObjectBuilder userAttributes = Json.createObjectBuilder();
+		userAttributes.add("email", this.getEmail());
+		userAttributes.add("forename", this.getForeName());
+		userAttributes.add("lastname", this.getName());
+		userAttributes.add("userid", this.getId());
+		JsonObjectBuilder user = Json.createObjectBuilder();
+		user.add("user", userAttributes);
+		return user.build().toString();
+	}
 }

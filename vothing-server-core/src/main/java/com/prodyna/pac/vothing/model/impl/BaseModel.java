@@ -10,7 +10,7 @@ public interface BaseModel<T> extends Serializable {
 	void setObjectKey(long objectKey);
 
 	<T> long getId();
-	
+
 	<T> void setId(long id);
 
 	<T> String getName();

@@ -17,12 +17,11 @@ import java.util.Random;
 @MappedSuperclass
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "objectKey")
 @JsonIgnoreProperties(ignoreUnknown = true)
-//@JsonDeserialize(using = RemoteEntityDeserializer.class)
 public abstract class BaseModelImpl<T> implements BaseModel<T> {
 
-    @Inject
-    @Transient
-    private Vothing vothing;
+	@Inject
+	@Transient
+	private Vothing vothing;
 
 	@Id
 	@GeneratedValue
@@ -54,7 +53,12 @@ public abstract class BaseModelImpl<T> implements BaseModel<T> {
 	public long getId() {
 		return id;
 	}
-	
+
+	@Override
+	public void setId(long id) {
+		this.id = id;
+	}
+
 	@Override
 	public String getName() {
 		return name;
@@ -63,11 +67,6 @@ public abstract class BaseModelImpl<T> implements BaseModel<T> {
 	@Override
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	@Override
-	public void setId(long id) {
-		this.id = id;
 	}
 
 	@Override
@@ -117,9 +116,6 @@ public abstract class BaseModelImpl<T> implements BaseModel<T> {
 			return false;
 		}
 		final BaseModel other = (BaseModel) obj;
-		if(this.getId() == other.getId()) {
-			return true;
-		}
-		return false;
+		return this.getId() == other.getId();
 	}
 }

@@ -10,21 +10,21 @@ import javax.persistence.EntityNotFoundException;
 
 public interface Vothing {
 
-	public User getUser() throws EntityNotFoundException;
+	User getUser() throws EntityNotFoundException;
 
-	public void setUser(User user);
+	void setUser(User user);
 
-	public EntityManager getEntityManager();
+	EntityManager getEntityManager();
 
-	public void setEntityManager(EntityManager entityManager);
+	void setEntityManager(EntityManager entityManager);
 
-	public UserService getUserService();
+	UserService getUserService();
 
-	public void setUserService(UserService userService);
-
-	void setSecurityService(SecurityService securityService);
+	void setUserService(UserService userService);
 
 	SecurityService getSecurityService();
+
+	void setSecurityService(SecurityService securityService);
 
 	PermissionService getPermissionService();
 

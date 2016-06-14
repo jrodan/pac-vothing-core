@@ -7,13 +7,13 @@ import javax.persistence.PersistenceContext;
 
 @ApplicationScoped
 public class EntityManagerProducer {
-	
+
 	@PersistenceContext(unitName = "vothingPU")
 	private EntityManager entityManager;
-	
+
 	@Produces
 	public EntityManager getEntityManager() {
 		return entityManager;
 	}
-	
+
 }

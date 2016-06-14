@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class SurveyRemote extends Survey implements BaseRemoteEntity {
 
-	private List<String> usersPermissions = new ArrayList<String>();
+	private List<String> usersPermissions = new ArrayList<>();
 
 	private boolean isNew = false;
 
@@ -20,12 +20,12 @@ public class SurveyRemote extends Survey implements BaseRemoteEntity {
 
 	private List<SurveyOptionRemote> surveyOptionRemotes;
 
-	public void setSurveyOptionsRemote(List<SurveyOptionRemote> surveyOptionRemotes) {
-		this.surveyOptionRemotes = surveyOptionRemotes;
-	}
-
 	public List<SurveyOptionRemote> getSurveyOptionsRemote() {
 		return this.surveyOptionRemotes;
+	}
+
+	public void setSurveyOptionsRemote(List<SurveyOptionRemote> surveyOptionRemotes) {
+		this.surveyOptionRemotes = surveyOptionRemotes;
 	}
 
 	@Override
