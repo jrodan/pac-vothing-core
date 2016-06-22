@@ -14,8 +14,11 @@
     </properties>
 
     <modules>
-        <module>vothing-server-core</module>
+        <module>vothing-api</module>
+        <module>vothing-core</module>
+        <module>vothing-remote</module>
         <module>vothing-tests</module>
+        <module>vothing-dist</module>
     </modules>
 
     <build>
@@ -49,6 +52,7 @@
                         <attachClasses>true</attachClasses>
                     </configuration>
                 </plugin>
+
             </plugins>
         </pluginManagement>
 

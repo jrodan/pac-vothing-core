@@ -1,9 +1,9 @@
 package com.prodyna.pac.vothing.test;
 
-import com.prodyna.pac.vothing.model.remote.SurveyRemote;
-import com.prodyna.pac.vothing.security.LoginCredentials;
-import com.prodyna.pac.vothing.service.remote.SecurityRemoteService;
-import com.prodyna.pac.vothing.service.remote.SurveyRemoteService;
+import com.prodyna.pac.vothing.api.model.LoginCredentials;
+import com.prodyna.pac.vothing.remote.model.SurveyRemote;
+import com.prodyna.pac.vothing.remote.service.SecurityRemoteService;
+import com.prodyna.pac.vothing.remote.service.SurveyRemoteService;
 import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.junit.InSequence;

@@ -1,6 +1,6 @@
 package com.prodyna.pac.vothing.test;
 
-import com.prodyna.pac.vothing.service.SecurityService;
+import com.prodyna.pac.vothing.api.service.SecurityService;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;

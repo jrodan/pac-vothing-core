@@ -15,11 +15,23 @@
     <dependencies>
         <dependency>
             <groupId>com.prodyna.pac.vothing</groupId>
+            <artifactId>vothing-api</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>com.prodyna.pac.vothing</groupId>
             <artifactId>vothing-core</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <type>jar</type>
-            <classifier>classes</classifier>
-            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.prodyna.pac.vothing</groupId>
+            <artifactId>vothing-remote</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <type>jar</type>
+            <!--<classifier>classes</classifier>-->
+            <!--<scope>test</scope>-->
         </dependency>
 
         <!--<dependency>-->
@@ -45,7 +57,7 @@
         </dependency>
 
         <!-- Arquillian Container for WildFly -->
-        <!-- <dependency> <groupId>org.wildfly</groupId> <artifactId>wildfly-arquillian-container-remote</artifactId>
+        <!-- <dependency> <groupId>org.wildfly</groupId> <artifactId>wildfly-arquillian-container-service</artifactId>
             <version>8.2.1.Final</version> <scope>test</scope> </dependency> -->
         <!--<dependency>-->
         <!--<groupId>org.wildfly.arquillian</groupId>-->

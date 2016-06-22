@@ -9,7 +9,7 @@
 		</configuration>
 	</container>
 
-	<!-- <container qualifier="widlfly-remote">
+	<!-- <container qualifier="widlfly-service">
 		<configuration>
 			<property name="managementAddress">macci</property>
 			<property name="managementPort">9990</property>
