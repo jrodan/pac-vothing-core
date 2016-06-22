@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
-@Entity(name = "Survey")
+@Entity(name = "Permission")
 @XmlRootElement
 @Table(name = "vothing_permission")
 public class PermissionImpl extends Permission {

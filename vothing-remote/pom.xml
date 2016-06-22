@@ -139,6 +139,18 @@
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.6</version>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                    <archiveClasses>true</archiveClasses>
+                    <attachClasses>true</attachClasses>
+                    <warName>vothing-remote</warName>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>2.6</version>
                 <executions>
@@ -155,7 +167,7 @@
                 <artifactId>wildfly-maven-plugin</artifactId>
                 <version>1.1.0.Alpha7</version>
                 <configuration>
-                    <skip>${skip.deployment}</skip>
+                    <!--<skip>${skip.deployment}</skip>-->
                     <hostname>localhost</hostname>
                     <port>9990</port>
                     <filename>vothing-remote.war</filename>
@@ -182,6 +194,16 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.5.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
             </plugin>
 
         </plugins>

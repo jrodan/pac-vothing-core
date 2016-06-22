@@ -12,7 +12,6 @@ import javax.persistence.Query;
 import java.lang.reflect.ParameterizedType;
 import java.util.Date;
 import java.util.List;
-import java.util.ServiceLoader;
 
 public class BaseServiceImpl<T extends BaseModel> implements BaseService<T> {
 
@@ -29,13 +28,12 @@ public class BaseServiceImpl<T extends BaseModel> implements BaseService<T> {
 
 	@Override
 	public List<T> getElements(EntityOrder entityOrder) {
-		Class<T> persistentClass = (Class<T>)
-				((ParameterizedType) getClass().getGenericSuperclass())
-						.getActualTypeArguments()[0];
+
+		Class<T> persistentClass = (Class<T>) getEntityImplClass();
 
 		String orderString = entityOrder.getOrder();
 
-		Query query = entityManager.createQuery("SELECT e FROM " + persistentClass.getSimpleName() + " e order by " + orderString);
+		Query query = entityManager.createQuery("SELECT e FROM " + getEntityInterfaceClass().getSimpleName() + " e order by " + orderString);
 		List<T> entities = (List<T>) query.getResultList();
 
 		return entities;
@@ -44,28 +42,10 @@ public class BaseServiceImpl<T extends BaseModel> implements BaseService<T> {
 	@Override
 	public <T> T getElement(long id) {
 
-		Class<T> persistentInterface = (Class<T>)
-				((ParameterizedType) getClass().getGenericSuperclass())
-						.getActualTypeArguments()[0];
-		ServiceLoader<T> loader = ServiceLoader.load(persistentInterface);
-		for (T implClass : loader) {
-			System.out.println(implClass.getClass().getSimpleName()); // prints Dog, Cat
-		}
+		Class<T> persistentClass = (Class<T>) getEntityImplClass();
+		T element = null;
 
-		System.out.println(getClass());
-		System.out.println((Class<T>)
-				((ParameterizedType) getClass().getGenericSuperclass())
-						.getActualTypeArguments()[0]);
-
-		Class<T> persistentClass = (Class<T>)
-				((ParameterizedType) getClass().getGenericSuperclass())
-						.getActualTypeArguments()[0];
-
-//		Class<T> persistentClass = (Class<T>)
-//				((ParameterizedType) getClass().getGenericSuperclass())
-//						.getActualTypeArguments()[0];
-
-		T element = entityManager.find(
+		element = entityManager.find(
 				persistentClass, id);
 		if (element == null) {
 			throw new EntityNotFoundException(
@@ -74,6 +54,28 @@ public class BaseServiceImpl<T extends BaseModel> implements BaseService<T> {
 		}
 
 		return element;
+	}
+
+	private Class<T> getEntityInterfaceClass() {
+		Class<T> persistentInterface = (Class<T>)
+				((ParameterizedType) getClass().getGenericSuperclass())
+						.getActualTypeArguments()[0];
+		return persistentInterface;
+	}
+
+	private Class<T> getEntityImplClass() {
+		Class<T> persistentClass = null;
+		Class<T> persistentInterface = getEntityInterfaceClass();
+
+		String implClassName = "com.prodyna.pac.vothing.core.model." + persistentInterface.getSimpleName() + "Impl";
+
+		try {
+			persistentClass = (Class<T>) Class.forName(implClassName);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace(); // TODO
+		}
+
+		return persistentClass;
 	}
 
 	@Override
