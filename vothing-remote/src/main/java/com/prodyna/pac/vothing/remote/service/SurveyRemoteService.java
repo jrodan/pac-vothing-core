@@ -11,13 +11,13 @@ import java.util.List;
  */
 public interface SurveyRemoteService {
 
-	SurveyRemote createSurvey(Survey survey);
+	SurveyRemote createSurvey(SurveyRemote survey);
 
 	List<SurveyRemote> getSurveys(@PathParam("order") String order);
 
 	List<SurveyRemote> getSurveys();
 
-	SurveyRemote updateSurvey(Survey survey);
+	SurveyRemote updateSurvey(SurveyRemote survey);
 
 	SurveyRemote getSurvey(@PathParam("surveyId") long surveyId);
 

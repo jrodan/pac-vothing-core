@@ -21,6 +21,43 @@
         <module>vothing-dist</module>
     </modules>
 
+    <profiles>
+        <profile>
+            <id>build-and-deploy</id>
+            <modules>
+                <module>vothing-api</module>
+                <module>vothing-core</module>
+                <module>vothing-remote</module>
+                <module>vothing-dist</module>
+            </modules>
+            <properties>
+                <skip.deployment>false</skip.deployment> <!-- default -->
+            </properties>
+        </profile>
+        <profile>
+            <id>build</id>
+            <modules>
+                <module>vothing-api</module>
+                <module>vothing-core</module>
+                <module>vothing-remote</module>
+                <module>vothing-dist</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>build-with-remote-test</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <modules>
+                <module>vothing-api</module>
+                <module>vothing-core</module>
+                <module>vothing-remote</module>
+                <module>vothing-tests</module>
+                <module>vothing-dist</module>
+            </modules>
+        </profile>
+    </profiles>
+
     <build>
         <pluginManagement>
             <plugins>

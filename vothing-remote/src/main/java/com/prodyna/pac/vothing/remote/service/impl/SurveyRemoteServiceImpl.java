@@ -8,7 +8,8 @@ import com.prodyna.pac.vothing.api.model.Survey;
 import com.prodyna.pac.vothing.api.service.SurveyOptionService;
 import com.prodyna.pac.vothing.api.service.SurveyService;
 import com.prodyna.pac.vothing.core.annotion.PermissionAnn;
-import com.prodyna.pac.vothing.remote.model.ObjectConverterHelper;
+import com.prodyna.pac.vothing.remote.helper.SurveyConverter;
+import com.prodyna.pac.vothing.remote.helper.SurveyOptionConverter;
 import com.prodyna.pac.vothing.remote.model.SurveyRemote;
 import com.prodyna.pac.vothing.remote.service.SurveyRemoteService;
 
@@ -37,18 +38,23 @@ public class SurveyRemoteServiceImpl implements SurveyRemoteService {
 	private Vothing vothing;
 
 	@Inject
-	private ObjectConverterHelper objectConverterHelper;
+	private SurveyConverter surveyConverter;
+
+	@Inject
+	private SurveyOptionConverter surveyOptionConverter;
 
 	@Override
 	@POST
 	@Path("/add")
 	@PermissionAnn(permission = PermissionEnum.SURVEY_ADD)
-	public SurveyRemote createSurvey(Survey survey) {
-		survey.setUser(vothing.getUser());
-		Survey surveyDB = surveyService.addElement(survey);
-		surveyDB = surveyOptionService.updateSurveyOptions(surveyDB.getId(), survey.getSurveyOptions());
-		SurveyRemote surveyRemote = getRemoteSurveyFromSurvey(surveyDB);
-		return surveyRemote;
+	public SurveyRemote createSurvey(SurveyRemote surveyRemote) {
+
+		Survey surveyTemp = surveyConverter.toSurvey(surveyRemote);
+		surveyTemp.setUser(vothing.getUser());
+		Survey surveyDB = surveyService.addElement(surveyTemp);
+		surveyDB = surveyOptionService.updateSurveyOptions(surveyDB.getId(), surveyTemp.getSurveyOptions());
+		SurveyRemote surveyRemoteResponse = getRemoteSurveyFromSurvey(surveyDB);
+		return surveyRemoteResponse;
 	}
 
 	@Override
@@ -81,27 +87,27 @@ public class SurveyRemoteServiceImpl implements SurveyRemoteService {
 	@POST
 	@Path("/update")
 	@PermissionAnn(permission = PermissionEnum.SURVEY_UPDATE)
-	public SurveyRemote updateSurvey(Survey survey) {
-		SurveyRemote surveyRemote;
+	public SurveyRemote updateSurvey(SurveyRemote surveyRemote) {
 
 		// get existing element from db
-		Survey surveyDB = surveyService.getElement(survey.getId());
+		Survey surveyDB = surveyService.getElement(surveyRemote.getId());
 
 		// copy attributes
-		surveyDB.setName(survey.getName());
+		surveyDB.setName(surveyRemote.getName());
 		surveyDB.setModifiedDate(new Date());
 		surveyDB.setUser(vothing.getUser());
-		surveyDB.setSurveyOptions(survey.getSurveyOptions());
+		surveyDB.setSurveyOptions(surveyOptionConverter
+				.toSurveyOptions(surveyRemote.getSurveyOptionsRemote()));
 
 		// update surveyOptions and survey
-		Survey surveyDB2 = surveyOptionService.updateSurveyOptions(surveyDB.getId(), survey.getSurveyOptions());
+		Survey surveyDB2 = surveyOptionService.updateSurveyOptions(surveyDB.getId(), surveyDB.getSurveyOptions());
 
 		surveyDB.setSurveyOptions(surveyDB2.getSurveyOptions());
 		surveyService.updateElement(surveyDB);
 
-		surveyRemote = getRemoteSurveyFromSurvey(surveyDB);
+		SurveyRemote surveyRemoteResponse = getRemoteSurveyFromSurvey(surveyDB);
 
-		return surveyRemote;
+		return surveyRemoteResponse;
 	}
 
 	@Override
@@ -121,7 +127,7 @@ public class SurveyRemoteServiceImpl implements SurveyRemoteService {
 	}
 
 	private SurveyRemote getRemoteSurveyFromSurvey(Survey survey) {
-		SurveyRemote surveyRemote = objectConverterHelper.toSurveyRemote(survey.getId());
+		SurveyRemote surveyRemote = surveyConverter.toSurveyRemote(survey.getId());
 		return surveyRemote;
 	}
 

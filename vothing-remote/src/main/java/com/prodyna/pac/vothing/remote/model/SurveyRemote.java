@@ -1,77 +1,51 @@
 package com.prodyna.pac.vothing.remote.model;
 
-import com.prodyna.pac.vothing.core.model.SurveyImpl;
+import com.prodyna.pac.vothing.api.model.User;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 
 /**
  * Created by jrodan on 13/05/16.
  */
-public class SurveyRemote extends SurveyImpl implements BaseRemoteEntity {
+public class SurveyRemote extends BaseRemoteEntityImpl {
 
-	private List<String> usersPermissions = new ArrayList<>();
+	private User user;
 
-	private boolean isNew = false;
+	private Collection<SurveyOptionRemote> surveyOptions;
 
-	private boolean userVoted = false;
+	private boolean hasUserVoted;
 
-	private int votes = 0;
+	private long votes;
 
-	private List<SurveyOptionRemote> surveyOptionRemotes;
-
-	public List<SurveyOptionRemote> getSurveyOptionsRemote() {
-		return this.surveyOptionRemotes;
+	public boolean hasUserVoted() {
+		return hasUserVoted;
 	}
 
-	public void setSurveyOptionsRemote(List<SurveyOptionRemote> surveyOptionRemotes) {
-		this.surveyOptionRemotes = surveyOptionRemotes;
+	public void setUserVoted(boolean hasUserVoted) {
+		this.hasUserVoted = hasUserVoted;
 	}
 
-	@Override
-	public boolean getUserVotedThisOption() {
-		return false;
-	}
-
-	@Override
-	public void setUserVotedThisOption(boolean userVotedThisOption) {
-
-	}
-
-	@Override
-	public List<String> getUsersPermissions() {
-		return usersPermissions;
-	}
-
-	@Override
-	public void setUsersPermissions(List<String> usersPermissions) {
-		this.usersPermissions = usersPermissions;
-	}
-
-	@Override
-	public boolean isNew() {
-		return isNew;
-	}
-
-	@Override
-	public void setIsNew(boolean isNew) {
-		this.isNew = isNew;
-	}
-
-	public boolean isUserVoted() {
-		return userVoted;
-	}
-
-	public void setUserVoted(boolean userVoted) {
-		this.userVoted = userVoted;
-	}
-
-	public int getVotes() {
+	public long getVotes() {
 		return votes;
 	}
 
-	public void setVotes(int votes) {
+	public void setVotes(long votes) {
 		this.votes = votes;
 	}
 
+	public Collection<SurveyOptionRemote> getSurveyOptionsRemote() {
+		return surveyOptions;
+	}
+
+	public void setSurveyOptionsRemote(Collection<SurveyOptionRemote> surveyOptions) {
+		this.surveyOptions = surveyOptions;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 }
