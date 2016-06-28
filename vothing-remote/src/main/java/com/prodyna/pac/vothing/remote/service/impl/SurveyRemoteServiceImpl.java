@@ -52,7 +52,8 @@ public class SurveyRemoteServiceImpl implements SurveyRemoteService {
 		Survey surveyTemp = surveyConverter.toSurvey(surveyRemote);
 		surveyTemp.setUser(vothing.getUser());
 		Survey surveyDB = surveyService.addElement(surveyTemp);
-		surveyDB = surveyOptionService.updateSurveyOptions(surveyDB.getId(), surveyTemp.getSurveyOptions());
+		surveyDB = surveyOptionService
+				.updateSurveyOptions(surveyDB.getId(), surveyTemp.getSurveyOptions());
 		SurveyRemote surveyRemoteResponse = getRemoteSurveyFromSurvey(surveyDB);
 		return surveyRemoteResponse;
 	}
@@ -100,7 +101,8 @@ public class SurveyRemoteServiceImpl implements SurveyRemoteService {
 				.toSurveyOptions(surveyRemote.getSurveyOptionsRemote()));
 
 		// update surveyOptions and survey
-		Survey surveyDB2 = surveyOptionService.updateSurveyOptions(surveyDB.getId(), surveyDB.getSurveyOptions());
+		Survey surveyDB2 = surveyOptionService
+				.updateSurveyOptions(surveyDB.getId(), surveyDB.getSurveyOptions());
 
 		surveyDB.setSurveyOptions(surveyDB2.getSurveyOptions());
 		surveyService.updateElement(surveyDB);

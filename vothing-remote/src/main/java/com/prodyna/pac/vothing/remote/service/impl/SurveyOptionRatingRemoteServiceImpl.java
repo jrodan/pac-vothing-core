@@ -74,7 +74,8 @@ public class SurveyOptionRatingRemoteServiceImpl implements SurveyOptionRatingRe
 		User userContext = vothing.getUser();
 		boolean hasUserVoted = false;
 		for (SurveyOption surveyOptionLocal : survey.getSurveyOptions()) {
-			for (SurveyOptionRating surveyOptionRating : surveyOptionLocal.getSurveyOptionRatings()) {
+			for (SurveyOptionRating surveyOptionRating : surveyOptionLocal
+					.getSurveyOptionRatings()) {
 				if (surveyOptionRating.getUser().getId() == userContext.getId()) {
 					hasUserVoted = true;
 					break;

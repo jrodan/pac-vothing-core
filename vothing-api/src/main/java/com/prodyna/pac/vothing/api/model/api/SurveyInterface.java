@@ -8,7 +8,7 @@ import java.util.Collection;
 /**
  * Created by jrodan on 21/06/16.
  */
-public interface SurveyInterface{
+public interface SurveyInterface {
 	public Collection<SurveyOption> getSurveyOptions();
 
 	public void setSurveyOptions(Collection<SurveyOption> surveyOptions);

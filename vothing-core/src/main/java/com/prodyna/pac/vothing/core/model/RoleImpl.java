@@ -16,7 +16,9 @@ public class RoleImpl extends Role {
 	private static final long serialVersionUID = -4959572841738825267L;
 
 	@ManyToMany(cascade = {}, targetEntity = PermissionImpl.class)
-	@JoinTable(name = "vothing_rolepermission", joinColumns = @JoinColumn(name = "roleId", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "permissionId", referencedColumnName = "id"))
+	@JoinTable(name = "vothing_rolepermission",
+			joinColumns = @JoinColumn(name = "roleId", referencedColumnName = "id"),
+			inverseJoinColumns = @JoinColumn(name = "permissionId", referencedColumnName = "id"))
 	private Collection<Permission> permissions = new ArrayList<>();
 
 	public RoleImpl() {

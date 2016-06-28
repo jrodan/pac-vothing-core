@@ -8,5 +8,6 @@ import javax.persistence.MappedSuperclass;
  * Created by jrodan on 21/06/16.
  */
 @MappedSuperclass
-public abstract class SurveyOption extends BaseModelImpl<SurveyOption> implements SurveyOptionInterface {
+public abstract class SurveyOption extends BaseModelImpl<SurveyOption>
+		implements SurveyOptionInterface {
 }

@@ -1,6 +1,5 @@
 package com.prodyna.pac.vothing.core.service;
 
-import com.prodyna.pac.vothing.api.annotion.VothingMonitoringAnn;
 import com.prodyna.pac.vothing.api.model.Permission;
 import com.prodyna.pac.vothing.api.model.Role;
 import com.prodyna.pac.vothing.api.service.RoleService;
@@ -12,7 +11,6 @@ import javax.inject.Inject;
 import java.util.Collection;
 
 @Stateless
-@VothingMonitoringAnn
 public class RoleServiceImpl extends BaseServiceImpl<Role> implements RoleService {
 
 	@Inject
@@ -20,7 +18,7 @@ public class RoleServiceImpl extends BaseServiceImpl<Role> implements RoleServic
 
 	@Override
 	public Role createRole(String name,
-	                       Collection<Permission> permissions) {
+			Collection<Permission> permissions) {
 
 		Role role = new RoleImpl();
 		role.setName(name);

@@ -17,7 +17,7 @@ import java.util.List;
  * Created by jrodan on 13/05/16.
  */
 @RequestScoped
-public class SurveyConverter  {
+public class SurveyConverter {
 
 	@Inject
 	private SurveyService surveyService;
@@ -39,7 +39,8 @@ public class SurveyConverter  {
 		Survey survey = new SurveyImpl();
 
 		survey.setId(surveyRemote.getId());
-		survey.setSurveyOptions(surveyOptionConverter.toSurveyOptions(surveyRemote.getSurveyOptionsRemote()));
+		survey.setSurveyOptions(
+				surveyOptionConverter.toSurveyOptions(surveyRemote.getSurveyOptionsRemote()));
 		survey.setName(surveyRemote.getName());
 		survey.setUser(surveyRemote.getUser());
 		survey.setCreateDate(surveyRemote.getCreateDate());
@@ -65,9 +66,9 @@ public class SurveyConverter  {
 		boolean hasUserVoted = false;
 		long votes = 0;
 
-		for(SurveyOptionRemote surveyOptionRemote : surveyRemote.getSurveyOptionsRemote()) {
+		for (SurveyOptionRemote surveyOptionRemote : surveyRemote.getSurveyOptionsRemote()) {
 			votes += surveyOptionRemote.getVotes();
-			if(!hasUserVoted) {
+			if (!hasUserVoted) {
 				hasUserVoted = surveyOptionRemote.hasUserVoted();
 			}
 		}

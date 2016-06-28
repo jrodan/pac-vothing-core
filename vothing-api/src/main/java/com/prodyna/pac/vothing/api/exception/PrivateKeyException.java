@@ -1,4 +1,4 @@
-package com.prodyna.pac.vothing.core.exception;
+package com.prodyna.pac.vothing.api.exception;
 
 /**
  * Created by jrodan on 13/05/16.

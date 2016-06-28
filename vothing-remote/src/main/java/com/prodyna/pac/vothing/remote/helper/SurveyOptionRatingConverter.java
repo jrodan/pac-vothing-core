@@ -20,17 +20,19 @@ public class SurveyOptionRatingConverter {
 	@Inject
 	private SurveyOptionConverter surveyOptionConverter;
 
-	public Collection<SurveyOptionRating> toSurveyOptionRating(SurveyOption surveyOption, Collection<SurveyOptionRatingRemote> surveyOptionRatingRemotes) {
+	public Collection<SurveyOptionRating> toSurveyOptionRating(SurveyOption surveyOption,
+			Collection<SurveyOptionRatingRemote> surveyOptionRatingRemotes) {
 		Collection<SurveyOptionRating> surveyOptionRatings = new ArrayList<SurveyOptionRating>();
 
-		for(SurveyOptionRatingRemote surveyOptionRatingRemote : surveyOptionRatingRemotes) {
+		for (SurveyOptionRatingRemote surveyOptionRatingRemote : surveyOptionRatingRemotes) {
 			surveyOptionRatings.add(toSurveyOptionRating(surveyOption, surveyOptionRatingRemote));
 		}
 
 		return surveyOptionRatings;
 	}
 
-	public SurveyOptionRating toSurveyOptionRating(SurveyOption surveyOption, SurveyOptionRatingRemote surveyOptionRatingRemote) {
+	public SurveyOptionRating toSurveyOptionRating(SurveyOption surveyOption,
+			SurveyOptionRatingRemote surveyOptionRatingRemote) {
 		SurveyOptionRating surveyOptionRating = new SurveyOptionRatingImpl();
 
 		surveyOptionRating.setName(surveyOptionRatingRemote.getName());
@@ -44,17 +46,22 @@ public class SurveyOptionRatingConverter {
 		return surveyOptionRating;
 	}
 
-	public Collection<SurveyOptionRatingRemote> toSurveyOptionRatingRemote(SurveyOptionRemote surveyOptionRemote, Collection<SurveyOptionRating> surveyOptionRatings) {
-		Collection<SurveyOptionRatingRemote> surveyOptionRatingsRemote = new ArrayList<SurveyOptionRatingRemote>();
+	public Collection<SurveyOptionRatingRemote> toSurveyOptionRatingRemote(
+			SurveyOptionRemote surveyOptionRemote,
+			Collection<SurveyOptionRating> surveyOptionRatings) {
+		Collection<SurveyOptionRatingRemote> surveyOptionRatingsRemote =
+				new ArrayList<SurveyOptionRatingRemote>();
 
-		for(SurveyOptionRating surveyOptionRating : surveyOptionRatings) {
-			surveyOptionRatingsRemote.add(toSurveyOptionRatingRemote(surveyOptionRemote, surveyOptionRating));
+		for (SurveyOptionRating surveyOptionRating : surveyOptionRatings) {
+			surveyOptionRatingsRemote
+					.add(toSurveyOptionRatingRemote(surveyOptionRemote, surveyOptionRating));
 		}
 
 		return surveyOptionRatingsRemote;
 	}
 
-	public SurveyOptionRatingRemote toSurveyOptionRatingRemote(SurveyOptionRemote surveyOptionRmote, SurveyOptionRating surveyOptionRating) {
+	public SurveyOptionRatingRemote toSurveyOptionRatingRemote(SurveyOptionRemote surveyOptionRmote,
+			SurveyOptionRating surveyOptionRating) {
 		SurveyOptionRatingRemote surveyOptionRatingRemote = new SurveyOptionRatingRemote();
 
 		surveyOptionRatingRemote.setName(surveyOptionRatingRemote.getName());
@@ -67,7 +74,6 @@ public class SurveyOptionRatingConverter {
 
 		return surveyOptionRatingRemote;
 	}
-
 
 
 }

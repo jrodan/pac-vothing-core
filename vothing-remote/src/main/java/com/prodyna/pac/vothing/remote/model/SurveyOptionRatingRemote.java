@@ -5,7 +5,7 @@ import com.prodyna.pac.vothing.api.model.User;
 /**
  * Created by jrodan on 13/05/16.
  */
-public class SurveyOptionRatingRemote extends BaseRemoteEntityImpl  {
+public class SurveyOptionRatingRemote extends BaseRemoteEntityImpl {
 
 	private SurveyOptionRemote surveyOption;
 

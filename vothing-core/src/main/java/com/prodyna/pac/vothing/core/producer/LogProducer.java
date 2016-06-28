@@ -1,4 +1,4 @@
-package com.prodyna.pac.vothing.core.helper;
+package com.prodyna.pac.vothing.core.producer;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

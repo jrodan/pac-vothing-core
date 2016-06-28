@@ -1,6 +1,5 @@
 package com.prodyna.pac.vothing.core.service;
 
-import com.prodyna.pac.vothing.api.annotion.VothingMonitoringAnn;
 import com.prodyna.pac.vothing.api.model.User;
 import com.prodyna.pac.vothing.api.service.UserService;
 import org.slf4j.Logger;
@@ -11,7 +10,6 @@ import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 @Stateless
-@VothingMonitoringAnn
 public class UserServiceImpl extends BaseServiceImpl<User> implements UserService {
 
 	@Inject

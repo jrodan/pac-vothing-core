@@ -1,12 +1,11 @@
-package com.prodyna.pac.vothing.core.security;
+package com.prodyna.pac.vothing.core.filter;
 
 import com.nimbusds.jose.JOSEException;
 import com.prodyna.pac.vothing.api.Vothing;
-import com.prodyna.pac.vothing.api.annotion.VothingMonitoringAnn;
 import com.prodyna.pac.vothing.api.constants.VothingConstants;
+import com.prodyna.pac.vothing.api.exception.PrivateKeyException;
 import com.prodyna.pac.vothing.api.model.User;
 import com.prodyna.pac.vothing.api.service.SecurityService;
-import com.prodyna.pac.vothing.core.exception.PrivateKeyException;
 
 import javax.annotation.Priority;
 import javax.inject.Inject;
@@ -24,7 +23,6 @@ import java.text.ParseException;
 @Priority(2)
 @PreMatching
 @Path("/restricted/*")
-@VothingMonitoringAnn
 public class VothingSecurityFilter implements ContainerRequestFilter, VothingConstants {
 
 	@Context
@@ -47,8 +45,8 @@ public class VothingSecurityFilter implements ContainerRequestFilter, VothingCon
 		}
 
 		/*
-		 * check if login is requested. This will not be handled in the security
-		 * filter. The security filter only checks of a already signed in login
+		 * check if login is requested. This will not be handled in the interceptor
+		 * com.prodyna.pac.vothing.core.filter. The interceptor com.prodyna.pac.vothing.core.filter only checks of a already signed in login
 		 * is still valid. The login method can be accessed without permission
 		 * check and is excluded from the servlet's URL mapper.
 		 */

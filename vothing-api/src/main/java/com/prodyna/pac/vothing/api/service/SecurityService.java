@@ -7,7 +7,7 @@ import com.prodyna.pac.vothing.api.model.LoginCredentials;
 import com.prodyna.pac.vothing.api.model.Permission;
 import com.prodyna.pac.vothing.api.model.Survey;
 import com.prodyna.pac.vothing.api.model.User;
-import com.prodyna.pac.vothing.core.exception.PrivateKeyException;
+import com.prodyna.pac.vothing.api.exception.PrivateKeyException;
 
 import java.text.ParseException;
 import java.util.List;

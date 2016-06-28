@@ -1,4 +1,4 @@
-package com.prodyna.pac.vothing.core.helper;
+package com.prodyna.pac.vothing.core.producer;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;

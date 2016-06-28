@@ -1,4 +1,4 @@
-package com.prodyna.pac.vothing.core.security;
+package com.prodyna.pac.vothing.core.filter;
 
 import com.prodyna.pac.vothing.api.Vothing;
 import com.prodyna.pac.vothing.api.constants.PermissionEnum;

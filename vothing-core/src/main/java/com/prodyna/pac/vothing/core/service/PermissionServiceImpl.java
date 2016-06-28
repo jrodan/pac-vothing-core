@@ -1,7 +1,6 @@
 package com.prodyna.pac.vothing.core.service;
 
 import com.prodyna.pac.vothing.api.Vothing;
-import com.prodyna.pac.vothing.api.annotion.VothingMonitoringAnn;
 import com.prodyna.pac.vothing.api.constants.PermissionEnum;
 import com.prodyna.pac.vothing.api.model.Permission;
 import com.prodyna.pac.vothing.api.service.PermissionService;
@@ -12,8 +11,8 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 @Stateless
-@VothingMonitoringAnn
-public class PermissionServiceImpl extends BaseServiceImpl<Permission> implements PermissionService {
+public class PermissionServiceImpl extends BaseServiceImpl<Permission>
+		implements PermissionService {
 
 	@Inject
 	private Logger logger;

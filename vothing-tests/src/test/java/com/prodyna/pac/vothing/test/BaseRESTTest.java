@@ -9,7 +9,6 @@ import org.slf4j.LoggerFactory;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
-import javax.ws.rs.core.Cookie;
 import javax.ws.rs.core.Form;
 import javax.ws.rs.core.MultivaluedHashMap;
 import java.net.URL;
@@ -38,8 +37,10 @@ public abstract class BaseRESTTest extends BaseTest {
 
 	protected <C> C createService(Class<C> ifaceType, String token) {
 		MultivaluedHashMap<String, Object> headers = new MultivaluedHashMap<>();
-		headers.add("Vothing-Token",token);
-		return WebResourceFactory.newResource(ifaceType, createWebTarget(), false, headers, new ArrayList<>(), new Form());
+		headers.add("Vothing-Token", token);
+		return WebResourceFactory
+				.newResource(ifaceType, createWebTarget(), false, headers, new ArrayList<>(),
+						new Form());
 	}
 
 }

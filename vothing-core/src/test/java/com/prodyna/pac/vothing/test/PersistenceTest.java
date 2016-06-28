@@ -56,9 +56,9 @@ public class PersistenceTest {
 				.addAsResource("test-persistence.xml", "META-INF/persistence.xml")
 				.addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
 	}
-//
-//    @Inject
-//    private AddEventHelper eventHelper;
+	//
+	//    @Inject
+	//    private AddEventHelper eventHelper;
 
 	@Test
 	@InSequence(1)
@@ -88,8 +88,10 @@ public class PersistenceTest {
 		permissions.add(permissionService.createPermission(PermissionEnum.SURVEY_UPDATE));
 		permissions.add(permissionService.createPermission(PermissionEnum.SURVEY_LIST));
 		permissions.add(permissionService.createPermission(PermissionEnum.ADMIN));
-		permissions.add(permissionService.createPermission(PermissionEnum.SURVEYOPTIONRATING_UPDATE));
-		permissions.add(permissionService.createPermission(PermissionEnum.SURVEYOPTIONRATING_UPDATE_DELETE));
+		permissions
+				.add(permissionService.createPermission(PermissionEnum.SURVEYOPTIONRATING_UPDATE));
+		permissions.add(permissionService
+				.createPermission(PermissionEnum.SURVEYOPTIONRATING_UPDATE_DELETE));
 		Assert.assertEquals(permissionService.getElements().size(), 8);
 
 		// test roles
@@ -137,13 +139,16 @@ public class PersistenceTest {
 		SurveyOptionRating surveyOptionRating2 = new SurveyOptionRatingImpl();
 		surveyOptionRating2.setSurveyOption(surveyOption2);
 		surveyOptionRating2.setUser(null); // TODO
-		SurveyOptionRating surveyOptionRating1DB = surveyOptionRatingService.addElement(surveyOptionRating1);
-		SurveyOptionRating surveyOptionRating2DB = surveyOptionRatingService.addElement(surveyOptionRating2);
+		SurveyOptionRating surveyOptionRating1DB =
+				surveyOptionRatingService.addElement(surveyOptionRating1);
+		SurveyOptionRating surveyOptionRating2DB =
+				surveyOptionRatingService.addElement(surveyOptionRating2);
 		Assert.assertNotNull(surveyOptionRating1DB);
 		Assert.assertNotNull(surveyOptionRating2DB);
 		Assert.assertTrue(surveyOptionRating1DB.getId() > 0);
 		Assert.assertTrue(surveyOptionRating2DB.getId() > 0);
-		Assert.assertTrue(surveyOptionRating1DB.getSurveyOption().getId() == surveyOption1DB.getId());
+		Assert.assertTrue(
+				surveyOptionRating1DB.getSurveyOption().getId() == surveyOption1DB.getId());
 
 		// test user
 		// TODO does a user need to know its surveys in the model?
@@ -188,7 +193,8 @@ public class PersistenceTest {
 		adminDB = userService.addElement(adminDB);
 		Assert.assertTrue(adminDB.getRoles().size() == 1);
 		Assert.assertTrue(adminDB.getSurveys().size() == 1);
-		Assert.assertTrue(adminDB.getSurveyOptionRatings().size() == 0); // the result should be 0 because even if I add the options there, their userId is currently still not set correctly
+		Assert.assertTrue(adminDB.getSurveyOptionRatings().size() ==
+				0); // the result should be 0 because even if I add the options there, their userId is currently still not set correctly
 		// test deletion of entries
 		surveyOptionService.deleteElement(surveyOption1DB.getId());
 		User adminDB2 = userService.getElement(adminDB.getId());
@@ -230,30 +236,30 @@ public class PersistenceTest {
 	}
 
 
-//    @Test
-//    @InSequence(2)
-//    public void testEntitySerialization() {
-//        User admin = userService.getUser("admin@vothing.com","123");
-//
-////        admin.getSurveys()
-//
-//    }
-//
-//    @Test
-//    @InSequence(3)
-//    public void testEntityDerialization() {
-//        User admin = userService.getUser("admin@vothing.com","123");
-//
-////        admin.getSurveys()
-//
-//    }
-//
-//    @Test
-//    @InSequence(2)
-//    public void testEntityDerialization() {
-//        User admin = userService.getUser("admin@vothing.com","123");
-//
-////        admin.getSurveys()
-//
-//    }
+	//    @Test
+	//    @InSequence(2)
+	//    public void testEntitySerialization() {
+	//        User admin = userService.getUser("admin@vothing.com","123");
+	//
+	////        admin.getSurveys()
+	//
+	//    }
+	//
+	//    @Test
+	//    @InSequence(3)
+	//    public void testEntityDerialization() {
+	//        User admin = userService.getUser("admin@vothing.com","123");
+	//
+	////        admin.getSurveys()
+	//
+	//    }
+	//
+	//    @Test
+	//    @InSequence(2)
+	//    public void testEntityDerialization() {
+	//        User admin = userService.getUser("admin@vothing.com","123");
+	//
+	////        admin.getSurveys()
+	//
+	//    }
 }

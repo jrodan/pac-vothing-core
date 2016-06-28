@@ -1,6 +1,8 @@
 package com.prodyna.pac.vothing.core.model;
 
-import com.prodyna.pac.vothing.api.model.*;
+import com.prodyna.pac.vothing.api.model.Survey;
+import com.prodyna.pac.vothing.api.model.SurveyOption;
+import com.prodyna.pac.vothing.api.model.User;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -15,7 +17,9 @@ public class SurveyImpl extends Survey {
 	@ManyToOne(cascade = {CascadeType.MERGE}, targetEntity = UserImpl.class)
 	User user;
 
-	@OneToMany(mappedBy = "survey", cascade = {CascadeType.REMOVE, CascadeType.REFRESH, CascadeType.PERSIST}, targetEntity = SurveyOptionImpl.class)
+	@OneToMany(mappedBy = "survey",
+			cascade = {CascadeType.REMOVE, CascadeType.REFRESH, CascadeType.PERSIST},
+			targetEntity = SurveyOptionImpl.class)
 	private Collection<SurveyOption> surveyOptions = new ArrayList<>();
 
 	/**

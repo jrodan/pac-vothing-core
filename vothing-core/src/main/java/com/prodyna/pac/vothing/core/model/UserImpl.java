@@ -1,7 +1,10 @@
 package com.prodyna.pac.vothing.core.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.prodyna.pac.vothing.api.model.*;
+import com.prodyna.pac.vothing.api.model.Role;
+import com.prodyna.pac.vothing.api.model.Survey;
+import com.prodyna.pac.vothing.api.model.SurveyOptionRating;
+import com.prodyna.pac.vothing.api.model.User;
 
 import javax.json.Json;
 import javax.json.JsonObjectBuilder;
@@ -44,7 +47,9 @@ public class UserImpl extends User {
 
 	@JsonIgnore
 	@ManyToMany(cascade = {}, targetEntity = RoleImpl.class)
-	@JoinTable(name = "vothing_userrole", joinColumns = @JoinColumn(name = "userId", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "roleId", referencedColumnName = "id"))
+	@JoinTable(name = "vothing_userrole",
+			joinColumns = @JoinColumn(name = "userId", referencedColumnName = "id"),
+			inverseJoinColumns = @JoinColumn(name = "roleId", referencedColumnName = "id"))
 	private Collection<Role> roles = new ArrayList<>();
 
 	@JsonIgnore

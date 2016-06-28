@@ -33,7 +33,9 @@ public class BaseServiceImpl<T extends BaseModel> implements BaseService<T> {
 
 		String orderString = entityOrder.getOrder();
 
-		Query query = entityManager.createQuery("SELECT e FROM " + getEntityInterfaceClass().getSimpleName() + " e order by " + orderString);
+		Query query = entityManager.createQuery(
+				"SELECT e FROM " + getEntityInterfaceClass().getSimpleName() + " e order by " +
+						orderString);
 		List<T> entities = (List<T>) query.getResultList();
 
 		return entities;
@@ -67,7 +69,9 @@ public class BaseServiceImpl<T extends BaseModel> implements BaseService<T> {
 		Class<T> persistentClass = null;
 		Class<T> persistentInterface = getEntityInterfaceClass();
 
-		String implClassName = "com.prodyna.pac.vothing.core.model." + persistentInterface.getSimpleName() + "Impl";
+		String implClassName =
+				"com.prodyna.pac.vothing.core.model." + persistentInterface.getSimpleName() +
+						"Impl";
 
 		try {
 			persistentClass = (Class<T>) Class.forName(implClassName);

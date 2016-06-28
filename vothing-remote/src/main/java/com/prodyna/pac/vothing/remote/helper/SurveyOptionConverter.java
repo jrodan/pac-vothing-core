@@ -20,7 +20,8 @@ public class SurveyOptionConverter {
 	@Inject
 	private SurveyOptionRatingConverter surveyOptionRatingConverter;
 
-	public Collection<SurveyOption> toSurveyOptions(Collection<SurveyOptionRemote> surveyOptionRemoteList) {
+	public Collection<SurveyOption> toSurveyOptions(
+			Collection<SurveyOptionRemote> surveyOptionRemoteList) {
 		Collection<SurveyOption> surveyOptionList = new ArrayList<SurveyOption>();
 
 		for (SurveyOptionRemote surveyOptionRemote : surveyOptionRemoteList) {
@@ -38,15 +39,16 @@ public class SurveyOptionConverter {
 		surveyOption.setCreateDate(surveyOptionRemote.getCreateDate());
 		surveyOption.setId(surveyOptionRemote.getId());
 		surveyOption.setName(surveyOptionRemote.getName());
-//		surveyOption.setSurvey(surveyOptionRemote.get.getSurvey());
+		//		surveyOption.setSurvey(surveyOptionRemote.get.getSurvey());
 		surveyOption.setSurveyOptionRatings(surveyOptionRatingConverter
 				.toSurveyOptionRating(surveyOption,
-				surveyOptionRemote.getSurveyOptionRatings()));
+						surveyOptionRemote.getSurveyOptionRatings()));
 
 		return surveyOption;
 	}
 
-	public Collection<SurveyOptionRemote> toSurveyOptionsRemote(User user, Collection<SurveyOption> surveyOptionList) {
+	public Collection<SurveyOptionRemote> toSurveyOptionsRemote(User user,
+			Collection<SurveyOption> surveyOptionList) {
 		Collection<SurveyOptionRemote> surveyOptionRemoteList = new ArrayList<SurveyOptionRemote>();
 
 		for (SurveyOption surveyOption : surveyOptionList) {
@@ -64,7 +66,7 @@ public class SurveyOptionConverter {
 		surveyOptionRemote.setCreateDate(surveyOption.getCreateDate());
 		surveyOptionRemote.setId(surveyOption.getId());
 		surveyOptionRemote.setName(surveyOption.getName());
-//		surveyOptionRemote.setSurveyRemote(surveyOption.getSurvey());
+		//		surveyOptionRemote.setSurveyRemote(surveyOption.getSurvey());
 		surveyOptionRemote.setVotes(surveyOption.getSurveyOptionRatings().size());
 
 		boolean hasUserVoted = false;
@@ -81,7 +83,8 @@ public class SurveyOptionConverter {
 		surveyOptionRemote.setUserVotedThisOption(hasUserVotedThisOption);
 		surveyOptionRemote.setUserVoted(hasUserVoted);
 		surveyOptionRemote.setSurveyOptionRatingsRemote(surveyOptionRatingConverter
-				.toSurveyOptionRatingRemote(surveyOptionRemote, surveyOption.getSurveyOptionRatings()));
+				.toSurveyOptionRatingRemote(surveyOptionRemote,
+						surveyOption.getSurveyOptionRatings()));
 
 		return surveyOptionRemote;
 	}

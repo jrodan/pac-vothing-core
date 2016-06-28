@@ -5,15 +5,19 @@ import java.util.Collection;
 /**
  * Created by jrodan on 13/05/16.
  */
-public class SurveyOptionRemote extends BaseRemoteEntityImpl  {
+public class SurveyOptionRemote extends BaseRemoteEntityImpl {
 
 	private Collection<SurveyOptionRatingRemote> surveyOptionRatings;
 
-//	private SurveyRemote survey;
+	//	private SurveyRemote survey;
 
 	private long votes = 0;
 
 	private boolean hasUserVoted = false;
+
+	public SurveyOptionRemote() {
+
+	}
 
 	public boolean hasUserVoted() {
 		return hasUserVoted;
@@ -31,28 +35,25 @@ public class SurveyOptionRemote extends BaseRemoteEntityImpl  {
 		this.votes = votes;
 	}
 
-	public void setSurveyOptionRatings(Collection<SurveyOptionRatingRemote> surveyOptionRatings) {
-		this.surveyOptionRatings = surveyOptionRatings;
-	}
-
-	public SurveyOptionRemote() {
-
-	}
-
 	public Collection<SurveyOptionRatingRemote> getSurveyOptionRatings() {
 		return surveyOptionRatings;
 	}
 
-	public void setSurveyOptionRatingsRemote(Collection<SurveyOptionRatingRemote> surveyOptionRatings) {
+	public void setSurveyOptionRatings(Collection<SurveyOptionRatingRemote> surveyOptionRatings) {
 		this.surveyOptionRatings = surveyOptionRatings;
 	}
 
-//	public SurveyRemote getSurvey() {
-//		return survey;
-//	}
-//
-//	public void setSurveyRemote(SurveyRemote survey) {
-//		this.survey = survey;
-//	}
+	public void setSurveyOptionRatingsRemote(
+			Collection<SurveyOptionRatingRemote> surveyOptionRatings) {
+		this.surveyOptionRatings = surveyOptionRatings;
+	}
+
+	//	public SurveyRemote getSurvey() {
+	//		return survey;
+	//	}
+	//
+	//	public void setSurveyRemote(SurveyRemote survey) {
+	//		this.survey = survey;
+	//	}
 
 }

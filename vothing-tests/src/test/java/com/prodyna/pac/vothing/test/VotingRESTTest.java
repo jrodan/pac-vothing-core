@@ -18,37 +18,37 @@ import java.util.List;
 @RunWith(Arquillian.class)
 public class VotingRESTTest extends BaseRESTTest {
 
-    @ArquillianResource
-    private URL url;
+	@ArquillianResource
+	private URL url;
 
-    @Test
-    @RunAsClient
-    @InSequence(1)
-    public void testLogin() {
-        String token = login();
-        Assert.assertNotNull(
-                token);
-    }
+	@Test
+	@RunAsClient
+	@InSequence(1)
+	public void testLogin() {
+		String token = login();
+		Assert.assertNotNull(
+				token);
+	}
 
-    private String login () {
-        SecurityRemoteService securityService = createService(SecurityRemoteService.class, null);
-        LoginCredentials cred = new LoginCredentials();
-        cred.setEmail("admin@vothing.com");
-        cred.setPassword("123");
-        String token = securityService.login(cred);
-        return token;
-    }
+	private String login() {
+		SecurityRemoteService securityService = createService(SecurityRemoteService.class, null);
+		LoginCredentials cred = new LoginCredentials();
+		cred.setEmail("admin@vothing.com");
+		cred.setPassword("123");
+		String token = securityService.login(cred);
+		return token;
+	}
 
-    @Test
-    @RunAsClient
-    @InSequence(2)
-    public void testGetSurveys() {
-        String token = login();
-        Assert.assertNotNull(token);
-        SurveyRemoteService surveyRemoteService = createService(SurveyRemoteService.class, token);
-        List<SurveyRemote> surveys = surveyRemoteService.getSurveys();
-        Assert.assertNotNull(surveys);
-        Assert.assertTrue(surveys.size() > 0);
-    }
+	@Test
+	@RunAsClient
+	@InSequence(2)
+	public void testGetSurveys() {
+		String token = login();
+		Assert.assertNotNull(token);
+		SurveyRemoteService surveyRemoteService = createService(SurveyRemoteService.class, token);
+		List<SurveyRemote> surveys = surveyRemoteService.getSurveys();
+		Assert.assertNotNull(surveys);
+		Assert.assertTrue(surveys.size() > 0);
+	}
 
 }

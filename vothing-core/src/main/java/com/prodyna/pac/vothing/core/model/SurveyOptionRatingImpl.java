@@ -1,7 +1,9 @@
 package com.prodyna.pac.vothing.core.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.prodyna.pac.vothing.api.model.*;
+import com.prodyna.pac.vothing.api.model.SurveyOption;
+import com.prodyna.pac.vothing.api.model.SurveyOptionRating;
+import com.prodyna.pac.vothing.api.model.User;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;

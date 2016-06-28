@@ -1,7 +1,6 @@
 package com.prodyna.pac.vothing.core;
 
 import com.prodyna.pac.vothing.api.Vothing;
-import com.prodyna.pac.vothing.api.annotion.VothingMonitoringAnn;
 import com.prodyna.pac.vothing.api.model.User;
 import com.prodyna.pac.vothing.api.service.PermissionService;
 import com.prodyna.pac.vothing.api.service.SecurityService;
@@ -17,7 +16,6 @@ import java.io.Serializable;
 
 @Named
 @Stateless
-@VothingMonitoringAnn
 @ApplicationPath("/")
 public class VothingBean extends Application implements Vothing, Serializable {
 

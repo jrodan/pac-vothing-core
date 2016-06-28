@@ -102,7 +102,7 @@ public class BaseRemoteEntityImpl implements BaseRemoteEntity {
 
 	@Override
 	public void setUsersPermissions(List<String> usersPermissions) {
-		this.usersPermissions = usersPermissions ;
+		this.usersPermissions = usersPermissions;
 	}
 
 	@Override

@@ -1,6 +1,5 @@
 package com.prodyna.pac.vothing.remote.service;
 
-import com.prodyna.pac.vothing.api.model.Survey;
 import com.prodyna.pac.vothing.remote.model.SurveyRemote;
 
 import javax.ws.rs.PathParam;

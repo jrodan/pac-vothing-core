@@ -5,13 +5,12 @@ import com.nimbusds.jose.crypto.MACSigner;
 import com.nimbusds.jose.crypto.MACVerifier;
 import com.nimbusds.jose.util.JSONObjectUtils;
 import com.prodyna.pac.vothing.api.Vothing;
-import com.prodyna.pac.vothing.api.annotion.VothingMonitoringAnn;
 import com.prodyna.pac.vothing.api.constants.PermissionEnum;
 import com.prodyna.pac.vothing.api.constants.RoleConstants;
 import com.prodyna.pac.vothing.api.constants.VothingConstants;
+import com.prodyna.pac.vothing.api.exception.PrivateKeyException;
 import com.prodyna.pac.vothing.api.model.*;
 import com.prodyna.pac.vothing.api.service.SecurityService;
-import com.prodyna.pac.vothing.core.exception.PrivateKeyException;
 import net.minidev.json.JSONObject;
 import org.slf4j.Logger;
 
@@ -26,7 +25,6 @@ import java.util.Collection;
 import java.util.List;
 
 @Stateless
-@VothingMonitoringAnn
 public class SecurityServiceImpl implements SecurityService, VothingConstants {
 
 	@Inject
@@ -42,7 +40,8 @@ public class SecurityServiceImpl implements SecurityService, VothingConstants {
 		String token = null;
 
 		try {
-			user = vothing.getUserService().getUser(loginCredentials.getEmail(), loginCredentials.getPassword());
+			user = vothing.getUserService()
+					.getUser(loginCredentials.getEmail(), loginCredentials.getPassword());
 		} catch (EntityNotFoundException e) {
 			logger.debug("no user is existing for email " + loginCredentials.getEmail(), e);
 		}
@@ -100,7 +99,8 @@ public class SecurityServiceImpl implements SecurityService, VothingConstants {
 		final String privateServerKey = System.getProperty(SERVER_PRIVATE_AUTH_KEY);
 
 		if (privateServerKey == null || privateServerKey.equals("")) {
-			throw new PrivateKeyException("no private server key is set. Please make sure that the VM parameter is set.");
+			throw new PrivateKeyException(
+					"no private server key is set. Please make sure that the VM parameter is set.");
 		}
 
 		return privateServerKey;

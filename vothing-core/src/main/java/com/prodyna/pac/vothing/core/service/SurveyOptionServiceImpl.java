@@ -1,6 +1,5 @@
 package com.prodyna.pac.vothing.core.service;
 
-import com.prodyna.pac.vothing.api.annotion.VothingMonitoringAnn;
 import com.prodyna.pac.vothing.api.model.Survey;
 import com.prodyna.pac.vothing.api.model.SurveyOption;
 import com.prodyna.pac.vothing.api.service.SurveyOptionService;
@@ -12,8 +11,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 @Stateless
-@VothingMonitoringAnn
-public class SurveyOptionServiceImpl extends BaseServiceImpl<SurveyOption> implements SurveyOptionService {
+public class SurveyOptionServiceImpl extends BaseServiceImpl<SurveyOption>
+		implements SurveyOptionService {
 
 	@Inject
 	private SurveyService surveyService;
@@ -28,9 +27,11 @@ public class SurveyOptionServiceImpl extends BaseServiceImpl<SurveyOption> imple
 
 		// remove DB surveyOptions
 		// if DB element was removed
-		survey.getSurveyOptions().stream().filter(surveyOptionDB -> !surveyOptionList.contains(surveyOptionDB)).forEach(surveyOptionDB -> {
-			this.deleteElement(surveyOptionDB.getId());
-		});
+		survey.getSurveyOptions().stream()
+				.filter(surveyOptionDB -> !surveyOptionList.contains(surveyOptionDB))
+				.forEach(surveyOptionDB -> {
+					this.deleteElement(surveyOptionDB.getId());
+				});
 
 		// add or update surveyOptions
 		for (SurveyOption surveyOption : surveyOptionList) {

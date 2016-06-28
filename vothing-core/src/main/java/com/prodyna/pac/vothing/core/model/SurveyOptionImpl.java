@@ -1,7 +1,9 @@
 package com.prodyna.pac.vothing.core.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.prodyna.pac.vothing.api.model.*;
+import com.prodyna.pac.vothing.api.model.Survey;
+import com.prodyna.pac.vothing.api.model.SurveyOption;
+import com.prodyna.pac.vothing.api.model.SurveyOptionRating;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -21,7 +23,8 @@ public class SurveyOptionImpl extends SurveyOption {
 	@ManyToOne(cascade = {}, targetEntity = SurveyImpl.class)
 	private Survey survey;
 
-	@OneToMany(mappedBy = "surveyOption", cascade = {CascadeType.REMOVE, CascadeType.MERGE}, targetEntity = SurveyOptionRatingImpl.class)
+	@OneToMany(mappedBy = "surveyOption", cascade = {CascadeType.REMOVE, CascadeType.MERGE},
+			targetEntity = SurveyOptionRatingImpl.class)
 	private Collection<SurveyOptionRating> surveyOptionRatings = new ArrayList<>();
 
 	/**

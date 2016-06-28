@@ -66,6 +66,9 @@ For the inital development IntelliJ IDEA is used.
 ## Testing
 
 # TODO 1.0.0
+- [ ] fix problem with monitoring and interception: WELD-001408: Unsatisfied dependencies for type VothingMonitoringCollector with qualifiers @Default at injection point [BackedAnnotatedField] @Inject private com.prodyna.pac.vothing.core.interceptor.VothingMonitoringInterceptor.vothingMonitoringMBean
+- [ ] make remote tests runnable
+- [ ] hash password on client side and save it encrypted
 - [ ] Use Git Flow 
 - [ ] Arquillian Tests
 - [ ] Automated maven builds
