@@ -2,7 +2,7 @@ package com.prodyna.pac.vothing.core.monitoring.impl;
 
 
 import com.prodyna.pac.vothing.core.monitoring.PerformanceEntry;
-import com.prodyna.pac.vothing.core.monitoring.VothingMonitoringMBean;
+import com.prodyna.pac.vothing.core.monitoring.VothingMonitoringMXBean;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -12,7 +12,7 @@ import java.util.Map;
 /**
  * Created by jrodan on 28/06/16.
  */
-public class VothingMonitoringCollector implements VothingMonitoringMBean {
+public class VothingMonitoringCollector implements VothingMonitoringMXBean {
 
 	/**
 	 * Map containing the collected performance values for each method.

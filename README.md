@@ -66,7 +66,6 @@ For the inital development IntelliJ IDEA is used.
 ## Testing
 
 # TODO 1.0.0
-- [ ] fix problem with monitoring and interception: WELD-001408: Unsatisfied dependencies for type VothingMonitoringCollector with qualifiers @Default at injection point [BackedAnnotatedField] @Inject private com.prodyna.pac.vothing.core.interceptor.VothingMonitoringInterceptor.vothingMonitoringMBean
 - [ ] make remote tests runnable
 - [ ] hash password on client side and save it encrypted
 - [ ] Use Git Flow 
@@ -84,6 +83,7 @@ For the inital development IntelliJ IDEA is used.
 - [ ] create more tests - test every usecase which are relevant for the client
 - [ ] cleanup
 - [ ] documentation
+- [x] fix problem with monitoring and interception: WELD-001408: Unsatisfied dependencies for type VothingMonitoringCollector with qualifiers @Default at injection point [BackedAnnotatedField] @Inject private com.prodyna.pac.vothing.core.interceptor.VothingMonitoringInterceptor.vothingMonitoringMBean
 - [x] separate core, model, services and remote services in separate release units
 - [x] reimplementation of remote model level - how to improve handling of JSON entities for the frontend?
 - [x] CI (travis integrated)

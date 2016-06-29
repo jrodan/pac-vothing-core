@@ -5,8 +5,9 @@ import java.util.List;
 /**
  * Created by jrodan on 28/06/16.
  */
-public interface VothingMonitoringMBean {
+public interface VothingMonitoringMXBean {
 
+	String OBJECT_NAME = "com.prodyna.pac.vothing.core.monitoring:service=PerformanceMonitoring";
 
 	/**
 	 * @return
