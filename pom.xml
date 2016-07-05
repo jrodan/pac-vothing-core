@@ -21,43 +21,6 @@
         <module>vothing-dist</module>
     </modules>
 
-    <profiles>
-        <profile>
-            <id>build-and-deploy</id>
-            <modules>
-                <module>vothing-api</module>
-                <module>vothing-core</module>
-                <module>vothing-remote</module>
-                <module>vothing-dist</module>
-            </modules>
-            <properties>
-                <skip.deployment>false</skip.deployment> <!-- default -->
-            </properties>
-        </profile>
-        <profile>
-            <id>build</id>
-            <modules>
-                <module>vothing-api</module>
-                <module>vothing-core</module>
-                <module>vothing-remote</module>
-                <module>vothing-dist</module>
-            </modules>
-        </profile>
-        <profile>
-            <id>build-with-remote-test</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <modules>
-                <module>vothing-api</module>
-                <module>vothing-core</module>
-                <module>vothing-remote</module>
-                <module>vothing-tests</module>
-                <module>vothing-dist</module>
-            </modules>
-        </profile>
-    </profiles>
-
     <build>
         <pluginManagement>
             <plugins>
@@ -90,9 +53,56 @@
                     </configuration>
                 </plugin>
 
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>2.3</version>
+                    <configuration>
+                        <includePom>true</includePom>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>jar-no-fork</goal>
+                                <goal>test-jar-no-fork</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>2.9.1</version>
+                    <executions>
+                        <execution>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>jar</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-site-plugin</artifactId>
+                    <version>3.4</version>
+                </plugin>
+
             </plugins>
         </pluginManagement>
 
     </build>
+
+    <name>Vothing App</name>
+    <url>https://github.com/jrodan/vothing</url>
+    <organization>
+        <name>PRODYNA AG</name>
+        <url>http://www.prodyna.com</url>
+    </organization>
+    <ciManagement>
+        <system>Travis</system>
+        <url>https://travis-ci.org/jrodan/vothing</url>
+    </ciManagement>
 
 </project>

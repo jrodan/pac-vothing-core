@@ -34,8 +34,16 @@ For the inital development IntelliJ IDEA is used.
 ### Formatting
 
 ### File Encoding
+Files use UTF-8 encoding and Unix delimiter 
 
 ### Naming Conventions
+#### Modules
+vothing-api: Contains all API interfaces
+vothing-config: Contains configuration files (e.g. Code Formatting)
+vothing-core: Contains the implementation of the API 
+vothing-dist: Assembly project
+vothing-remote: Remote Services
+vothing-tests: Tests and Remote Tests
 
 ### Technologies
 
@@ -60,8 +68,25 @@ For the inital development IntelliJ IDEA is used.
 - The private server key has to be set as server JVM parameter "vothing.server.private.key"
 
 ## Build
-- `mvn clean install`
-- want to build without remote tests then run `mvn clean install -pl !vothing-tests`
+- `mvn clean source:jar javadoc:jar package install` (server has to run because of wildfly management mode for tests)
+- want to build without remote tests then run `mvn clean source:jar javadoc:jar package install -pl !vothing-tests`
+
+## Releases
+
+E.g. the Release number 2.5.1
+
+### Major X.0.0
+Changes in the API
+
+### Minor 0.X.0
+New Features but without changing the API
+
+### Bugfix 0.0.X
+In this release only Bufixes are included
+
+### Tags
+Tags for releases: pac-presentation-X.X.X
+Git flow will be used in future and the branching will be defined for this project.
 
 ## Testing
 
