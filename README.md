@@ -63,6 +63,8 @@ vothing-tests: Tests and Remote Tests
 - to see the complete dependencies resolved by npm open https://github.com/jrodan/pac-vothing-client/package.json 
 
 ## Development Setup
+- Install MySQL and create a new Database and corresponding user. 
+- Import DDL from /pac-vothing-core/vothing-dist/sql/vothing-db-0.0.1.sql
 - Install WildFly 10.0.0Final
 - Set mysql datasource "java:/MysqlDS" in the standalone.xml in the server 
 - The private server key has to be set as server JVM parameter "vothing.server.private.key"
