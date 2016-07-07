@@ -162,39 +162,39 @@
                 </executions>
             </plugin>
 
-            <plugin>
-                <groupId>org.wildfly.plugins</groupId>
-                <artifactId>wildfly-maven-plugin</artifactId>
-                <version>1.1.0.Alpha7</version>
-                <configuration>
-                    <!--<skip>${skip.deployment}</skip>-->
-                    <hostname>localhost</hostname>
-                    <port>9990</port>
-                    <filename>vothing-remote.war</filename>
-                    <!-- <username>mkyong</username> <password>password</password> <name>spring4ajax.war</name> -->
-                </configuration>
-                <executions>
+            <!--<plugin>-->
+                <!--<groupId>org.wildfly.plugins</groupId>-->
+                <!--<artifactId>wildfly-maven-plugin</artifactId>-->
+                <!--<version>1.1.0.Alpha7</version>-->
+                <!--<configuration>-->
+                    <!--&lt;!&ndash;<skip>${skip.deployment}</skip>&ndash;&gt;-->
+                    <!--<hostname>localhost</hostname>-->
+                    <!--<port>9990</port>-->
+                    <!--<filename>vothing-remote.war</filename>-->
+                    <!--&lt;!&ndash; <username>mkyong</username> <password>password</password> <name>spring4ajax.war</name> &ndash;&gt;-->
+                <!--</configuration>-->
+                <!--<executions>-->
 
-                    <execution>
-                        <id>undeploy</id>
-                        <phase>clean</phase>
-                        <goals>
-                            <goal>undeploy</goal>
-                        </goals>
-                        <configuration>
-                            <ignoreMissingDeployment>true</ignoreMissingDeployment>
-                        </configuration>
-                    </execution>
+                    <!--<execution>-->
+                        <!--<id>undeploy</id>-->
+                        <!--<phase>clean</phase>-->
+                        <!--<goals>-->
+                            <!--<goal>undeploy</goal>-->
+                        <!--</goals>-->
+                        <!--<configuration>-->
+                            <!--<ignoreMissingDeployment>true</ignoreMissingDeployment>-->
+                        <!--</configuration>-->
+                    <!--</execution>-->
 
-                    <execution>
-                        <id>deploy</id>
-                        <phase>install</phase>
-                        <goals>
-                            <goal>deploy</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+                    <!--<execution>-->
+                        <!--<id>deploy</id>-->
+                        <!--<phase>install</phase>-->
+                        <!--<goals>-->
+                            <!--<goal>deploy</goal>-->
+                        <!--</goals>-->
+                    <!--</execution>-->
+                <!--</executions>-->
+            <!--</plugin>-->
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

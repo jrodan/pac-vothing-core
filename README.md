@@ -71,7 +71,7 @@ vothing-tests: Tests and Remote Tests
 
 ## Build
 - `mvn clean source:jar javadoc:jar package install` (server has to run because of wildfly management mode for tests)
-- want to build without remote tests then run `mvn clean source:jar javadoc:jar package install -pl !vothing-tests`
+- want to build without remote tests then run `mvn clean source:jar javadoc:jar package install -DskipTests=true -pl !vothing-tests`
 
 ## Releases
 
