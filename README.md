@@ -39,12 +39,17 @@ Files use UTF-8 encoding and Unix delimiter
 
 ### Naming Conventions
 #### Modules
-vothing-api: Contains all API interfaces
-vothing-config: Contains configuration files (e.g. Code Formatting)
+vothing-api: Contains all API interfaces 
+
+vothing-config: Contains configuration files (e.g. Code Formatting) 
+
 vothing-core: Contains the implementation of the API 
-vothing-dist: Assembly project
-vothing-remote: Remote Services
-vothing-tests: Tests and Remote Tests (Jersey, JUnit, Arquillian)
+
+vothing-dist: Assembly project 
+
+vothing-remote: Remote Services 
+
+vothing-tests: Tests and Remote Tests (Jersey, JUnit, Arquillian) 
 
 ### Technologies
 
