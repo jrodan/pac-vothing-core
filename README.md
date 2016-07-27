@@ -101,6 +101,184 @@ Git flow will be used in future and the branching will be defined for this proje
 
 Automated tests will run, when the server is set up correctly. Later on, during a built on the CI server is running, the tests will also be done automatically. Manual smoke tests will be set up.
 
+# Project Structure
+
+```
+├── README.md
+├── pac.iml
+├── pom.xml
+├── vothing-api
+│   ├── pom.xml
+│   ├── src
+│   │   └── main
+│   │       └── java
+│   │           └── com
+│   │               └── prodyna
+│   │                   └── pac
+│   │                       └── vothing
+│   │                           └── api
+│   │                               ├── Vothing.java
+│   │                               ├── annotion
+│   │                               │   └── VothingMonitoringAnn.java
+│   │                               ├── constants
+│   │                               │   ├── EntityOrder.java
+│   │                               │   ├── PermissionEnum.java
+│   │                               │   ├── RoleConstants.java
+│   │                               │   └── VothingConstants.java
+│   │                               ├── exception
+│   │                               │   └── PrivateKeyException.java
+│   │                               ├── model
+│   │                               │   ├── BaseModel.java
+│   │                               │   ├── BaseModelImpl.java
+│   │                               │   ├── LoginCredentials.java
+│   │                               │   ├── Permission.java
+│   │                               │   ├── Role.java
+│   │                               │   ├── Survey.java
+│   │                               │   ├── SurveyOption.java
+│   │                               │   ├── SurveyOptionRating.java
+│   │                               │   ├── User.java
+│   │                               │   └── api
+│   │                               │       ├── PermissionInterface.java
+│   │                               │       ├── RoleInterface.java
+│   │                               │       ├── SurveyInterface.java
+│   │                               │       ├── SurveyOptionInterface.java
+│   │                               │       ├── SurveyOptionRatingInterface.java
+│   │                               │       └── UserInterface.java
+│   │                               └── service
+│   │                                   ├── BaseService.java
+│   │                                   ├── PermissionService.java
+│   │                                   ├── RoleService.java
+│   │                                   ├── SecurityService.java
+│   │                                   ├── SurveyOptionRatingService.java
+│   │                                   ├── SurveyOptionService.java
+│   │                                   ├── SurveyService.java
+│   │                                   └── UserService.java
+│   └── vothing-api.iml
+├── vothing-config
+│   └── pac-code-style.xml
+├── vothing-core
+│   ├── pom.xml
+│   ├── src
+│   │   ├── main
+│   │   │   ├── java
+│   │   │   │   └── com
+│   │   │   │       └── prodyna
+│   │   │   │           └── pac
+│   │   │   │               └── vothing
+│   │   │   │                   └── core
+│   │   │   │                       ├── VothingBean.java
+│   │   │   │                       ├── annotion
+│   │   │   │                       │   └── PermissionAnn.java
+│   │   │   │                       ├── filter
+│   │   │   │                       │   ├── CorsFilter.java
+│   │   │   │                       │   ├── VothingPermissionFilter.java
+│   │   │   │                       │   └── VothingSecurityFilter.java
+│   │   │   │                       ├── interceptor
+│   │   │   │                       │   └── VothingMonitoringInterceptor.java
+│   │   │   │                       ├── model
+│   │   │   │                       │   ├── PermissionImpl.java
+│   │   │   │                       │   ├── RoleImpl.java
+│   │   │   │                       │   ├── SurveyImpl.java
+│   │   │   │                       │   ├── SurveyOptionImpl.java
+│   │   │   │                       │   ├── SurveyOptionRatingImpl.java
+│   │   │   │                       │   └── UserImpl.java
+│   │   │   │                       ├── monitoring
+│   │   │   │                       │   ├── PerformanceEntry.java
+│   │   │   │                       │   ├── VothingMonitoringMXBean.java
+│   │   │   │                       │   └── impl
+│   │   │   │                       │       └── VothingMonitoringCollector.java
+│   │   │   │                       ├── producer
+│   │   │   │                       │   ├── EntityManagerProducer.java
+│   │   │   │                       │   ├── LogProducer.java
+│   │   │   │                       │   └── MBeanServerProducer.java
+│   │   │   │                       └── service
+│   │   │   │                           ├── BaseServiceImpl.java
+│   │   │   │                           ├── PermissionServiceImpl.java
+│   │   │   │                           ├── RoleServiceImpl.java
+│   │   │   │                           ├── SecurityServiceImpl.java
+│   │   │   │                           ├── SurveyOptionRatingServiceImpl.java
+│   │   │   │                           ├── SurveyOptionServiceImpl.java
+│   │   │   │                           ├── SurveyServiceImpl.java
+│   │   │   │                           └── UserServiceImpl.java
+│   │   │   └── resources
+│   │   │       └── META-INF
+│   │   │           ├── persistence.xml
+│   │   │           └── test-persistence.xml
+│   │   └── test
+│   │       ├── java
+│   │       │   └── com
+│   │       │       └── prodyna
+│   │       │           └── pac
+│   │       │               └── vothing
+│   │       │                   └── test
+│   │       │                       └── PersistenceTest.java
+│   │       ├── resources
+│   │       │   └── arquillian.xml
+│   │       └── resources-jbossas-remote
+│   │           └── test-persistence.xml
+│   └── vothing-core.iml
+├── vothing-dist
+│   ├── assembly.xml
+│   ├── documentation
+│   ├── pom.xml
+│   ├── sql
+│   │   └── vothing-db-0.0.1.sql
+│   ├── target
+│   │   ├── Vothing\ App.zip
+│   │   └── archive-tmp
+│   └── vothing-dist.iml
+├── vothing-remote
+│   ├── pom.xml
+│   ├── src
+│   │   └── main
+│   │       └── java
+│   │           └── com
+│   │               └── prodyna
+│   │                   └── pac
+│   │                       └── vothing
+│   │                           └── remote
+│   │                               ├── helper
+│   │                               │   ├── SurveyConverter.java
+│   │                               │   ├── SurveyOptionConverter.java
+│   │                               │   └── SurveyOptionRatingConverter.java
+│   │                               ├── model
+│   │                               │   ├── BaseRemoteEntity.java
+│   │                               │   ├── BaseRemoteEntityImpl.java
+│   │                               │   ├── SurveyOptionRatingRemote.java
+│   │                               │   ├── SurveyOptionRemote.java
+│   │                               │   └── SurveyRemote.java
+│   │                               └── service
+│   │                                   ├── SecurityRemoteService.java
+│   │                                   ├── SurveyOptionRatingRemoteService.java
+│   │                                   ├── SurveyRemoteService.java
+│   │                                   └── impl
+│   │                                       ├── SecurityRemoteServiceImpl.java
+│   │                                       ├── SurveyOptionRatingRemoteServiceImpl.java
+│   │                                       └── SurveyRemoteServiceImpl.java
+│   └── vothing-remote.iml
+├── vothing-tests
+│   ├── pom.xml
+│   ├── src
+│   │   └── test
+│   │       ├── java
+│   │       │   └── com
+│   │       │       └── prodyna
+│   │       │           └── pac
+│   │       │               └── vothing
+│   │       │                   └── test
+│   │       │                       ├── BaseRESTTest.java
+│   │       │                       ├── BaseTest.java
+│   │       │                       ├── VotingRESTTest.java
+│   │       │                       └── VotingServiceTest.java
+│   │       ├── resources
+│   │       │   ├── arquillian.xml
+│   │       │   ├── beans.xml
+│   │       │   └── persistence.xml
+│   │       └── test.iml
+│   └── vothing-tests.iml
+└── vothing.iml
+```
+
 # TODO 1.0.0
 - [ ] make remote tests runnable
 - [ ] hash password on client side and save it encrypted
