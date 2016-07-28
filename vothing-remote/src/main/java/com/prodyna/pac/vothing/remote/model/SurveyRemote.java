@@ -1,6 +1,7 @@
 package com.prodyna.pac.vothing.remote.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.prodyna.pac.vothing.api.model.User;
 
 import java.util.Collection;
@@ -10,6 +11,7 @@ import java.util.Collection;
  */
 public class SurveyRemote extends BaseRemoteEntityImpl {
 
+	@JsonIgnore
 	private User user;
 
 	private Collection<SurveyOptionRemote> surveyOptions;
@@ -32,6 +34,7 @@ public class SurveyRemote extends BaseRemoteEntityImpl {
 		this.surveyOptions = surveyOptions;
 	}
 
+	@JsonProperty
 	public User getUser() {
 		return user;
 	}
