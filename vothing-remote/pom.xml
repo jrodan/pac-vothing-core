@@ -11,7 +11,7 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <artifactId>vothing-remote</artifactId>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
 
     <dependencyManagement>
         <dependencies>
@@ -52,20 +52,11 @@
             <artifactId>gson</artifactId>
             <version>2.6.1</version>
         </dependency>
-        <!-- <dependency>
-            <groupId>jboss</groupId>
-            <artifactId>jboss-annotations-ejb3</artifactId>
-            <version>4.2.2.GA</version>
-        </dependency> -->
         <dependency>
             <groupId>com.nimbusds</groupId>
             <artifactId>nimbus-jose-jwt</artifactId>
             <version>4.12</version>
         </dependency>
-        <!-- <dependency> <groupId>org.jboss.resteasy</groupId> <artifactId>resteasy-jaxrs</artifactId>
-            <version>3.0.16.Final</version> </dependency> -->
-        <!-- <dependency> <groupId>org.jboss.resteasy</groupId> <artifactId>jaxrs-api</artifactId>
-            <version>3.0.12.Final</version> </dependency> -->
         <dependency>
             <groupId>javax.ws.rs</groupId>
             <artifactId>javax.ws.rs-api</artifactId>
@@ -102,12 +93,6 @@
             <artifactId>arquillian-junit-container</artifactId>
             <scope>test</scope>
         </dependency>
-        <!--<dependency>-->
-        <!--<groupId>org.hibernate.javax.impl</groupId>-->
-        <!--<artifactId>hibernate-jpa-2.1-api</artifactId>-->
-        <!--<version>1.0.0.Final</version>-->
-        <!--<scope>test</scope>-->
-        <!--</dependency>-->
         <dependency>
             <groupId>javax.persistence</groupId>
             <artifactId>persistence-api</artifactId>
@@ -162,39 +147,15 @@
                 </executions>
             </plugin>
 
-            <!--<plugin>-->
-                <!--<groupId>org.wildfly.plugins</groupId>-->
-                <!--<artifactId>wildfly-maven-plugin</artifactId>-->
-                <!--<version>1.1.0.Alpha7</version>-->
-                <!--<configuration>-->
-                    <!--&lt;!&ndash;<skip>${skip.deployment}</skip>&ndash;&gt;-->
-                    <!--<hostname>localhost</hostname>-->
-                    <!--<port>9990</port>-->
-                    <!--<filename>vothing-remote.war</filename>-->
-                    <!--&lt;!&ndash; <username>mkyong</username> <password>password</password> <name>spring4ajax.war</name> &ndash;&gt;-->
-                <!--</configuration>-->
-                <!--<executions>-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+            </plugin>
 
-                    <!--<execution>-->
-                        <!--<id>undeploy</id>-->
-                        <!--<phase>clean</phase>-->
-                        <!--<goals>-->
-                            <!--<goal>undeploy</goal>-->
-                        <!--</goals>-->
-                        <!--<configuration>-->
-                            <!--<ignoreMissingDeployment>true</ignoreMissingDeployment>-->
-                        <!--</configuration>-->
-                    <!--</execution>-->
-
-                    <!--<execution>-->
-                        <!--<id>deploy</id>-->
-                        <!--<phase>install</phase>-->
-                        <!--<goals>-->
-                            <!--<goal>deploy</goal>-->
-                        <!--</goals>-->
-                    <!--</execution>-->
-                <!--</executions>-->
-            <!--</plugin>-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+            </plugin>
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

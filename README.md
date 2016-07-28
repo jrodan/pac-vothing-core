@@ -70,8 +70,8 @@ vothing-tests: Tests and Remote Tests
 - The private server key has to be set as server JVM parameter "vothing.server.private.key"
 
 ## Build
-- `mvn clean source:jar javadoc:jar package install` (server has to run because of wildfly management mode for tests)
-- want to build without remote tests then run `mvn clean source:jar javadoc:jar package install -DskipTests=true -pl !vothing-tests`
+- `mvn clean install` (server has to run because of wildfly management mode for tests)
+- want to build without remote tests then run `mvn clean install -DskipTests=true`
 
 ## Releases
 
