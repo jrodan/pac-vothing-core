@@ -55,6 +55,20 @@ public class SurveyOptionConverter {
 			surveyOptionRemoteList.add(toSurveyOptionRemote(user, surveyOption));
 		}
 
+		boolean userVoted = false;
+		for (SurveyOptionRemote surveyOptionRemote : surveyOptionRemoteList) {
+			if(surveyOptionRemote.hasUserVoted()) {
+				userVoted = true;
+				break;
+			}
+		}
+
+		if(userVoted) {
+			for (SurveyOptionRemote surveyOptionRemote : surveyOptionRemoteList) {
+				surveyOptionRemote.setUserVoted(userVoted);
+			}
+		}
+
 		return surveyOptionRemoteList;
 	}
 

@@ -35,6 +35,18 @@ public class BaseRemoteEntityImpl implements BaseRemoteEntity {
 
 	private int votes = 0;
 
+	private boolean hasUserVoted = false;
+
+	@Override
+	public boolean hasUserVoted() {
+		return hasUserVoted;
+	}
+
+	@Override
+	public void setUserVoted(boolean hasUserVoted) {
+		this.hasUserVoted = hasUserVoted;
+	}
+
 	@Override
 	public long getObjectKey() {
 		return objectKey;

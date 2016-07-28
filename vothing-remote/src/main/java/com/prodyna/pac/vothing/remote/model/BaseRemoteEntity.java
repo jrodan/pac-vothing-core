@@ -9,6 +9,10 @@ import java.util.List;
  */
 public interface BaseRemoteEntity extends Serializable {
 
+	boolean hasUserVoted();
+
+	void setUserVoted(boolean hasUserVoted);
+
 	long getObjectKey();
 
 	void setObjectKey(long objectKey);

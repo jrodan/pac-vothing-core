@@ -13,18 +13,8 @@ public class SurveyOptionRemote extends BaseRemoteEntityImpl {
 
 	private long votes = 0;
 
-	private boolean hasUserVoted = false;
-
 	public SurveyOptionRemote() {
 
-	}
-
-	public boolean hasUserVoted() {
-		return hasUserVoted;
-	}
-
-	public void setUserVoted(boolean hasUserVoted) {
-		this.hasUserVoted = hasUserVoted;
 	}
 
 	public long getVotes() {
