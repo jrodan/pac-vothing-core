@@ -22,24 +22,23 @@ public abstract class BaseRESTTest extends BaseTest {
 	private URL url;
 
 	protected javax.ws.rs.client.Client createClient() {
-		final Client client = ClientBuilder.newClient();
+		Client client = ClientBuilder.newClient();
 		client.register(JsonProcessingFeature.class);
 		client.register(JacksonFeature.class);
 		return client;
 	}
 
-	protected WebTarget createWebTarget() {
-		String fullPath = url.toString();//+ "rest";
-		log.info("URL = " + fullPath);
-		WebTarget target = createClient().target(fullPath);
+	protected WebTarget createWebTarget(String url) {
+		log.info("URL = " + url);
+		WebTarget target = createClient().target(url);
 		return target;
 	}
 
-	protected <C> C createService(Class<C> ifaceType, String token) {
+	protected <C> C createService(Class<C> ifaceType, String token, String url) {
 		MultivaluedHashMap<String, Object> headers = new MultivaluedHashMap<>();
 		headers.add("Vothing-Token", token);
 		return WebResourceFactory
-				.newResource(ifaceType, createWebTarget(), false, headers, new ArrayList<>(),
+				.newResource(ifaceType, createWebTarget(url), false, headers, new ArrayList<>(),
 						new Form());
 	}
 

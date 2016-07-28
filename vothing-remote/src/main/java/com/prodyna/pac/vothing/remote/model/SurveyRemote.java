@@ -1,5 +1,6 @@
 package com.prodyna.pac.vothing.remote.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.prodyna.pac.vothing.api.model.User;
 
 import java.util.Collection;
@@ -13,17 +14,7 @@ public class SurveyRemote extends BaseRemoteEntityImpl {
 
 	private Collection<SurveyOptionRemote> surveyOptions;
 
-	private boolean hasUserVoted;
-
 	private long votes;
-
-	public boolean hasUserVoted() {
-		return hasUserVoted;
-	}
-
-	public void setUserVoted(boolean hasUserVoted) {
-		this.hasUserVoted = hasUserVoted;
-	}
 
 	public long getVotes() {
 		return votes;
@@ -45,6 +36,7 @@ public class SurveyRemote extends BaseRemoteEntityImpl {
 		return user;
 	}
 
+	@JsonIgnore
 	public void setUser(User user) {
 		this.user = user;
 	}

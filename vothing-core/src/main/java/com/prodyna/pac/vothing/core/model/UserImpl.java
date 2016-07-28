@@ -42,18 +42,18 @@ public class UserImpl extends User {
 	private Date lastLogin;
 
 	@JsonIgnore
-	@OneToMany(mappedBy = "user", cascade = {}, targetEntity = SurveyImpl.class)
+	@OneToMany(mappedBy = "user", cascade = {}, targetEntity = SurveyImpl.class, fetch = FetchType.EAGER)
 	private Collection<Survey> surveys = new ArrayList<>();
 
 	@JsonIgnore
-	@ManyToMany(cascade = {}, targetEntity = RoleImpl.class)
+	@ManyToMany(cascade = {}, targetEntity = RoleImpl.class, fetch = FetchType.EAGER)
 	@JoinTable(name = "vothing_userrole",
 			joinColumns = @JoinColumn(name = "userId", referencedColumnName = "id"),
 			inverseJoinColumns = @JoinColumn(name = "roleId", referencedColumnName = "id"))
 	private Collection<Role> roles = new ArrayList<>();
 
 	@JsonIgnore
-	@OneToMany(mappedBy = "user", cascade = {}, targetEntity = SurveyOptionRatingImpl.class)
+	@OneToMany(mappedBy = "user", cascade = {}, targetEntity = SurveyOptionRatingImpl.class, fetch = FetchType.EAGER)
 	private Collection<SurveyOptionRating> votes = new ArrayList<>();
 
 	/**

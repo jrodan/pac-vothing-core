@@ -19,7 +19,7 @@ public class SurveyImpl extends Survey {
 
 	@OneToMany(mappedBy = "survey",
 			cascade = {CascadeType.REMOVE, CascadeType.REFRESH, CascadeType.PERSIST},
-			targetEntity = SurveyOptionImpl.class)
+			targetEntity = SurveyOptionImpl.class, fetch = FetchType.EAGER)
 	private Collection<SurveyOption> surveyOptions = new ArrayList<>();
 
 	/**

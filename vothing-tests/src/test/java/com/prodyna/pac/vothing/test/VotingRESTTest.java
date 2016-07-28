@@ -31,11 +31,13 @@ public class VotingRESTTest extends BaseRESTTest {
 	}
 
 	private String login() {
-		SecurityRemoteService securityService = createService(SecurityRemoteService.class, null);
+		String token = null;
+		SecurityRemoteService securityService =
+				createService(SecurityRemoteService.class, null, url.toString());
 		LoginCredentials cred = new LoginCredentials();
 		cred.setEmail("admin@vothing.com");
 		cred.setPassword("123");
-		String token = securityService.login(cred);
+		token = securityService.login(cred);
 		return token;
 	}
 
@@ -45,10 +47,12 @@ public class VotingRESTTest extends BaseRESTTest {
 	public void testGetSurveys() {
 		String token = login();
 		Assert.assertNotNull(token);
-		SurveyRemoteService surveyRemoteService = createService(SurveyRemoteService.class, token);
+		SurveyRemoteService surveyRemoteService = createService(SurveyRemoteService.class, token, url.toString());
 		List<SurveyRemote> surveys = surveyRemoteService.getSurveys();
 		Assert.assertNotNull(surveys);
 		Assert.assertTrue(surveys.size() > 0);
+		Assert.assertNotNull(
+				token);
 	}
 
 }

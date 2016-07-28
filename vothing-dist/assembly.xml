@@ -30,20 +30,19 @@
             </includes>
         </dependencySet>
         <dependencySet>
-            <outputDirectory>/Vothing App/test-sources
-            </outputDirectory>
+            <outputDirectory>/Vothing App/test-sources</outputDirectory>
             <unpack>false</unpack>
             <scope>runtime</scope>
             <includes>
-                <include>*:test-sources</include>
+                <include>*:tests-sources</include>
             </includes>
         </dependencySet>
     </dependencySets>
     <fileSets>
-        <fileSet>
-            <outputDirectory>/Vothing App/documentation</outputDirectory>
-            <directory>documentation</directory>
-        </fileSet>
+        <!--<fileSet>-->
+            <!--<outputDirectory>/Vothing App/documentation</outputDirectory>-->
+            <!--<directory>documentation</directory>-->
+        <!--</fileSet>-->
         <fileSet>
             <outputDirectory>/Vothing App/sql</outputDirectory>
             <directory>sql</directory>

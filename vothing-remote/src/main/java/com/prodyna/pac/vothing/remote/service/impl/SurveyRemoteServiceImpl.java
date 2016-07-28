@@ -22,9 +22,6 @@ import java.util.Date;
 import java.util.List;
 
 @Provider
-@Path("/restricted/survey")
-@Consumes(MediaType.APPLICATION_JSON)
-@Produces(MediaType.APPLICATION_JSON)
 @VothingMonitoringAnn
 public class SurveyRemoteServiceImpl implements SurveyRemoteService {
 
@@ -44,8 +41,6 @@ public class SurveyRemoteServiceImpl implements SurveyRemoteService {
 	private SurveyOptionConverter surveyOptionConverter;
 
 	@Override
-	@POST
-	@Path("/add")
 	@PermissionAnn(permission = PermissionEnum.SURVEY_ADD)
 	public SurveyRemote createSurvey(SurveyRemote surveyRemote) {
 
@@ -59,8 +54,6 @@ public class SurveyRemoteServiceImpl implements SurveyRemoteService {
 	}
 
 	@Override
-	@GET
-	@Path("/list")
 	@PermissionAnn(permission = PermissionEnum.SURVEY_LIST)
 	public List<SurveyRemote> getSurveys(@PathParam("order") String order) {
 		List<SurveyRemote> surveysReturn = new ArrayList<>();
@@ -77,16 +70,12 @@ public class SurveyRemoteServiceImpl implements SurveyRemoteService {
 	}
 
 	@Override
-	@GET
-	@Path("/list")
 	@PermissionAnn(permission = PermissionEnum.SURVEY_LIST)
 	public List<SurveyRemote> getSurveys() {
 		return this.getSurveys(null);
 	}
 
 	@Override
-	@POST
-	@Path("/update")
 	@PermissionAnn(permission = PermissionEnum.SURVEY_UPDATE)
 	public SurveyRemote updateSurvey(SurveyRemote surveyRemote) {
 
@@ -113,8 +102,6 @@ public class SurveyRemoteServiceImpl implements SurveyRemoteService {
 	}
 
 	@Override
-	@GET
-	@Path("/get/{surveyId}")
 	@PermissionAnn(permission = PermissionEnum.SURVEY_LIST)
 	public SurveyRemote getSurvey(@PathParam("surveyId") long surveyId) {
 		SurveyRemote surveyRemote = null;
@@ -134,8 +121,6 @@ public class SurveyRemoteServiceImpl implements SurveyRemoteService {
 	}
 
 	@Override
-	@PUT
-	@Path("/delete/{surveyId}")
 	@PermissionAnn(permission = PermissionEnum.SURVEY_DELETE)
 	public void deleteVote(@PathParam("surveyId") long surveyId) {
 		surveyService.deleteElement(surveyId);
