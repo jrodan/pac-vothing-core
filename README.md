@@ -289,6 +289,7 @@ Automated tests will run, when the server is set up correctly. Later on, during 
 - [ ] use fontawesome icons
 - [ ] fix: voting after updating a survey
 - [ ] JaCoCo for code coverage
+- [ ] SonarQube for static code analysis
 - [ ] consistency check of implemented methods and naming
 - [ ] check permissions before persistence actions
 - [ ] add exception handling
