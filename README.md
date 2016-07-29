@@ -76,8 +76,9 @@ vothing-tests: Tests and Remote Tests (Jersey, JUnit, Arquillian)
 - The private server key has to be set as server JVM parameter "vothing.server.private.key"
 
 ## Build
-- `mvn clean install` (server has to run because of wildfly management mode for tests)
-- want to build without remote tests then run `mvn clean install -DskipTests=true`
+- `mvn install` - server has to run because of Wildfly managed mode for tests
+-- The server only has to run. The test will push the test artifact via the Wildfly management port to the server. Nothing has to be configured by default.
+- `mvn install -DskipTests=true` - to build without tests because tests require a running Wildfly. 
 
 ## Releases
 
