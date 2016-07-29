@@ -10,6 +10,14 @@
             <unpack>false</unpack>
             <scope>runtime</scope>
             <includes>
+                <include>*:war</include>
+            </includes>
+        </dependencySet>
+        <dependencySet>
+            <outputDirectory>/Vothing App/deployable</outputDirectory>
+            <unpack>false</unpack>
+            <scope>runtime</scope>
+            <includes>
                 <include>*:jar</include>
             </includes>
         </dependencySet>

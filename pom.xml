@@ -9,10 +9,6 @@
     <packaging>pom</packaging>
     <version>0.0.1-SNAPSHOT</version>
 
-    <properties>
-        <skip.deployment>true</skip.deployment> <!-- default -->
-    </properties>
-
     <modules>
         <module>vothing-api</module>
         <module>vothing-core</module>
@@ -42,17 +38,17 @@
                         <ejbVersion>3.2</ejbVersion>
                     </configuration>
                 </plugin>
-
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-war-plugin</artifactId>
                     <version>2.6</version>
                     <configuration>
                         <failOnMissingWebXml>false</failOnMissingWebXml>
+                        <archiveClasses>true</archiveClasses>
                         <attachClasses>true</attachClasses>
+                        <warName>vothing-remote</warName>
                     </configuration>
                 </plugin>
-
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-javadoc-plugin</artifactId>
@@ -65,7 +61,6 @@
                         </execution>
                     </executions>
                 </plugin>
-
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-source-plugin</artifactId>
@@ -85,24 +80,6 @@
                         </execution>
                     </executions>
                 </plugin>
-
-                <!--<plugin>-->
-                    <!--<groupId>org.apache.maven.plugins</groupId>-->
-                    <!--<artifactId>maven-source-plugin</artifactId>-->
-                    <!--<version>2.3</version>-->
-                    <!--<configuration>-->
-                        <!--<includePom>true</includePom>-->
-                    <!--</configuration>-->
-                    <!--<executions>-->
-                        <!--<execution>-->
-                            <!--<phase>package</phase>-->
-                            <!--<goals>-->
-                                <!--<goal>jar-no-fork</goal>-->
-                                <!--<goal>test-jar-no-fork</goal>-->
-                            <!--</goals>-->
-                        <!--</execution>-->
-                    <!--</executions>-->
-                <!--</plugin>-->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-javadoc-plugin</artifactId>
