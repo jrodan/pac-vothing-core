@@ -17,14 +17,12 @@ import com.prodyna.pac.vothing.remote.model.SurveyRemote;
 import com.prodyna.pac.vothing.remote.service.SurveyOptionRatingRemoteService;
 
 import javax.inject.Inject;
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.ext.Provider;
 
 @Provider
-@Path("/restricted/surveyoptionrating")
-@Consumes(MediaType.APPLICATION_JSON)
-@Produces(MediaType.APPLICATION_JSON)
 @VothingMonitoringAnn
 public class SurveyOptionRatingRemoteServiceImpl implements SurveyOptionRatingRemoteService {
 
@@ -43,8 +41,6 @@ public class SurveyOptionRatingRemoteServiceImpl implements SurveyOptionRatingRe
 	@Inject
 	private SurveyConverter surveyConverter;
 
-	@GET
-	@Path("/add/{surveyOptionId}")
 	@PermissionAnn(permission = PermissionEnum.SURVEYOPTIONRATING_UPDATE)
 	@Override
 	public SurveyRemote addSurveyOptionRating(@PathParam("surveyOptionId") long surveyOptionId) {
